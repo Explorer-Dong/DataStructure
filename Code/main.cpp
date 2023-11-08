@@ -32,14 +32,7 @@ int main() {
 	Homework_6 hw6;
 	Homework_7 hw7;
 
-	string pre_with_tag = "ab#f##gh###";
-	BTree<char> tree(pre_with_tag);
-
-	auto res = hw7.PathOfRoot2X(tree, 'f');
-
-	for (auto& x: res) {
-		cout << x << ' ';
-	}
+	tr7.Swap();
 
 	return 0;
 }

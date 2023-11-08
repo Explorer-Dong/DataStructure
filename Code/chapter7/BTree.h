@@ -9,6 +9,7 @@ using namespace std;
 #ifndef INC_3__DATASTRUCTURES_BTREE_H
 #define INC_3__DATASTRUCTURES_BTREE_H
 
+
 template<class T>
 struct BtNode {
 	T data;
@@ -18,31 +19,28 @@ struct BtNode {
 };
 
 
+// ----------------------------------------------------------------------
+
+
 template<class T>
 class BTree {
 private:
 	BtNode<T>* CreateWithPre(const string& pre_of_tag, int& i);
 	void PreOutput(BtNode<T>* now);
+	void MidOutput(BtNode<T>* now);
+	void PostOutput(BtNode<T>* now);
 
 public:
 	BtNode<T>* root;
 	BTree() : root(nullptr) {};
 	BTree(const string& pre_with_tag);
 	BTree(const string& pre, const string& mid);
-//	~BTree();
+	~BTree();
 
 	void PreOutput();
 	void MidOutput();
 	void PostOutput();
 	void LevelOutput();
-
-	int CountLeaf();
-	int CountOneBranch();
-	int CountTwoBranch();
-
-	int Height();
-	void SwapChild();
-	vector<vector<T>> PathOfRootToLeaf();
 };
 
 
@@ -58,6 +56,7 @@ BtNode<T>* BTree<T>::CreateWithPre(const string& pre_of_tag, int& i) {
 	return now;
 }
 
+
 template<class T>
 void BTree<T>::PreOutput(BtNode<T>* now) {
 	if (!now) {
@@ -68,7 +67,28 @@ void BTree<T>::PreOutput(BtNode<T>* now) {
 	PreOutput(now->rchild);
 }
 
-// -------------------------以下为用户可调用函数--------------------------
+
+template<class T>
+void BTree<T>::MidOutput(BtNode<T>* now) {
+	if (!now) {
+		return;
+	}
+	MidOutput(now->lchild);
+	cout << now->data;
+	MidOutput(now->rchild);
+}
+
+
+template<class T>
+void BTree<T>::PostOutput(BtNode<T>* now) {
+	if (!now) {
+		return;
+	}
+	PostOutput(now->lchild);
+	PostOutput(now->rchild);
+	cout << now->data;
+}
+
 
 template<class T>
 BTree<T>::BTree(const string& pre_with_tag) {
@@ -76,29 +96,54 @@ BTree<T>::BTree(const string& pre_with_tag) {
 	root = CreateWithPre(pre_with_tag, *p);
 }
 
+
 template<class T>
 BTree<T>::BTree(const string& pre, const string& mid) {
 
 }
+
+
+template<class T>
+BTree<T>::~BTree() {
+
+}
+
+
+// -------------------------以下为用户可调用函数--------------------------
+
 
 template<class T>
 void BTree<T>::PreOutput() {
 	PreOutput(root);
 }
 
+
+template<class T>
+void BTree<T>::MidOutput() {
+	MidOutput(root);
+}
+
+
+template<class T>
+void BTree<T>::PostOutput() {
+	PostOutput(root);
+}
+
+
+template<class T>
+void BTree<T>::LevelOutput() {
+	queue<BtNode<T>*> q;
+	q.push(root);
+
+	while (q.size()) {
+		auto h = q.front();
+		q.pop();
+		if (h) {
+			cout << h->data;
+			q.push(h->lchild);
+			q.push(h->rchild);
+		}
+	}
+}
+
 #endif //INC_3__DATASTRUCTURES_BTREE_H
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
