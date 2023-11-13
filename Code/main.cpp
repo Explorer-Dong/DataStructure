@@ -32,7 +32,22 @@ int main() {
 	Homework_6 hw6;
 	Homework_7 hw7;
 
-	tr7.Swap();
+	/**
+	 * 				a
+	 * 			b		g
+	 * 		 #    f   h   #
+	 * 		  	#  # # #
+	 */
+
+	string pre_with_tag = "ab#f##gh###";
+	BTree<char> tree(pre_with_tag);
+
+	BtNode<char>* h = hw7.LinkLeaf(tree);
+
+	while (h) {
+		cout << h->data << " ";
+		h = h->rchild;
+	}
 
 	return 0;
 }
