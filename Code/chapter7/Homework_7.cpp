@@ -204,7 +204,7 @@ public:
 		return res;
 	}
 
-	// T7.13 链接叶子结点 TODO
+	// T7.13 链接叶子结点
 	BtNode<char>* LinkLeaf(BTree<char>& tree) {
 		BtNode<char>* h = nullptr, * p = nullptr;
 
