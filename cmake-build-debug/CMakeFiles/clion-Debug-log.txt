@@ -1,0 +1,4 @@
+"D:\installation_package\CLion 2023.1.3\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=D:/installation_package/CLion 2023.1.3/bin/ninja/win/x64/ninja.exe" -G Ninja -S "D:\BaiduSyncdisk\2. Score\3. DataStructures" -B "D:\BaiduSyncdisk\2. Score\3. DataStructures\cmake-build-debug"
+-- Configuring done (0.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: D:/BaiduSyncdisk/2. Score/3. DataStructures/cmake-build-debug
