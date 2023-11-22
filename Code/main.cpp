@@ -39,15 +39,8 @@ int main() {
 	 * 		  	#  # # #
 	 */
 
-	string pre_with_tag = "ab#f##gh###";
-	BTree<char> tree(pre_with_tag);
+	tr7.CreateWithPostAndMid();
 
-	BtNode<char>* h = hw7.LinkLeaf(tree);
-
-	while (h) {
-		cout << h->data << " ";
-		h = h->rchild;
-	}
 
 	return 0;
 }
