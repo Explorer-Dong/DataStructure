@@ -922,9 +922,51 @@ $$
 
 #### 8.3.1 图遍历的概念
 
+每个结点只能访问一次
 
+#### 8.3.2 深度优先搜索
 
-8.3.2
+<img src="C:/Users/%E8%91%A3%E6%96%87%E6%9D%B0/AppData/Roaming/Typora/typora-user-images/image-20231127083412848.png" alt="image-20231127083412848" style="zoom:67%;" />
+
+1. 邻接矩阵：
+
+    - 时间复杂度：$O(n^2)$
+
+    - 针对**邻接矩阵**的一个**无向**连通图的搜索代码示例
+
+        <img src="C:/Users/%E8%91%A3%E6%96%87%E6%9D%B0/AppData/Roaming/Typora/typora-user-images/image-20231127083039909.png" alt="image-20231127083039909" style="zoom:67%;" />
+
+2. 邻接表：
+
+    - 时间复杂度：$O(n+e)$
+
+    - 针对**邻接表**的一个**无向**连通图的搜索代码示例
+
+        ```c++
+        template<class T>
+        void ALGraph::DFS(int v, bool* visited) {
+            cout << vexs[v];
+            visited[v] = true;
+            // 遍历所有的边
+        }
+        ```
+
+#### 8.3.3 广度优先搜索
+
+- 通过队列实现
+- 时间复杂度与上述DFS算法类似
+
+#### 8.3.4 图遍历算法的应用
+
+1. 求 `(u,v)` 的所有简单路径
+
+    > 其实就是回溯法的简单应用
+
+2. 染色法求二部图
+
+    > 广度优先搜索的简单应用
+
+### 8.4 最小生成树
 
 ## 九、查找
 

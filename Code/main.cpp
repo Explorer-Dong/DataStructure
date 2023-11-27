@@ -16,6 +16,9 @@
 #include "chapter7/Homework_7.cpp"
 #include "chapter7/Trail_7.cpp"
 
+#include "chapter8/Homework_8.cpp"
+#include "chapter8/Trail_8.cpp"
+
 using namespace std;
 
 int main() {
@@ -25,22 +28,16 @@ int main() {
 	Trail_5 tr5;
 	Trail_6 tr6;
 	Trail_7 tr7;
+	Trail_8 tr8;
 	Homework_2 hw2;
 	Homework_3 hw3;
 	Homework_4 hw4;
 	Homework_5 hw5;
 	Homework_6 hw6;
 	Homework_7 hw7;
+	Homework_8 hw8;
 
-	/**
-	 * 				a
-	 * 			b		g
-	 * 		 #    f   h   #
-	 * 		  	#  # # #
-	 */
-
-	tr7.CreateWithPostAndMid();
-
+	tr7.PathOfRoot2Leaf();
 
 	return 0;
 }
