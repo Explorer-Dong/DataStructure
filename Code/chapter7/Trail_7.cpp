@@ -1,15 +1,19 @@
 //
-// Created by è‘£æ–‡æ° on 2023-11-06.
+// Created by ¶­ÎÄ½Ü on 2023-11-06.
 //
 
 #include "BTree.h"
 #include "CSTree.h"
+#include "HuffmanTree.h"
 
 using namespace std;
 
 class Trail_7 {
 public:
-	// 7.1(1) ç”¨å«æœ‰æ ‡è®°çš„å…ˆåºéå†åºåˆ—è¿›è¡Œæ„é€ 
+	// -----------------------------ÊµÑé1--------------------------------
+
+
+	// 7.1(1) ÓÃº¬ÓĞ±ê¼ÇµÄÏÈĞò±éÀúĞòÁĞ½øĞĞ¹¹Ôì
 	void CreateWithPreOfTag() {
 		/**
 		 * 				a
@@ -23,8 +27,7 @@ public:
 		tree.PreOutput();
 	}
 
-
-	// ç”¨å«æœ‰æ ‡è®°çš„ååºéå†åºåˆ—è¿›è¡Œæ„é€ 
+	// ÓÃº¬ÓĞ±ê¼ÇµÄºóĞò±éÀúĞòÁĞ½øĞĞ¹¹Ôì
 	void CreateWithPost() {
 		/**
 		 * 				a
@@ -38,8 +41,7 @@ public:
 		tree.PreOutput();
 	}
 
-
-	// 7.1(1) ç”¨å…ˆåºå’Œä¸­åºè¿›è¡Œæ„é€ 
+	// 7.1(1) ÓÃÏÈĞòºÍÖĞĞò½øĞĞ¹¹Ôì
 	void CreateWithPreAndMid() {
 		/**
 		 * 				a
@@ -54,8 +56,7 @@ public:
 		tree.MidOutput();
 	}
 
-
-	// ç”¨ååºå’Œä¸­åºè¿›è¡Œæ„é€ 
+	// ÓÃºóĞòºÍÖĞĞò½øĞĞ¹¹Ôì
 	void CreateWithPostAndMid() {
 		/**
 		 * 				a
@@ -70,8 +71,7 @@ public:
 		tree.MidOutput();
 	}
 
-
-	// 7.1(3) å››ç§éå†ï¼šå…ˆã€ä¸­ã€åã€å±‚
+	// 7.1(3) ËÄÖÖ±éÀú£ºÏÈ¡¢ÖĞ¡¢ºó¡¢²ã
 	void Output() {
 		string pre_with_tag = "ab#f##gh###";
 		BTree<char> tree(pre_with_tag, 1);
@@ -88,14 +88,12 @@ public:
 		tree.LevelOutput();
 	}
 
-
-	// ä¸­åºéé€’å½’éå† TODO*
+	// ÖĞĞò·Çµİ¹é±éÀú TODO*
 	void MidOutputNonRecursive() {
 
 	}
 
-
-	// 7.1(4) ç»Ÿè®¡0åˆ†æ”¯ï¼Œ1åˆ†æ”¯ï¼Œ2åˆ†æ”¯çš„ç»“ç‚¹çš„ä¸ªæ•°
+	// 7.1(4) Í³¼Æ0·ÖÖ§£¬1·ÖÖ§£¬2·ÖÖ§µÄ½áµãµÄ¸öÊı
 	void Count() {
 		string pre_with_tag = "ab#f##gh###";
 		BTree<char> tree(pre_with_tag, 1);
@@ -120,8 +118,7 @@ public:
 		cout << "cnt2: " << cnt2 << "\n";
 	}
 
-
-	// 7.1(5) è®¡ç®—äºŒå‰æ ‘çš„é«˜åº¦
+	// 7.1(5) ¼ÆËã¶ş²æÊ÷µÄ¸ß¶È
 	void Height() {
 		string pre_with_tag = "ab#f##gh###";
 		BTree<char> tree(pre_with_tag, 1);
@@ -135,8 +132,7 @@ public:
 		cout << Depth(tree.root);
 	}
 
-
-	// 7.1(6) äº¤æ¢æ¯ä¸ªç»“ç‚¹çš„å·¦å³å­©å­
+	// 7.1(6) ½»»»Ã¿¸ö½áµãµÄ×óÓÒº¢×Ó
 	void Swap() {
 		string pre_with_tag = "ab#f##gh###";
 		BTree<char> tree(pre_with_tag, 1);
@@ -154,8 +150,7 @@ public:
 		tree.PreOutput();
 	}
 
-
-	// 7.1(7) è¾“å‡ºæ ¹ç»“ç‚¹åˆ°æ¯ä¸€ä¸ªå¶å­ç»“ç‚¹çš„è·¯å¾„
+	// 7.1(7) Êä³ö¸ù½áµãµ½Ã¿Ò»¸öÒ¶×Ó½áµãµÄÂ·¾¶
 	vector<vector<char>> PathOfRoot2Leaf(BTree<char>& tree) {
 		function<void(BtNode<char>*, vector<vector<char>>&, vector<char>&)> dfs = [&](BtNode<char>* now, vector<vector<char>>& res, vector<char>& path) -> void {
 			if (!now) {
@@ -177,7 +172,10 @@ public:
 	}
 
 
-	// 7.2(1) ç”¨åºå¶é›†åˆæ„é€ å¯¹è±¡ï¼Œçº¦å®šï¼šå¯¹äº<ai, aj>ï¼Œåœ¨æ’å…¥ajæ—¶ï¼Œaiå·²ç»å­˜åœ¨äºæ ‘ç»“æ„ä¸­
+	// -----------------------------ÊµÑé2--------------------------------
+
+
+	// 7.2(1) ÓÃĞòÅ¼¼¯ºÏ¹¹Ôì¶ÔÏó£¬Ô¼¶¨£º¶ÔÓÚ<ai, aj>£¬ÔÚ²åÈëajÊ±£¬aiÒÑ¾­´æÔÚÓÚÊ÷½á¹¹ÖĞ
 	void CreateWithOrderedPairSet() {
 		/**
 		 * 				  1
@@ -193,12 +191,11 @@ public:
 		tree.PreOutput();
 	}
 
-
 	/**
-	 * @note äºŒå‰é“¾è¡¨å®ç°æ ‘
-	 * @note æ ‘åªæœ‰å…ˆåºéå†å’Œååºéå†ï¼Œåˆ†åˆ«ä¸º æ ¹ å­©ã€å­© æ ¹ï¼Œå¯¹åº”äºäºŒå‰æ ‘å°±æ˜¯æ ¹ å·¦ å³ã€å·¦ æ ¹ å³ã€‚å…¶ä¸­å³æ°¸è¿œåœ¨æœ€åï¼Œå› ä¸ºå³ï¼ˆå…„å¼Ÿï¼‰å±äºé‡å¤é€’å½’å•å…ƒ
+	 * @note ¶ş²æÁ´±íÊµÏÖÊ÷
+	 * @note Ê÷Ö»ÓĞÏÈĞò±éÀúºÍºóĞò±éÀú£¬·Ö±ğÎª ¸ù º¢¡¢º¢ ¸ù£¬¶ÔÓ¦ÓÚ¶ş²æÊ÷¾ÍÊÇ¸ù ×ó ÓÒ¡¢×ó ¸ù ÓÒ¡£ÆäÖĞÓÒÓÀÔ¶ÔÚ×îºó£¬ÒòÎªÓÒ£¨ĞÖµÜ£©ÊôÓÚÖØ¸´µİ¹éµ¥Ôª
 	 */
-	// 7.2(3) å…ˆåºéå† & ååºéå†
+	// 7.2(3) ÏÈĞò±éÀú & ºóĞò±éÀú
 	void PrePostOutput() {
 		vector<pair<int, int>> a = {
 				{1, 2}, {1, 3}, {1, 6},
@@ -210,7 +207,7 @@ public:
 		tree.PostOutput();
 	}
 
-	// 7.2(4) è®¡ç®—æ¯ä¸€ä¸ªç»“ç‚¹çš„åº¦
+	// 7.2(4) ¼ÆËãÃ¿Ò»¸ö½áµãµÄ¶È
 	void CountDegree() {
 		vector<pair<int, int>> a = {
 				{1, 2}, {1, 3}, {1, 6},
@@ -223,7 +220,7 @@ public:
 		tree.PreOutput();
 	}
 
-	// 7.2(5) è®¡ç®—æ ‘çš„é«˜åº¦
+	// 7.2(5) ¼ÆËãÊ÷µÄ¸ß¶È
 	void TreeHeight() {
 		vector<pair<int, int>> a = {
 				{1, 2}, {1, 3}, {1, 6},
@@ -236,7 +233,7 @@ public:
 		cout << "tree_height: " << tree.Height_() << endl;
 	}
 
-	// 7.2(6) è¾“å‡ºæ ¹åˆ°æ¯ä¸€ä¸ªå¶å­ç»“ç‚¹çš„è·¯å¾„
+	// 7.2(6) Êä³ö¸ùµ½Ã¿Ò»¸öÒ¶×Ó½áµãµÄÂ·¾¶
 	void PathOfRoot2Leaf() {
 		vector<pair<int, int>> a = {
 				{1, 2}, {1, 3}, {1, 6},
@@ -255,5 +252,39 @@ public:
 		}
 	}
 
-	// 7.3(1)
+
+	// -----------------------------ÊµÑé3--------------------------------
+
+	/**
+	 * @note aaaabcccccdd
+	 * @note
+	 * 	  _
+	 * 	c	_
+	 * 	  _	   a
+	 * 	b	d
+	 * @note a: 11
+	 * @note b: 100
+	 * @note c: 0
+	 * @note d: 101
+	 */
+
+	// 7.3(1¡¢2) ¸ù¾İ×Ö·û´®¹¹ÔìHuffmanTreeÊ÷ & ±àÂëÊä³ö
+	void BuildHuffmanTree() {
+		string s = "aaaabcccccdd";
+		HuffmanTree huff_tree(s);
+
+		string source = "abcd";
+		auto x = huff_tree.EnCode(source);
+		cout << "±àÂëÎª£º" << x << endl;
+	}
+
+	// 7.3(1¡¢3) ¸ù¾İ×Ö·û´®¹¹ÔìHuffmanTreeÊ÷ & ÒëÂëÊä³ö
+	void DeHuffmanCode() {
+		string s = "aaaabcccccdd";
+		HuffmanTree huff_tree(s);
+
+		string secret = "000111000101";
+		auto x = huff_tree.DeCode(secret);
+		cout << "½âÂëÎª£º" << x << endl;
+	}
 };

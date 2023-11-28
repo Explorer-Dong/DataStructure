@@ -37,7 +37,7 @@ int main() {
 	Homework_7 hw7;
 	Homework_8 hw8;
 
-	tr7.PathOfRoot2Leaf();
+	tr7.DeHuffmanCode();
 
 	return 0;
 }
