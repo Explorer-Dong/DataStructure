@@ -37,7 +37,7 @@ int main() {
 	Homework_7 hw7;
 	Homework_8 hw8;
 
-	tr8.ALbfs();
+	hw8.FindLoop();
 
 	return 0;
 }

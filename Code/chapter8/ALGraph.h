@@ -41,6 +41,7 @@ public:
 	void dfs();
 	void bfs();
 	bool FindPathFromA2B(int a, int b);
+	bool FindPathFromA2BLengthK(int a, int b, int k);
 };
 
 
@@ -234,6 +235,44 @@ bool ALGraph<T>::FindPathFromA2B(int a, int b) {
 	// 调用过程并返回答案
 	bfs(a);
 	return ok;
+}
+
+template<class T>
+bool ALGraph<T>::FindPathFromA2BLengthK(int a, int b, int k) {
+	// 越界判断
+	if (a < 1 || a > n || b < 1 || b > n) {
+		cerr << "Wrong Input! Out of Range!\n";
+		exit(1);
+	}
+
+	// 辅助变量
+	vector<vector<int>> paths;
+	vector<int> path;
+	vector<bool> vis(n + 1, false);
+
+	// 深搜函数
+	function<void(int)> dfs = [&](int now) {
+		vis[now] = true;
+		path.push_back(now);
+
+		if (now == b && path.size() - 1 == k) {
+			paths.push_back(path);
+			path.pop_back();
+			vis[now] = false;
+			return;
+		}
+
+		for (EdgeNode<T>* p = h[now].next; p; p = p->next)
+			if (!vis[p->toid])
+				dfs(p->toid);
+
+		path.pop_back();
+		vis[now] = false;
+	};
+
+	// 调用并返回
+	dfs(a);
+	return paths.size() >= 1;
 }
 
 #endif //INC_3__DATASTRUCTURES_ALGRAPH_H

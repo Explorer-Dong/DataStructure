@@ -25,6 +25,7 @@ public:
 
 	void dfs();
 	void bfs();
+	vector<T> FindLoop();
 };
 
 
@@ -135,6 +136,52 @@ void MGraph<T>::bfs() {
 			bfs(i);
 		}
 	}
+}
+
+template<class T>
+vector<T> MGraph<T>::FindLoop() {
+	vector<T> loop;
+
+	bool ok = false;
+	vector<bool> vis(n + 1, false), vis2(n + 1, false);
+
+	// 存环
+	function<void(int)> GetPath = [&](int now) {
+		vis2[now] = true;
+		loop.push_back(now);
+
+		for (int i = 1; i <= n; i++)
+			if (edges[now][i] && vis[i] && !vis2[i])
+				GetPath(i);
+	};
+
+	// 判环
+	function<void(int)> dfs = [&](int now) {
+		if (ok) {
+			return;
+		}
+
+		if (vis[now]) {
+			ok = true;
+			GetPath(now);
+			return;
+		}
+
+		vis[now] = true;
+
+		for (int i = 1; i <= n; i++)
+			if (edges[now][i])
+				dfs(i);
+
+		vis[now] = false;
+	};
+
+	// 遍历连通分量
+	for (int i = 1; i <= n; i++)
+		if (!ok)
+			dfs(i);
+
+	return loop;
 }
 
 #endif //INC_3__DATASTRUCTURES_MGRAPH_H
