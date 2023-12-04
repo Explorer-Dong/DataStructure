@@ -68,7 +68,7 @@
 
 ## 二、线性表
 
-<img src="C:/Users/%E8%91%A3%E6%96%87%E6%9D%B0/AppData/Roaming/Typora/typora-user-images/image-20230920231245137.png" alt="image-20230920231245137" style="zoom:50%;" />
+<img src="https://s2.loli.net/2023/12/04/4Nn73PGspUM2Cwl.png" alt="image-20230920231245137" style="zoom:50%;" />
 
 ### 2.1 线性表的基本概念~(逻辑结构)~
 
@@ -213,7 +213,7 @@ public:
 
     - 插入
 
-        <img src="C:/Users/%E8%91%A3%E6%96%87%E6%9D%B0/AppData/Roaming/Typora/typora-user-images/image-20230925092012868.png" alt="image-20230925092012868" style="zoom:50%;" />
+        <img src="https://s2.loli.net/2023/12/04/7d4ygetnDPANTzU.png" alt="image-20230925092012868" style="zoom:50%;" />
 
         ```c++
         // 插入当前结点 s
@@ -225,7 +225,7 @@ public:
 
     - 删除
 
-        <img src="C:/Users/%E8%91%A3%E6%96%87%E6%9D%B0/AppData/Roaming/Typora/typora-user-images/image-20230925091955866.png" alt="image-20230925091955866" style="zoom:50%;" />
+        <img src="https://s2.loli.net/2023/12/04/CiJzh1HXaGqvURB.png" alt="image-20230925091955866" style="zoom:50%;" />
 
         ```c++
         // 删除当前结点 p
@@ -243,7 +243,7 @@ public:
 
 #### 3.1.1 栈的基本概念
 
-![image-20230928095521363](C:/Users/%E8%91%A3%E6%96%87%E6%9D%B0/AppData/Roaming/Typora/typora-user-images/image-20230928095521363.png)
+![image-20230928095521363](https://s2.loli.net/2023/12/04/MuQ7ZHX6xNKSqbf.png)
 
 卡特兰数：假设 $f(k)$ 表示第k个数最后一个出栈的总个数，则 $f(k)=f(k-1)f(n-k)$
 $$
@@ -254,11 +254,11 @@ $$
 
 1. 顺序存储
 
-    <img src="C:/Users/%E8%91%A3%E6%96%87%E6%9D%B0/AppData/Roaming/Typora/typora-user-images/image-20230928095919380.png" alt="image-20230928095919380" style="zoom:67%;" />
+    <img src="https://s2.loli.net/2023/12/04/DGIASXO27NbC8Ji.png" alt="image-20230928095919380" style="zoom:67%;" />
 
 2. 链式存储
 
-    <img src="C:/Users/%E8%91%A3%E6%96%87%E6%9D%B0/AppData/Roaming/Typora/typora-user-images/image-20230928100849337.png" alt="image-20230928100849337" style="zoom:67%;" />
+    <img src="https://s2.loli.net/2023/12/04/o8mYC2XQvqUJ5BL.png" alt="image-20230928100849337" style="zoom:67%;" />
 
 #### 3.1.3 栈的操作算法
 
@@ -298,13 +298,13 @@ $$
 
 1. 顺序存储
 
-    <img src="C:/Users/%E8%91%A3%E6%96%87%E6%9D%B0/AppData/Roaming/Typora/typora-user-images/image-20231007091939711.png" alt="image-20231007091939711" style="zoom:67%;" />
+    <img src="https://s2.loli.net/2023/12/04/GJh3alEndfXKCMq.png" alt="image-20231007091939711" style="zoom:67%;" />
 
     <img src="C:/Users/%E8%91%A3%E6%96%87%E6%9D%B0/AppData/Roaming/Typora/typora-user-images/image-20231007091951161.png" alt="image-20231007091951161" style="zoom:67%;" />
 
 2. 链式存储
 
-    <img src="C:/Users/%E8%91%A3%E6%96%87%E6%9D%B0/AppData/Roaming/Typora/typora-user-images/image-20231007090752380.png" alt="image-20231007090752380" style="zoom:67%;" />
+    <img src="https://s2.loli.net/2023/12/04/h1rZ6A3FVN9mRaq.png" alt="image-20231007090752380" style="zoom:67%;" />
 
 #### 3.2.3 队列的操作算法
 
@@ -354,7 +354,7 @@ $$
 
 使用固定长度的数组来存储，3种存储字符串长度的方法如下：
 
-1. <img src="C:/Users/%E8%91%A3%E6%96%87%E6%9D%B0/AppData/Roaming/Typora/typora-user-images/image-20231012095542232.png" alt="image-20231012095542232" style="zoom:50%;" />
+1. <img src="https://s2.loli.net/2023/12/04/lwkEMtF2mXjPpaz.png" alt="image-20231012095542232" style="zoom:50%;" />
 
     ```c++
     struct String {
@@ -365,9 +365,9 @@ $$
 
 
 
-2. <img src="C:/Users/%E8%91%A3%E6%96%87%E6%9D%B0/AppData/Roaming/Typora/typora-user-images/image-20231012095512268.png" alt="image-20231012095512268" style="zoom:50%;" />
+2. <img src="https://s2.loli.net/2023/12/04/vbFg17sAwLBModl.png" alt="image-20231012095512268" style="zoom:50%;" />
 
-3. <img src="C:/Users/%E8%91%A3%E6%96%87%E6%9D%B0/AppData/Roaming/Typora/typora-user-images/image-20231012095528625.png" alt="image-20231012095528625" style="zoom:50%;" />
+3. <img src="https://s2.loli.net/2023/12/04/DIQATWxkN5J3eH1.png" alt="image-20231012095528625" style="zoom:50%;" />
 
 #### 4.2.2 串的链式存储
 
@@ -408,7 +408,7 @@ $$
 
 1. BF算法（Brute - Force）
 
-    <img src="C:/Users/%E8%91%A3%E6%96%87%E6%9D%B0/AppData/Roaming/Typora/typora-user-images/image-20231012105536936.png" alt="image-20231012105536936" style="zoom:60%;" />
+    <img src="https://s2.loli.net/2023/12/04/NemPEzIdOpLh3Vb.png" alt="image-20231012105536936" style="zoom:60%;" />
 
     ```c++
     // 返回匹配上的所有位置下标（下标从0开始）
@@ -433,7 +433,7 @@ $$
 
 2. KMP算法
 
-    <img src="C:/Users/%E8%91%A3%E6%96%87%E6%9D%B0/AppData/Roaming/Typora/typora-user-images/image-20231012194432323.png" alt="image-20231012194432323" style="zoom:80%;" />
+    <img src="https://s2.loli.net/2023/12/04/X2VvgtLuKnH1NwJ.png" alt="image-20231012194432323" style="zoom:80%;" />
 
    > ==优化思想：==
    >
@@ -490,7 +490,7 @@ typedef arr1 arr2[m];
 
 #### 5.2.1 对称矩阵的压缩存储
 
-<img src="C:/Users/%E8%91%A3%E6%96%87%E6%9D%B0/AppData/Roaming/Typora/typora-user-images/image-20231016092313887.png" alt="image-20231016092313887" style="zoom:50%;" />
+<img src="https://s2.loli.net/2023/12/04/TKBNSHyJ7RcdFu3.png" alt="image-20231016092313887" style="zoom:50%;" />
 
 假设现在有一个n*n的==对称矩阵：方阵元素关于主对角线相等==
 
@@ -512,7 +512,7 @@ typedef arr1 arr2[m];
 
 #### 5.2.2 三角矩阵的压缩存储
 
-<img src="C:/Users/%E8%91%A3%E6%96%87%E6%9D%B0/AppData/Roaming/Typora/typora-user-images/image-20231019094830937.png" alt="image-20231019094830937" style="zoom:50%;" />
+<img src="https://s2.loli.net/2023/12/04/6OPLDYtrKld1iGv.png" alt="image-20231019094830937" style="zoom:50%;" />
 
 假设现在有一个n*n的==三角矩阵：上三角或下三角为常数c==
 
@@ -529,7 +529,7 @@ typedef arr1 arr2[m];
 
 #### 5.2.3 对角矩阵的压缩存储
 
-<img src="C:/Users/%E8%91%A3%E6%96%87%E6%9D%B0/AppData/Roaming/Typora/typora-user-images/image-20231019094859766.png" alt="image-20231019094859766" style="zoom:50%;" />
+<img src="https://s2.loli.net/2023/12/04/PwcA7Tu5XBZ2q8y.png" alt="image-20231019094859766" style="zoom:50%;" />
 
 假设现在有一个n*n的==对角矩阵：围绕主对角线有数据，其余数据均为0==
 
@@ -598,17 +598,17 @@ typedef arr1 arr2[m];
 
 采用联合结构体存储结点类型
 
-<img src="C:/Users/%E8%91%A3%E6%96%87%E6%9D%B0/AppData/Roaming/Typora/typora-user-images/image-20231023084427729.png" alt="image-20231023084427729" style="zoom:50%;" />
+<img src="https://s2.loli.net/2023/12/04/Gjiltk6f74yO5L9.png" alt="image-20231023084427729" style="zoom:50%;" />
 
 #### 6.2.2 广义表的存储结构
 
 ==流程图==
 
-<img src="C:/Users/%E8%91%A3%E6%96%87%E6%9D%B0/AppData/Roaming/Typora/typora-user-images/image-20231023090301534.png" alt="image-20231023090301534" style="zoom: 67%;" />
+<img src="https://s2.loli.net/2023/12/04/G9yUhn4mzEDPBxo.png" alt="image-20231023090301534" style="zoom: 67%;" />
 
 <center>类框架</center>
 
-<img src="C:/Users/%E8%91%A3%E6%96%87%E6%9D%B0/AppData/Roaming/Typora/typora-user-images/image-20231026104401429.png" alt="image-20231026104401429" style="zoom:50%;" />
+<img src="https://s2.loli.net/2023/12/04/cvPKiCE1xTB24MW.png" alt="image-20231026104401429" style="zoom:50%;" />
 
 <img src="C:/Users/%E8%91%A3%E6%96%87%E6%9D%B0/AppData/Roaming/Typora/typora-user-images/image-20231026104417995.png" alt="image-20231026104417995" style="zoom:50%;" />
 
@@ -674,15 +674,15 @@ typedef arr1 arr2[m];
 
 3. 满二叉树：每一层都是满结点
 
-    <img src="C:/Users/%E8%91%A3%E6%96%87%E6%9D%B0/AppData/Roaming/Typora/typora-user-images/image-20231030085031394.png" alt="image-20231030085031394" style="zoom: 50%;" />
+    <img src="https://s2.loli.net/2023/12/04/dECpXhRImnJHxiw.png" alt="image-20231030085031394" style="zoom: 50%;" />
 
 4. 完全二叉树：对于一个 $k$ 层的二叉树，$1\to k-1$ 都是满的，第 $k$ 层从左到右连接叶子结点
 
-    <img src="C:/Users/%E8%91%A3%E6%96%87%E6%9D%B0/AppData/Roaming/Typora/typora-user-images/image-20231030085057862.png" alt="image-20231030085057862" style="zoom:50%;" />
+    <img src="https://s2.loli.net/2023/12/04/2xWt4QInCRXKulf.png" alt="image-20231030085057862" style="zoom:50%;" />
 
    结点数固定，则完全二叉树的形状唯一
 
-    <img src="C:/Users/%E8%91%A3%E6%96%87%E6%9D%B0/AppData/Roaming/Typora/typora-user-images/image-20231030090400650.png" alt="image-20231030090400650" style="zoom:67%;" />
+    <img src="https://s2.loli.net/2023/12/04/qDFBM34ghjwkCzR.png" alt="image-20231030090400650" style="zoom:67%;" />
 
    若 $i$ 为奇数，且 $i\neq1$，则左兄弟就是 $i-1$
 
@@ -726,7 +726,7 @@ typedef arr1 arr2[m];
 
     <img src="C:/Users/%E8%91%A3%E6%96%87%E6%9D%B0/AppData/Roaming/Typora/typora-user-images/image-20231102112448133.png" alt="image-20231102112448133" style="zoom:75%;" />
 
-    <img src="C:/Users/%E8%91%A3%E6%96%87%E6%9D%B0/AppData/Roaming/Typora/typora-user-images/image-20231102112515427.png" alt="image-20231102112515427" style="zoom:75%;" />
+    <img src="https://s2.loli.net/2023/12/04/EIX38hF67pVitun.png" alt="image-20231102112515427" style="zoom:75%;" />
 
    **中序序列**进行构造：
 
@@ -815,7 +815,7 @@ typedef arr1 arr2[m];
     };
     ```
 
-    <img src="C:/Users/%E8%91%A3%E6%96%87%E6%9D%B0/AppData/Roaming/Typora/typora-user-images/image-20231109115729850.png" alt="image-20231109115729850" style="zoom:50%;" />
+    <img src="https://s2.loli.net/2023/12/04/eKfb6koTwzBUAOV.png" alt="image-20231109115729850" style="zoom:50%;" />
 
 3. 双亲表示法
 
@@ -825,7 +825,7 @@ typedef arr1 arr2[m];
     
     ```
 
-    <img src="C:/Users/%E8%91%A3%E6%96%87%E6%9D%B0/AppData/Roaming/Typora/typora-user-images/image-20231109115759641.png" alt="image-20231109115759641" style="zoom:50%;" />
+    <img src="https://s2.loli.net/2023/12/04/Pc4ZMp2eQE1aCfN.png" alt="image-20231109115759641" style="zoom:50%;" />
 
 4. 孩子兄弟表示法
 
@@ -926,7 +926,7 @@ $$
 
 #### 8.3.2 深度优先搜索
 
-<img src="C:/Users/%E8%91%A3%E6%96%87%E6%9D%B0/AppData/Roaming/Typora/typora-user-images/image-20231127083412848.png" alt="image-20231127083412848" style="zoom:67%;" />
+<img src="https://s2.loli.net/2023/12/04/hXzEj7fZQqrJl3u.png" alt="image-20231127083412848" style="zoom:67%;" />
 
 1. 邻接矩阵：
 
@@ -934,7 +934,7 @@ $$
 
     - 针对**邻接矩阵**的一个**无向**连通图的搜索代码示例
 
-        <img src="C:/Users/%E8%91%A3%E6%96%87%E6%9D%B0/AppData/Roaming/Typora/typora-user-images/image-20231127083039909.png" alt="image-20231127083039909" style="zoom:67%;" />
+        <img src="https://s2.loli.net/2023/12/04/IqEmULWtYw5Chv9.png" alt="image-20231127083039909" style="zoom:67%;" />
 
 2. 邻接表：
 
