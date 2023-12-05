@@ -26,6 +26,8 @@ public:
 	void dfs();
 	void bfs();
 	vector<T> FindLoop();
+	T Prim(int v);
+	vector<tuple<int, int, T>> Kruskal();
 };
 
 
@@ -184,4 +186,106 @@ vector<T> MGraph<T>::FindLoop() {
 	return loop;
 }
 
+template<class T>
+T MGraph<T>::Prim(int v) {
+	T length = 0;
+
+	T INF = numeric_limits<T>::max();
+	vector<T> d(n + 1, INF); // d[i]表示i号点到集合MST中的最短边长
+	vector<bool> MST(n + 1, false);
+
+	auto min = [&](T a, T b) {
+		return a < b ? a : b;
+	};
+
+	/* 1. 选择一个点到集合MST中 */
+	MST[v] = true;
+	for (int i = 1; i <= n; i++)
+		if (!MST[i])
+			d[i] = min(d[i], edges[i][v]);
+
+	/* 2. 迭代n-1次，选择其他的点到集合MST中 */
+	for (int i = 2; i <= n; i++) {
+		// 找到交叉边中的最短边min_e和其在U-MST集合中的顶点vex
+		T min_e = INF;
+		int vex;
+		for (int j = 1; j <= n; j++)
+			if (!MST[j] && d[j] < min_e)
+				min_e = d[j], vex = j;
+
+		// 加入MST集合
+		MST[vex] = true;
+		if (min_e == INF) {
+			cerr << "unable to generate MST!\n";
+			exit(1);
+		} else {
+			length += min_e;
+		}
+
+		// 迭代更新d数组
+		for (int j = 1; j <= n; j++)
+			if (!MST[j])
+				d[j] = min(d[j], edges[j][vex]);
+	}
+
+	return length;
+}
+
+template<class T>
+vector<tuple<int, int, T>> MGraph<T>::Kruskal() {
+	vector<tuple<int, int, T>> res, edges_set;
+
+	// 获取边集
+	for (int i = 1; i <= n; i++) {
+		for (int j = 1; j <= n; j++) {
+			if (edges[i][j]) {
+				edges_set.push_back({i, j, edges[i][j]});
+			}
+		}
+	}
+
+	/* 1. 按边权升序排序 */
+	sort(edges_set.begin(), edges_set.end(), [&](tuple<int, int, T>& x, tuple<int, int, T>& y){
+		return get<2>(x) < get<2>(y);
+	});
+
+	/* 2. 选边构造MST */
+
+	// dsu
+	vector<int> p(n + 1);
+	for (int i = 1; i <= n; i++) {
+		p[i] = i;
+	}
+	function<int(int)> Find = [&](int now) {
+		if (p[now] != now) {
+			p[now] = Find(p[now]);
+		}
+		return p[now];
+	};
+
+	// 选边
+	int cnt = 0; // 统计选择的边数
+	for (auto& edge: edges_set) {
+		int u = get<0>(edge), v = get<1>(edge);
+		T weight = get<2>(edge);
+
+		int pu = Find(u), pv = Find(v);
+		if (pu != pv) {
+			p[pu] = pv;
+			res.push_back({u, v, weight});
+			cnt++;
+		}
+
+		if (cnt == n - 1) {
+			break;
+		}
+	}
+
+	if (cnt < n - 1) {
+		cerr << "unable to generate MST!\n";
+		exit(1);
+	}
+
+	return res;
+}
 #endif //INC_3__DATASTRUCTURES_MGRAPH_H

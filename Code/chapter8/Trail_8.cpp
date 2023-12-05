@@ -70,6 +70,38 @@ public:
 
 	// -------------------------------实验2-------------------------------
 
+	// 8.2 (1) 基于邻接矩阵(无向网)的Prim求解
+	void Prim() {
+		vector<int> vexs = {1, 2, 3};
+		vector<tuple<int, int, double>> edges = {
+				{1, 2, 5.5},
+				{1, 3, 4.0},
+				{2, 3, 10.0}
+		};
+		MGraph<double> G(undinetwork, vexs, edges);
+
+		double length = G.Prim(1);
+		cout << length << "\n";
+	}
+
+	// 8.2 (2) 基于邻接矩阵(无向网)的Kruskal求解
+	void Kruskal() {
+		vector<int> vexs = {1, 2, 3};
+		vector<tuple<int, int, double>> edges = {
+				{1, 2, 5.5},
+				{1, 3, 4.0},
+				{2, 3, 10.0}
+		};
+		MGraph<double> G(undinetwork, vexs, edges);
+
+		vector<tuple<int, int, double>> MST_edges = G.Kruskal();
+		for (auto& x: MST_edges) {
+			cout << get<0>(x) << " --> " << get<1>(x) << " weight: " << get<2>(x) << "\n";
+		}
+	}
+
+	// -------------------------------实验3-------------------------------
+
 	void f() {
 
 	}
