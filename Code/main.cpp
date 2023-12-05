@@ -37,8 +37,7 @@ int main() {
 	Homework_7 hw7;
 	Homework_8 hw8;
 
-	tr8.Prim();
-
+	hw8.FindLoop_un();
 
 	return 0;
 }

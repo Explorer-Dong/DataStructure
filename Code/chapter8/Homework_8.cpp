@@ -60,4 +60,46 @@ public:
 			cout << road << ' ';
 		}
 	}
+
+	// T5 无向图寻找回路 - 邻接矩阵
+	void FindLoop_un() {
+		vector<int> vexs = {1, 2, 3, 4, 5, 6, 7};
+		vector<pair<int, int>> edges = {
+				{1, 2}, {1, 6},
+				{2, 3}, {2, 4}, {2, 5},
+				{3, 4}, {3, 7},
+				{6, 7},
+		};
+		MGraph<int> G(undigraph, vexs, edges);
+
+		auto loop = G.FindLoop_un();
+
+		while (loop.size()) {
+			auto road = loop.front();
+			loop.pop_front();
+			cout << road << " ";
+		}
+	}
+
+	// T6 prim & kruskal
+	void MST() {
+		vector<int> vexs = {1, 2, 3, 4, 5, 6, 7, 8};
+		vector<tuple<int, int, int>> edges = {
+				{1, 2, 2}, {1, 3, 3},
+				{2, 4, 2}, {3, 4, 1},
+				{4, 5, 2}, {4, 6, 4},
+				{5, 7, 5}, {5, 6, 1},
+				{6, 7, 2}, {6, 8, 1},
+				{7, 8, 1}
+		};
+		MGraph<int> G(undinetwork, vexs, edges);
+
+		int length = G.Prim(1);
+		cout << length << "\n";
+
+		auto res = G.Kruskal();
+		for (auto& x: res) {
+			cout << get<0>(x) << " --> " << get<1>(x) << " weight: " << get<2>(x) << "\n";
+		}
+	}
 };

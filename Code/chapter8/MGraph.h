@@ -17,6 +17,7 @@ private:
 	GraphType kind;             // 图类型
 	vector<int> vexs;           // 点集
 	vector<vector<T>> edges;    // 边集(邻接矩阵)
+	T INF = numeric_limits<T>::max();
 
 public:
 	MGraph(GraphType _kind, vector<int>& _vexs, vector<pair<int, int>>& _edges);         // 图
@@ -25,7 +26,8 @@ public:
 
 	void dfs();
 	void bfs();
-	vector<T> FindLoop();
+	vector<T> FindLoop();       // 有向图找环
+	deque<T> FindLoop_un();     // 无向图找环
 	T Prim(int v);
 	vector<tuple<int, int, T>> Kruskal();
 };
@@ -60,7 +62,7 @@ MGraph<T>::MGraph(GraphType _kind, vector<int>& _vexs, vector<tuple<int, int, T>
 	n = _vexs.size(), e = _edges.size();
 	kind = _kind;
 	vexs = _vexs;
-	edges.resize(n + 1, vector<T>(n + 1, 0));
+	edges.resize(n + 1, vector<T>(n + 1, INF));
 
 	if (kind == undinetwork) {
 		for (auto& edge: _edges) {
@@ -187,10 +189,45 @@ vector<T> MGraph<T>::FindLoop() {
 }
 
 template<class T>
+deque<T> MGraph<T>::FindLoop_un() {
+	deque<T> loop;
+
+	vector<bool> vis(n + 1, false);
+	deque<T> path;
+	bool ok = false;
+
+	// 深搜函数
+	function<void(int, int)> dfs = [&](int before, int now) {
+		if (ok) return;
+
+		if (vis[now]) {
+			ok = true;
+			while (path.front() != now) path.pop_front();
+			loop = path;
+			return;
+		}
+
+		vis[now] = true;
+		path.push_back(now);
+
+		for (int i = 1; i <= n; i++)
+			if (edges[now][i] && i != before)
+				dfs(now, i);
+
+		vis[now] = false;
+		path.pop_back();
+	};
+
+	// 选择探索起点 - 任意选择一个点即可
+	dfs(-1, 1);
+
+	return loop;
+}
+
+template<class T>
 T MGraph<T>::Prim(int v) {
 	T length = 0;
 
-	T INF = numeric_limits<T>::max();
 	vector<T> d(n + 1, INF); // d[i]表示i号点到集合MST中的最短边长
 	vector<bool> MST(n + 1, false);
 
