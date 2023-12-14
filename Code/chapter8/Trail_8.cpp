@@ -102,7 +102,42 @@ public:
 
 	// -------------------------------实验3-------------------------------
 
-	void f() {
+	// 8.3 (1) Dijkstra 单源最短路 - 朴素版 O(n^2)
+	void Dijkstra() {
+		vector<int> vexs = {1, 2, 3, 4, 5};
+		vector<tuple<int, int, int>> edges = {
+				{1, 2, 10}, {1, 4, 30}, {1, 5, 100},
+				{2, 3, 50},
+				{3, 5, 10},
+				{4, 3, 20}, {4, 5, 60}
+		};
+		MGraph<int> G(dinetwork, vexs, edges);
+		vector<int> path = G.Dijkstra(1, 3);
+		for (auto& road: path) {
+			cout << road << " ";
+		}
+	}
 
+	// 8.3(2) Floyd多源最短路 - O(n^3) TODO
+	void Floyd() {
+		vector<int> vexs = {1, 2, 3, 4, 5};
+		vector<tuple<int, int, int>> edges = {
+				{1, 2, 10},
+				{1, 4, 30},
+				{1, 5, 100},
+				{2, 3, 50},
+				{3, 4, 10},
+				{4, 3, 20},
+				{4, 5, 60}
+		};
+		MGraph<int> G(dinetwork, vexs, edges);
+		vector<tuple<int, int, vector<int>>> paths = G.Floyd();
+		for (auto& path: paths) {
+			cout << get<0>(path) << "->" << get<1>(path) << ":\n";
+			for (auto& road: get<2>(path)) {
+				cout << road << " ";
+			}
+			cout << "\n\n";
+		}
 	}
 };

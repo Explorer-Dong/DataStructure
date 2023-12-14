@@ -13,11 +13,11 @@ enum GraphType {undigraph, undinetwork, digraph, dinetwork};
 template<class T>
 class MGraph {
 private:
-	int n, e;                   // 点数和边数
-	GraphType kind;             // 图类型
-	vector<int> vexs;           // 点集
-	vector<vector<T>> edges;    // 边集(邻接矩阵)
-	T INF = numeric_limits<T>::max();
+	int n, e;                               // 点数和边数
+	GraphType kind;                         // 图类型
+	vector<int> vexs;                       // 点集
+	vector<vector<T>> edges;                // 边集(邻接矩阵)
+	T INF = numeric_limits<T>::max() / 2;   // 最大值，之所以需要除以2是因为后续操作会爆int！
 
 public:
 	MGraph(GraphType _kind, vector<int>& _vexs, vector<pair<int, int>>& _edges);         // 图
@@ -26,10 +26,12 @@ public:
 
 	void dfs();
 	void bfs();
-	vector<T> FindLoop();       // 有向图找环
-	deque<T> FindLoop_un();     // 无向图找环
-	T Prim(int v);
-	vector<tuple<int, int, T>> Kruskal();
+	vector<T> FindLoop();                            // 有向图找环
+	deque<T> FindLoop_un();                          // 无向图找环
+	T Prim(int v);                                   // MST
+	vector<tuple<int, int, T>> Kruskal();            // MST
+	vector<int> Dijkstra(int a, int b);              // 单源最短路 (a->b)
+	vector<tuple<int, int , vector<int>>> Floyd();   // 多源最短路
 };
 
 
@@ -323,6 +325,65 @@ vector<tuple<int, int, T>> MGraph<T>::Kruskal() {
 		exit(1);
 	}
 
+	return res;
+}
+
+template<class T>
+vector<int> MGraph<T>::Dijkstra(int a, int b) {
+	vector<int> res;                    // a->b 的最短路径
+	vector<int> pre(n + 1, 0);          // SPT(shortest path tree) 中每一个结点的前驱结点
+	vector<int> d(n + 1, INF);          // d[i] 表示源点 a 到 i 号点的最短路径长度
+	vector<bool> SPT(n + 1, false);     // 标记 i 号点是否在 SPT 集合中
+
+	d[a] = 0;
+
+	// 将a号点加入SPT集合
+	SPT[a] = true;
+	pre[a] = -1;
+	for (int j = 1; j <= n; j++)
+		if (!SPT[j] && d[j] > d[a] + edges[a][j]) {
+			/**
+			 * @note d[j] > d[vex] + edges[vex][j] 注意爆int
+			 */
+			pre[j] = a;
+			d[j] = d[a] + edges[a][j];
+		}
+
+	// 迭代更新n-1次
+	for (int i = 1; i <= n - 1; i++) {
+		// 1. 选择最短边对应的点vex
+		int vex = -1;
+		for (int j = 1; j <= n; j++)
+			if (!SPT[j] && (vex == -1 || d[j] < d[vex]))
+				vex = j;
+
+		// 2. 将选出的点加入SPT集合
+		SPT[vex] = true;
+
+		// 3. 更新V-SPT中的点到源点的最短距离 & 记录被更新的点的前驱结点为vex
+		for (int j = 1; j <= n; j++)
+			if (!SPT[j] && d[j] > d[vex] + edges[vex][j]) {
+				/**
+				 * @note d[j] > d[vex] + edges[vex][j] 注意爆int
+				 */
+				pre[j] = vex;
+				d[j] = d[vex] + edges[vex][j];
+			}
+	}
+
+	// 求解最短路径
+	while (b != -1) {
+		res.push_back(b);
+		b = pre[b];
+	}
+	reverse(res.begin(), res.end());
+
+	return res;
+}
+
+template<class T>
+vector<tuple<int, int, vector<int>>> MGraph<T>::Floyd() {
+	vector<tuple<int, int, vector<int>>> res;
 	return res;
 }
 #endif //INC_3__DATASTRUCTURES_MGRAPH_H

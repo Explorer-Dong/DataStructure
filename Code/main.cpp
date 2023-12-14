@@ -37,7 +37,7 @@ int main() {
 	Homework_7 hw7;
 	Homework_8 hw8;
 
-	hw8.FindLoop_un();
+	tr8.Dijkstra();
 
 	return 0;
 }
