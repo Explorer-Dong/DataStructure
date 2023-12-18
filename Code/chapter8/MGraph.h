@@ -383,7 +383,69 @@ vector<int> MGraph<T>::Dijkstra(int a, int b) {
 
 template<class T>
 vector<tuple<int, int, vector<int>>> MGraph<T>::Floyd() {
+	/**
+	 * @note more detailed info about spatial optimization: https://www.acwing.com/solution/content/218719/
+	 */
 	vector<tuple<int, int, vector<int>>> res;
+
+	int d[n + 1][n + 1] {};     // d[i][j] means i to j shortest path length
+	int aft[n + 1][n + 1] {};   // aft[i][j] means i to j first pass vex
+
+	// init
+	for (int i = 1; i <= n; i++) {
+		for (int j = 1; j <= n; j++) {
+			if (i == j) {
+				d[i][j] = 0;
+			} else {
+				d[i][j] = INF;
+			}
+		}
+	}
+
+	// base
+	for (int i = 1; i <= n; i++) {
+		for (int j = 1; j <= n; j++) {
+			if (i == j) continue;
+			if (edges[i][j] != INF) {
+				d[i][j] = edges[i][j];
+				aft[i][j] = j;
+			} else {
+				d[i][j] = INF;
+			}
+		}
+	}
+
+	// dp
+	for (int k = 1; k <= n; k++) {
+		for (int i = 1; i <= n; i++) {
+			for (int j = 1; j <= n; j++) {
+				if (d[i][k] != INF && d[k][j] != INF && d[i][k] + d[k][j] < d[i][j]) {
+					d[i][j] = d[i][k] + d[k][j];
+					aft[i][j] = k; // aft[i][j] = aft[i][k] = k
+				}
+			}
+		}
+	}
+
+	// result
+	for (int i = 1; i <= n; i++) {
+		for (int j = 1; j <= n; j++) {
+			if (d[i][j] != INF && d[i][j]) {
+				vector<int> path;
+				path.push_back(i);
+
+				int next = aft[i][j];
+				while (next != j) {
+					path.push_back(next);
+					next = aft[next][j];
+				}
+
+				path.push_back(j);
+				res.push_back({i, j, path});
+			}
+		}
+	}
+
 	return res;
 }
 #endif //INC_3__DATASTRUCTURES_MGRAPH_H

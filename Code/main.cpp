@@ -40,7 +40,7 @@ int main() {
 	Homework_7 hw7;
 	Homework_8 hw8;
 
-	tr10.Compare();
+	tr8.Floyd();
 
 	return 0;
 }

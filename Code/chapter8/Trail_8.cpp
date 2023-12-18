@@ -118,17 +118,14 @@ public:
 		}
 	}
 
-	// 8.3(2) Floyd多源最短路 - O(n^3) TODO
+	// 8.3(2) Floyd多源最短路 - O(n^3)
 	void Floyd() {
 		vector<int> vexs = {1, 2, 3, 4, 5};
 		vector<tuple<int, int, int>> edges = {
-				{1, 2, 10},
-				{1, 4, 30},
-				{1, 5, 100},
+				{1, 2, 10}, {1, 4, 30}, {1, 5, 100},
 				{2, 3, 50},
-				{3, 4, 10},
-				{4, 3, 20},
-				{4, 5, 60}
+				{3, 5, 10},
+				{4, 3, 20}, {4, 5, 60}
 		};
 		MGraph<int> G(dinetwork, vexs, edges);
 		vector<tuple<int, int, vector<int>>> paths = G.Floyd();
