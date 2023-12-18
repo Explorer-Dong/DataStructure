@@ -20,6 +20,7 @@
 #include "chapter8/Trail_8.cpp"
 
 #include "chapter10/Trail_10.cpp"
+#include "chapter10/Homework_10.cpp"
 
 using namespace std;
 
@@ -39,8 +40,9 @@ int main() {
 	Homework_6 hw6;
 	Homework_7 hw7;
 	Homework_8 hw8;
+	Homework_10 hw10;
 
-	tr8.Floyd();
+	hw10._QuickSort();
 
 	return 0;
 }
