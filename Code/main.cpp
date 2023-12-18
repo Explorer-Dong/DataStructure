@@ -19,6 +19,8 @@
 #include "chapter8/Homework_8.cpp"
 #include "chapter8/Trail_8.cpp"
 
+#include "chapter10/Trail_10.cpp"
+
 using namespace std;
 
 int main() {
@@ -29,6 +31,7 @@ int main() {
 	Trail_6 tr6;
 	Trail_7 tr7;
 	Trail_8 tr8;
+	Trail_10 tr10;
 	Homework_2 hw2;
 	Homework_3 hw3;
 	Homework_4 hw4;
@@ -37,7 +40,7 @@ int main() {
 	Homework_7 hw7;
 	Homework_8 hw8;
 
-	tr8.Dijkstra();
+	tr10.Compare();
 
 	return 0;
 }
