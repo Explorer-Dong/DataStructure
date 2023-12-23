@@ -100,9 +100,34 @@ public:
 		return cnt;
 	}
 
-	// MergeSort TODO
+	// MergeSort - recursion
 	int MergeSort(vector<int>& a) {
 		int cnt = 0;
+
+		function<void(int, int)> mergeSort = [&](int l, int r) {
+			if (l >= r) return;
+
+			// divide
+			int mid = (l + r) >> 1;
+
+			// conquer
+			mergeSort(l, mid), mergeSort(mid + 1, r);
+
+			// combine
+			int t[a.size()], i = l, j = mid + 1, k = 0;
+			while (i <= mid && j <= r) {
+				if (a[i] < a[j]) t[k++] = a[i++];
+				else t[k++] = a[j++];
+				cnt++;
+			}
+			while (i <= mid) t[k++] = a[i++];
+			while (j <= r) t[k++] = a[j++];
+
+			for (i = l, j = 0; i <= r; i++) a[i] = t[j++];
+		};
+
+		mergeSort(0, a.size() - 1);
+
 		return cnt;
 	}
 

@@ -128,4 +128,53 @@ public:
 
 		return a;
 	}
+
+	// T4 merge two ordered seq
+	vector<int> MergeTwoOrderedSeq(vector<int>& a, vector<int>& b) {
+		vector<int> res(a.size() + b.size());
+
+		int i = 0, j = 0, k = 0;
+		while (i < a.size() && j < b.size()) {
+			if (a[i] < b[j]) res[k++] = a[i++];
+			else res[k++] = b[j++];
+		}
+
+		while (i < a.size()) res[k++] = a[i++];
+		while (j < b.size()) res[k++] = b[j++];
+
+		return res;
+	}
+
+	// T5 count reverse order
+	int CountReverseOrder(vector<int>& a) {
+		int cnt = 0;
+
+		function<void(int, int)> mergeSort = [&](int l, int r) {
+			if (l >= r) return;
+
+			// divide
+			int mid = (l + r) >> 1;
+
+			// conquer
+			mergeSort(l, mid), mergeSort(mid + 1, r);
+
+			// combine
+			int t[a.size()], i = l, j = mid + 1, k = 0;
+			while (i <= mid && j <= r) {
+				if (a[i] <= a[j]) t[k++] = a[i++];
+				else {
+					t[k++] = a[j++];
+					cnt += mid - i + 1;     // count
+				}
+			}
+			while (i <= mid) t[k++] = a[i++];
+			while (j <= r) t[k++] = a[j++];
+
+			for (i = l, k = 0; i <= r; i++) a[i] = t[k++];
+		};
+
+		mergeSort(0, a.size() - 1);
+
+		return cnt;
+	}
 };

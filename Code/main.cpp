@@ -42,7 +42,9 @@ int main() {
 	Homework_8 hw8;
 	Homework_10 hw10;
 
-	hw10.InsertNum2Heap();
+	vector<int> a = {3, 4, 1, 5, 2};
+
+	cout << hw10.CountReverseOrder(a) << endl;
 
 	return 0;
 }
