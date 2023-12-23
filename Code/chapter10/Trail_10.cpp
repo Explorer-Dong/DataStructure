@@ -6,6 +6,9 @@
 
 using namespace std;
 
+#ifndef INC_3__DATASTRUCTURES_TRAIL_10_H
+#define INC_3__DATASTRUCTURES_TRAIL_10_H
+
 class Trail_10 {
 public:
 	// Generate num random numbers in [0, range)
@@ -64,13 +67,40 @@ public:
 		return cnt;
 	}
 
-	// HeapSort
+	// HeapSort(largest top)
 	int HeapSort(vector<int>& a) {
 		int cnt = 0;
+
+		auto pushdown = [&](int top, int lim) {
+			int j = 2 * top + 1;
+			while (j <= lim) {
+				j += j < lim && a[j] < a[j + 1];    cnt++;
+				if (a[top] <= a[j]) {	            cnt++;
+					swap(a[top], a[j]);
+					top = j;
+					j = 2 * top + 1;
+				} else {
+					break;  // have to add it, or it's a dead loop
+				}
+			}
+		};
+
+		// ini heap
+		int n = a.size();
+		for (int i = n / 2 - 1; i >= 0; i--) {
+			pushdown(i, n - 1);
+		}
+
+		// modify heap
+		for (int i = 0; i < n - 1; i++) {
+			swap(a[0], a[n - i - 1]);
+			pushdown(0, n - i - 2);
+		}
+
 		return cnt;
 	}
 
-	// MergeSort
+	// MergeSort TODO
 	int MergeSort(vector<int>& a) {
 		int cnt = 0;
 		return cnt;
@@ -78,11 +108,7 @@ public:
 
 	// Compare
 	void Compare() {
-		vector<int> a = Generate(3, 1000);
-
-		for (auto& x: a) {
-			cout << x << " ";
-		} cout << endl;
+		vector<int> a = Generate(1000, 1000);
 
 		int insert_cnt = 0, quick_cnt = 0, heap_cnt = 0, merge_cnt = 0;
 
@@ -97,3 +123,5 @@ public:
 		cout << "merge count:\t" << merge_cnt << endl;
 	}
 };
+
+#endif //INC_3__DATASTRUCTURES_TRAIL_10_H

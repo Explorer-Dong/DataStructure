@@ -42,7 +42,7 @@ int main() {
 	Homework_8 hw8;
 	Homework_10 hw10;
 
-	hw10._QuickSort();
+	hw10.InsertNum2Heap();
 
 	return 0;
 }
