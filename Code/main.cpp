@@ -19,6 +19,8 @@
 #include "chapter8/Homework_8.cpp"
 #include "chapter8/Trail_8.cpp"
 
+#include "chapter9/Trail_9.cpp"
+
 #include "chapter10/Trail_10.cpp"
 #include "chapter10/Homework_10.cpp"
 
@@ -32,6 +34,7 @@ int main() {
 	Trail_6 tr6;
 	Trail_7 tr7;
 	Trail_8 tr8;
+	Trail_9 tr9;
 	Trail_10 tr10;
 	Homework_2 hw2;
 	Homework_3 hw3;
@@ -42,9 +45,7 @@ int main() {
 	Homework_8 hw8;
 	Homework_10 hw10;
 
-	vector<int> a = {3, 4, 1, 5, 2};
-
-	cout << hw10.CountReverseOrder(a) << endl;
+	tr9.Menu();
 
 	return 0;
 }
