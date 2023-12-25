@@ -67,15 +67,9 @@ public:
 	}
 
 	// T3 insert num to heap
-	void InsertNum2Heap() {
-		// ini heap
-		int n = 10;
-		vector<int> a = CreateHeap(n);
-
-		// num to be inserted
-		int num = 55;
-
-		// fun insert
+	void InsertNum2Heap(vector<int>& a, int num) {
+		// resize
+		int n = a.size();
 		a.resize(n + 1);
 
 		/* 1. find pos to be inserted */
