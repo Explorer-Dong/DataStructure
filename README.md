@@ -8,5 +8,6 @@
 - `CourseWare` - 课件文件夹
 - `HomeWork` - 作业文件夹
 - `.gitignore` - git忽略文件
+- `CMakeLists.txt` - 项目构建文件
 - `Notes.md` - 笔记文件
 - `README.md` - 说明文件
