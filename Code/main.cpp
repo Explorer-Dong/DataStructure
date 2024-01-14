@@ -45,7 +45,7 @@ int main() {
 	Homework_8 hw8;
 	Homework_10 hw10;
 
-	tr9.Menu();
+	tr3.TrMid2PostCalcPost();
 
 	return 0;
 }

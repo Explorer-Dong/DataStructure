@@ -80,8 +80,8 @@ public:
 		auto calc = [&]() {
 			int b = num.Top(); num.Pop();
 			int a = num.Top(); num.Pop();
-			char o = op.Top();
-			op.Pop();
+			char o = op.Top(); op.Pop();
+
 			if (o == '+') num.Push(a + b);
 			else if (o == '-') num.Push(a - b);
 			else if (o == '/') num.Push(a / b);
@@ -125,6 +125,7 @@ public:
 
 		int res = CalcPost(post);
 		cout << "后缀表达式的计算结果为：\n";
+		// 2 1 3 + *
 		cout << res << "\n";
 	}
 

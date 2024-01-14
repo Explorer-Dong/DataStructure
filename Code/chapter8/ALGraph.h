@@ -10,17 +10,17 @@ using namespace std;
 
 template<class T>
 struct EdgeNode {   // 边点集
-	int toid;
-	T w;
-	EdgeNode* next;
+	int toid;			// 当前边所连接的下一个顶点的编号
+	T w;				// 当前边的信息（以权重 w 为例）
+	EdgeNode* next;		// 当前边的下一条边的地址
 	EdgeNode(int _toid) : toid(_toid) {}
 	EdgeNode(int _toid, T _w) : toid(_toid), w(_w) {}
 };
 
 template<class T>
 struct VexNode {    // 顶点集
-	int id;
-	EdgeNode<T>* next;
+	int id;				// 当前顶点的编号
+	EdgeNode<T>* next;	// 当前顶点所指的第一条边的地址
 };
 
 template<class T>
@@ -146,38 +146,34 @@ void ALGraph<T>::dfs() {
 	vector<bool> vis(n + 1, false);
 
 	// 深搜函数
-	function<void(int, vector<bool>&)> dfs = [&](int now, vector<bool>& vis) {
+	function<void(int)> dfs = [&](int now) {
 		cout << now << " ";
 		vis[now] = true;
-		for (EdgeNode<T>* p = h[now].next; p; p = p->next) {
-			if (!vis[p->toid]) {
-				dfs(p->toid, vis);
-			}
-		}
+		for (EdgeNode<T>* p = h[now].next; p; p = p->next)
+			if (!vis[p->toid])
+				dfs(p->toid);
 	};
 
-	// 调用
-	for (int i = 1; i <= n; i++) {
-		if (!vis[i]) {
-			dfs(i, vis);
-		}
-	}
+	// 遍历连通分量
+	for (int i = 1; i <= n; i++)
+		if (!vis[i])
+			dfs(i);
 }
 
 template<class T>
 void ALGraph<T>::bfs() {
 	vector<bool> vis(n + 1, false);
 
-	auto bfs = [&](int hh, vector<bool>& vis) {
+	auto bfs = [&](int hh) {
 		queue<T> q;
 		q.push(hh);
+		vis[hh] = true;
 
 		while (q.size()) {
 			auto now = q.front();
 			q.pop();
 
 			cout << now << " ";
-			vis[now] = true;
 
 			for (EdgeNode<T>* p = h[now].next; p; p = p->next) {
 				if (!vis[p->toid]) {
@@ -188,11 +184,10 @@ void ALGraph<T>::bfs() {
 		}
 	};
 
-	for (int i = 1; i <= n; i++) {
-		if (!vis[i]) {
-			bfs(i, vis);
-		}
-	}
+	// 遍历连通分量
+	for (int i = 1; i <= n; i++)
+		if (!vis[i])
+			bfs(i);
 }
 
 template<class T>

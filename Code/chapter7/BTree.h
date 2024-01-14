@@ -81,6 +81,18 @@ BtNode<T>* BTree<T>::CreateWithPost(string& post_of_tag, int& i) {
 
 template<class T>
 BtNode<T>* BTree<T>::CreateWithPreMid(string& pre, string& mid, int ipre, int imid, int n) {
+	/**
+	 * 用先序和中序进行构造
+	 * @param pre 先序序列
+	 * @param mid 中序序列
+	 * @param ipre 先序序列的起始位置
+	 * @param imid 中序序列的起始位置
+	 * @param n 以当前节点为根节点的子树的节点个数
+	 * @note 用先序序列的第一个元素作为根节点，然后在中序序列中找到该元素，将中序序列分为左右两部分，左边为左子树，右边为右子树
+	 * @note 然后在先序序列中，根据左右子树的节点个数，将先序序列分为左右两部分，左边为左子树，右边为右子树
+	 * @note 递归构造左右子树
+	 * @note 递归终止条件：节点个数为0
+	 */
 	if (!n) {
 		return nullptr;
 	}
