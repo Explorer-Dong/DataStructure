@@ -64,7 +64,7 @@
 
 ## 二、线性表
 
-<center><img src="https://s2.loli.net/2023/12/04/4Nn73PGspUM2Cwl.png" alt="image-20230920231245137" style="zoom:50%;" />
+<center><img src="https://s2.loli.net/2023/12/04/4Nn73PGspUM2Cwl.png" alt="image-20230920231245137" style="zoom:50%;" /></center>
 
 ### 2.1 线性表的逻辑结构
 
@@ -165,7 +165,7 @@ public:
 
     - 插入
 
-        <center><img src="https://s2.loli.net/2023/12/04/7d4ygetnDPANTzU.png" alt="image-20230925092012868" style="zoom:50%;" />
+        <center><img src="https://s2.loli.net/2023/12/04/7d4ygetnDPANTzU.png" alt="image-20230925092012868" style="zoom:50%;" /></center>
 
         ```c++
         // 插入当前结点 s
@@ -177,7 +177,7 @@ public:
 
     - 删除
 
-        <center><img src="https://s2.loli.net/2023/12/04/CiJzh1HXaGqvURB.png" alt="image-20230925091955866" style="zoom:50%;" />
+        <center><img src="https://s2.loli.net/2023/12/04/CiJzh1HXaGqvURB.png" alt="image-20230925091955866" style="zoom:50%;" /></center>
 
         ```c++
         // 删除当前结点 p
@@ -191,7 +191,7 @@ public:
 
 #### 3.1.1 栈的基本概念
 
-<center><img src="https://s2.loli.net/2023/12/04/MuQ7ZHX6xNKSqbf.png" alt="image-20230928095521363" />
+<center><img src="https://s2.loli.net/2023/12/04/MuQ7ZHX6xNKSqbf.png" alt="image-20230928095521363" /></center>
 
 卡特兰数：假设 $f(k)$ 表示第 k 个数最后一个出栈的总个数，则 $f(k)=f(k-1)f(n-k)$
 $$
@@ -202,11 +202,11 @@ $$
 
 1. 顺序存储
 
-    <img src="https://s2.loli.net/2023/12/04/DGIASXO27NbC8Ji.png" alt="image-20230928095919380" style="zoom:67%;" />
+    <center><img src="https://s2.loli.net/2023/12/04/DGIASXO27NbC8Ji.png" alt="image-20230928095919380" style="zoom:67%;" /></center>
 
 2. 链式存储
 
-    <img src="https://s2.loli.net/2023/12/04/o8mYC2XQvqUJ5BL.png" alt="image-20230928100849337" style="zoom:67%;" />
+    <center><img src="https://s2.loli.net/2023/12/04/o8mYC2XQvqUJ5BL.png" alt="image-20230928100849337" style="zoom:67%;" /></center>
 
 #### 3.1.3 栈的操作算法
 
@@ -260,13 +260,13 @@ $$
 
 1. 顺序存储
 
-    <center><img src="https://s2.loli.net/2023/12/04/GJh3alEndfXKCMq.png" alt="image-20231007091939711"  style="zoom:67%;" />
+    <center><img src="https://s2.loli.net/2023/12/04/GJh3alEndfXKCMq.png" alt="image-20231007091939711"  style="zoom:67%;" /></center>
 
-    <center><img src="https://s2.loli.net/2024/01/14/2DNAL7e1UBlECas.png" alt="image-20231007091951161" style="zoom:67%;" />
+    <center><img src="https://s2.loli.net/2024/01/14/2DNAL7e1UBlECas.png" alt="image-20231007091951161" style="zoom:67%;" /></center>
 
 2. 链式存储
 
-    <img src="https://s2.loli.net/2023/12/04/h1rZ6A3FVN9mRaq.png" alt="image-20231007090752380" style="zoom:67%;" />
+    <center><img src="https://s2.loli.net/2023/12/04/h1rZ6A3FVN9mRaq.png" alt="image-20231007090752380" style="zoom:67%;" /></center>
 
 #### 3.2.3 队列的操作算法
 
@@ -315,11 +315,11 @@ $$
 
 使用固定长度的数组来存储，3种存储字符串长度的方法如下：
 
-<center><img src="https://s2.loli.net/2023/12/04/lwkEMtF2mXjPpaz.png" alt="image-20231012095542232" style="zoom:50%;" />
+<center><img src="https://s2.loli.net/2023/12/04/lwkEMtF2mXjPpaz.png" alt="image-20231012095542232" style="zoom:50%;" /></center>
 
-<center><img src="https://s2.loli.net/2023/12/04/vbFg17sAwLBModl.png" alt="image-20231012095512268" style="zoom:50%;" />
+<center><img src="https://s2.loli.net/2023/12/04/vbFg17sAwLBModl.png" alt="image-20231012095512268" style="zoom:50%;" /></center>
 
-<center><img src="https://s2.loli.net/2023/12/04/DIQATWxkN5J3eH1.png" alt="image-20231012095528625" style="zoom:50%;" />
+<center><img src="https://s2.loli.net/2023/12/04/DIQATWxkN5J3eH1.png" alt="image-20231012095528625" style="zoom:50%;" /></center>
 
 #### 4.2.2 串的链式存储
 
@@ -360,7 +360,7 @@ $$
 
 1. BF算法（Brute - Force）
 
-    <center><img src="https://s2.loli.net/2023/12/04/NemPEzIdOpLh3Vb.png" alt="image-20231012105536936" style="zoom:60%;" />
+    <center><img src="https://s2.loli.net/2023/12/04/NemPEzIdOpLh3Vb.png" alt="image-20231012105536936" style="zoom:60%;" /></center>
 
     ```c++
     // 返回匹配上的所有位置下标（下标从0开始）
@@ -384,7 +384,7 @@ $$
     
 2. KMP算法
 
-    <center><img src="https://s2.loli.net/2023/12/04/X2VvgtLuKnH1NwJ.png" alt="image-20231012194432323" style="zoom:80%;" />
+    <center><img src="https://s2.loli.net/2023/12/04/X2VvgtLuKnH1NwJ.png" alt="image-20231012194432323" style="zoom:80%;" /></center>
 
    > **优化思想**：
    >
@@ -460,7 +460,7 @@ typedef arr1 arr2[m];
 
 #### 5.2.1 对称矩阵的压缩存储
 
-<center><img src="https://s2.loli.net/2023/12/04/TKBNSHyJ7RcdFu3.png" alt="image-20231016092313887" style="zoom:50%;" />
+<center><img src="https://s2.loli.net/2023/12/04/TKBNSHyJ7RcdFu3.png" alt="image-20231016092313887" style="zoom:50%;" /></center>
 
 假设现在有一个 n*n 的对称矩阵
 
@@ -482,7 +482,7 @@ typedef arr1 arr2[m];
 
 #### 5.2.2 三角矩阵的压缩存储
 
-<img src="https://s2.loli.net/2023/12/04/6OPLDYtrKld1iGv.png" alt="image-20231019094830937" style="zoom:50%;" />
+<center><img src="https://s2.loli.net/2023/12/04/6OPLDYtrKld1iGv.png" alt="image-20231019094830937" style="zoom:50%;" /></center>
 
 假设现在有一个 n*n 的三角矩阵（上三角或下三角为常数c）
 
@@ -490,7 +490,7 @@ typedef arr1 arr2[m];
 
 #### 5.2.3 对角矩阵的压缩存储
 
-<img src="https://s2.loli.net/2023/12/04/PwcA7Tu5XBZ2q8y.png" alt="image-20231019094859766" style="zoom:50%;" />
+<center><img src="https://s2.loli.net/2023/12/04/PwcA7Tu5XBZ2q8y.png" alt="image-20231019094859766" style="zoom:50%;" /></center>
 
 假设现在有一个 n*n 的对角矩阵（围绕主对角线有数据，其余数据均为0）
 
@@ -521,11 +521,11 @@ typedef arr1 arr2[m];
 
 采用联合结构体存储结点类型
 
-<center><img src="https://s2.loli.net/2023/12/04/Gjiltk6f74yO5L9.png" alt="image-20231023084427729" style="zoom:50%;" />
+<center><img src="https://s2.loli.net/2023/12/04/Gjiltk6f74yO5L9.png" alt="image-20231023084427729" style="zoom:50%;" /></center>
 
 #### 6.2.2 广义表的存储结构
 
-<center><img src="https://s2.loli.net/2023/12/04/G9yUhn4mzEDPBxo.png" alt="image-20231023090301534" style="zoom: 67%;" />
+<center><img src="https://s2.loli.net/2023/12/04/G9yUhn4mzEDPBxo.png" alt="image-20231023090301534" style="zoom: 67%;" /></center>
 
 ### 6.3 广义表的操作算法
 
@@ -577,15 +577,15 @@ typedef arr1 arr2[m];
 
 3. 满二叉树：每一层都是满结点
 
-    <center><img src="https://s2.loli.net/2023/12/04/dECpXhRImnJHxiw.png" alt="image-20231030085031394" style="zoom: 50%;" />
+    <center><img src="https://s2.loli.net/2023/12/04/dECpXhRImnJHxiw.png" alt="image-20231030085031394" style="zoom: 50%;" /></center>
 
 4. 完全二叉树：对于一个 $k$ 层的二叉树，$1\to k-1$ 都是满的，第 $k$ 层从左到右连接叶子结点
 
-    <center><img src="https://s2.loli.net/2023/12/04/2xWt4QInCRXKulf.png" alt="image-20231030085057862" style="zoom:50%;" />
+    <center><img src="https://s2.loli.net/2023/12/04/2xWt4QInCRXKulf.png" alt="image-20231030085057862" style="zoom:50%;" /></center>
 
    结点数固定，则完全二叉树的形状唯一
 
-   <center><img src="https://s2.loli.net/2023/12/04/qDFBM34ghjwkCzR.png" alt="image-20231030090400650" style="zoom:67%;" />
+   <center><img src="https://s2.loli.net/2023/12/04/qDFBM34ghjwkCzR.png" alt="image-20231030090400650" style="zoom:67%;" /></center>
 
    若 $i$ 为奇数，且 $i\neq1$，则左兄弟就是 $i-1$
 
@@ -619,9 +619,9 @@ typedef arr1 arr2[m];
 
    **先序序列**进行构造：按照遍历的思路来，对于先序序列而言，第一个元素一定是根元素，因此首先根据“当前局面”的第一个元素创建根结点，接着递归创建左子树和右子树即可。注意传递的序列起始下标是引用类型的变量
 
-   <center><img src="https://s2.loli.net/2024/01/14/45xM2KrThuV8mkF.png" alt="image-20231102112448133" style="zoom:75%;" />
+   <center><img src="https://s2.loli.net/2024/01/14/45xM2KrThuV8mkF.png" alt="image-20231102112448133" style="zoom:75%;" /></center>
 
-   <center><img src="https://s2.loli.net/2023/12/04/EIX38hF67pVitun.png" alt="image-20231102112515427" style="zoom:75%;" />
+   <center><img src="https://s2.loli.net/2023/12/04/EIX38hF67pVitun.png" alt="image-20231102112515427" style="zoom:75%;" /></center>
    **中序序列**进行构造：
    
     <center>不可以，因为不能确定根节点以及左子树和右子树的部分</center>
@@ -703,13 +703,13 @@ typedef arr1 arr2[m];
     };
     ```
 
-   <center><img src="https://s2.loli.net/2023/12/04/eKfb6koTwzBUAOV.png" alt="image-20231109115729850" style="zoom:50%;" />
+   <center><img src="https://s2.loli.net/2023/12/04/eKfb6koTwzBUAOV.png" alt="image-20231109115729850" style="zoom:50%;" /></center>
 
 3. 双亲表示法
 
    自下向上存储边的信息
 
-   <center><img src="https://s2.loli.net/2023/12/04/Pc4ZMp2eQE1aCfN.png" alt="image-20231109115759641" style="zoom:50%;" />
+   <center><img src="https://s2.loli.net/2023/12/04/Pc4ZMp2eQE1aCfN.png" alt="image-20231109115759641" style="zoom:50%;" /></center>
    
 4. 孩子兄弟表示法
 
@@ -786,9 +786,9 @@ $$
 
 - 类定义：
 
-    <center><img src="https://s2.loli.net/2023/11/23/bR61nTfc34wNVgH.png" alt="image-20231123111517468" style="zoom:67%;" />
+    <center><img src="https://s2.loli.net/2023/11/23/bR61nTfc34wNVgH.png" alt="image-20231123111517468" style="zoom:67%;" /></center>
 
-    <center><img src="https://s2.loli.net/2023/11/23/O3HzLeM87SyUqN6.png" alt="image-20231123111541444" style="zoom:67%;" />
+    <center><img src="https://s2.loli.net/2023/11/23/O3HzLeM87SyUqN6.png" alt="image-20231123111541444" style="zoom:67%;" /></center>
 
 #### 8.2.2 邻接表
 
@@ -798,7 +798,7 @@ $$
 
 - 类定义：
 
-    <center><img src="https://s2.loli.net/2023/11/23/g5Hw6kdlGj8XvfQ.png" alt="image-20231123113744911" style="zoom:67%;" />
+    <center><img src="https://s2.loli.net/2023/11/23/g5Hw6kdlGj8XvfQ.png" alt="image-20231123113744911" style="zoom:67%;" /></center>
 
 ### 8.3 图的遍历
 
@@ -808,7 +808,7 @@ $$
 
 #### 8.3.2 深度优先搜索
 
-<center><img src="https://s2.loli.net/2023/12/04/hXzEj7fZQqrJl3u.png" alt="image-20231127083412848" style="zoom:67%;" />
+<center><img src="https://s2.loli.net/2023/12/04/hXzEj7fZQqrJl3u.png" alt="image-20231127083412848" style="zoom:67%;" /></center>
 
 1. 邻接矩阵：
 
@@ -816,7 +816,7 @@ $$
 
     - 针对**邻接矩阵**的一个**无向**连通图的搜索代码示例
 
-        <center><img src="https://s2.loli.net/2023/12/04/IqEmULWtYw5Chv9.png" alt="image-20231127083039909" style="zoom:67%;" />
+        <center><img src="https://s2.loli.net/2023/12/04/IqEmULWtYw5Chv9.png" alt="image-20231127083039909" style="zoom:67%;" /></center>
 
 2. 邻接表：
 
@@ -858,7 +858,7 @@ $Minimum\ Spanning\ Tree(MST)$
 
 证明：
 
-<img src="https://s2.loli.net/2023/11/30/YjIDAz6dsPUbTOB.png" alt="image-20231130114331973" style="zoom: 67%;" />
+<center><img src="https://s2.loli.net/2023/11/30/YjIDAz6dsPUbTOB.png" alt="image-20231130114331973" style="zoom: 67%;" /></center>
 
 对于上述的一个割，选择其中权值最小的交叉边。从而对于所有的状态，每次选择最小交叉边即可。
 
@@ -968,7 +968,7 @@ $Minimum\ Spanning\ Tree(MST)$
 
 结合顺序查找与分块查找的一种方法
 
-图例：<img src="https://s2.loli.net/2023/12/25/dkaKtQWFMbAR2Hh.png" alt="image-20231225093347357" style="zoom:67%;" />
+<center><img src="https://s2.loli.net/2023/12/25/dkaKtQWFMbAR2Hh.png" alt="image-20231225093347357" style="zoom:67%;" /></center>
 
 - 索引表可以折半或者顺序查找
 - 块内部只能顺序查找
@@ -989,11 +989,11 @@ $Minimum\ Spanning\ Tree(MST)$
 
 构建：当插入结点进行构建时出现了有结点平衡因子的绝对值超过了1，则进行“旋转”调整，旋转共分为4种
 
-<center><img src="https://s2.loli.net/2024/01/04/z29qmNZYl1xpKDh.png" alt="image-20240104125111608" style="zoom:50%;" />
+<center><img src="https://s2.loli.net/2024/01/04/z29qmNZYl1xpKDh.png" alt="image-20240104125111608" style="zoom:50%;" /></center>
 
-<center><img src="https://s2.loli.net/2024/01/04/7AaqC84f6eit13s.png" alt="image-20240104125140305" style="zoom:50%;" />
+<center><img src="https://s2.loli.net/2024/01/04/7AaqC84f6eit13s.png" alt="image-20240104125140305" style="zoom:50%;" /></center>
 
-<center><img src="https://s2.loli.net/2024/01/04/kP98Y7MBTcm2VQI.png" alt="image-20240104125159728" style="zoom:50%;" />
+<center><img src="https://s2.loli.net/2024/01/04/kP98Y7MBTcm2VQI.png" alt="image-20240104125159728" style="zoom:50%;" /></center>
 尝试模拟一遍下列序列的构造过程就可以理解了
 
 <center><img src="https://s2.loli.net/2024/01/14/AfC6nZv3FaU1MYo.png" alt="image-20240114231458389" style="zoom:50%;" /></center>
@@ -1173,16 +1173,3 @@ void Sort(int l, int r) {
 > - 划分局部排序的长度
 
 **稳定的**
-
-
-
-
-
-
-
-
-
-
-
-
-
