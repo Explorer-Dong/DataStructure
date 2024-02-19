@@ -45,7 +45,7 @@ int main() {
 	Homework_8 hw8;
 	Homework_10 hw10;
 
-	tr3.TrMid2PostCalcPost();
+	tr10.Compare();
 
 	return 0;
 }

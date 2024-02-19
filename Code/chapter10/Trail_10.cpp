@@ -22,7 +22,7 @@ public:
 	}
 
 	// InsertSort
-	int InsertSort(vector<int>& a) {
+	int InsertSort(vector<int> a) {
 		int cnt = 0;
 
 		auto Sort = [&]() {
@@ -46,7 +46,7 @@ public:
 	}
 
 	// QuickSort
-	int QuickSort(vector<int>& a) {
+	int QuickSort(vector<int> a) {
 		int cnt = 0;
 
 		function<void(int, int)> Sort = [&](int l, int r) {
@@ -68,7 +68,7 @@ public:
 	}
 
 	// HeapSort(largest top)
-	int HeapSort(vector<int>& a) {
+	int HeapSort(vector<int> a) {
 		int cnt = 0;
 
 		auto pushdown = [&](int top, int lim) {
@@ -101,7 +101,7 @@ public:
 	}
 
 	// MergeSort - recursion
-	int MergeSort(vector<int>& a) {
+	int MergeSort(vector<int> a) {
 		int cnt = 0;
 
 		function<void(int, int)> mergeSort = [&](int l, int r) {
