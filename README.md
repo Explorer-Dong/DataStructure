@@ -5,7 +5,7 @@
 
 ## Notes
 
-上课详细笔记请移步：https://explorer-dong.github.io/GPA/3rd-term/DataStructure/
+上课详细笔记请移步：<https://blog.dwj601.cn/GPA/3rd-term/DataStructure/>
 
 ## Project Introduction
 - `Code` - 源码文件夹
