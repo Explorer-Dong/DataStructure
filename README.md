@@ -5,7 +5,10 @@
 
 ## Notes
 
-上课详细笔记请移步：[_DataStructure.md](https://github.com/Explorer-Dong/NotesUnion/blob/main/Subject/_DataStructure.md)
+上课详细笔记请移步：
+
+- 高速体验：https://blog.dwj601.cn/GPA/3rd-term/DataStructure/
+- 永久链接：https://explorer-dong.github.io/GPA/3rd-term/DataStructure/
 
 ## Project Introduction
 - `Code` - 源码文件夹
