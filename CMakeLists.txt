@@ -9,11 +9,11 @@ include_directories(
 
 add_executable(3__DataStructures
         Code/chapter2/SeqList.h
+        Code/chapter2/Node.h
         Code/chapter2/LinkList.h
         Code/chapter2/CircleList.h
-        Code/chapter2/Node.h
         Code/chapter2/Homework_2.cpp
-        Code/chapter2/Trail_2.cpp
+        Code/chapter2/Experiment_2.cpp
 
         Code/chapter3/SeqStack.h
         Code/chapter3/LinkStack.h

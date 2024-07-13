@@ -1,5 +1,5 @@
 #include "chapter2/Homework_2.cpp"
-#include "chapter2/Trail_2.cpp"
+#include "chapter2/Experiment_2.cpp"
 
 #include "chapter3/Homework_3.cpp"
 #include "chapter3/Trail_3.cpp"
@@ -27,7 +27,7 @@
 using namespace std;
 
 int main() {
-	Trail_2 tr2;
+    Experiment_2 exp2;
 	Trail_3 tr3;
 	Trail_4 tr4;
 	Trail_5 tr5;
@@ -45,7 +45,7 @@ int main() {
 	Homework_8 hw8;
 	Homework_10 hw10;
 
-	tr10.Compare();
+	hw2.testCircleListNodeCount();
 
 	return 0;
 }
