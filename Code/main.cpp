@@ -44,8 +44,8 @@ int main() {
 	Homework_7 hw7;
 	Homework_8 hw8;
 	Homework_10 hw10;
-
-	hw2.testCircleListNodeCount();
+    
+    exp2.testStudentManageSystem();
 
 	return 0;
 }

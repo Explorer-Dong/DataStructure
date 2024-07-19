@@ -1,473 +1,442 @@
 //
-// Created by ∂≠ŒƒΩ‹ on 2023-10-10.
+// Created by Ëë£ÊñáÊù∞ on 2023-10-10.
 //
 
 #include "SeqList.h"
 #include "LinkList.h"
+#include <iostream>
+#include <fstream>
 
 using namespace std;
 
-#ifndef CODE_TRAIL_2_H
-#define CODE_TRAIL_2_H
-
-class Experiment_2 {
-//public:
-//	// Tr 1.1 ≤Àµ•≤‚ ‘ SeqList
-//	void TrSeqList() {
-//		int arr[] = {4, 2, 1, 3, 8, 0, 123}, n = 7;
-//		SeqList<int> seqList(arr, n);
-//		int choice;
-//
-//		function<void()> DisplayMenu = []() {
-//			cout << endl;
-//			cout << "====================" << endl;
-//			cout << "1. ¥Ú”°" << endl;
-//			cout << "2. …æ≥˝◊Ó–°÷µ" << endl;
-//			cout << "3. …æ≥˝À˘”–÷µŒ™xµƒ‘™Àÿ" << endl;
-//			cout << "4. …æ≥˝÷∏∂®÷µŒ™xµƒ‘™Àÿ" << endl;
-//			cout << "5. …æ≥˝÷µ‘⁄lµΩr÷Æº‰µƒÀ˘”–‘™Àÿ" << endl;
-//			cout << "6. »•÷ÿ" << endl;
-//			cout << "7. ≤Â»Î" << endl;
-//			cout << "8. ‘ˆ–Ú≤Â»Î" << endl;
-//			cout << "9. ≈≈–Ú“ª¬÷" << endl;
-//			cout << "0. ÕÀ≥ˆ" << endl;
-//			cout << "«Î ‰»Îƒ„µƒ—°‘Ò£∫";
-//		};
-//
-//		do {
-//			DisplayMenu();
-//			cin >> choice;
-//			cout << "\n";
-//
-//			switch (choice) {
-//				case 1:
-//					cout << "¥Ú”°" << endl;
-//					seqList.Output();
-//					break;
-//				case 2:
-//					if (seqList.size > 0) {
-//						int minVal = seqList.DeleteMin();
-//						cout << "…æ≥˝◊Ó–°÷µ " << minVal << " ÕÍ±œ" << endl;
-//					} else {
-//						cout << "±Ìø’£¨«Î÷ÿ–¬ ‰»Î" << endl;
-//					}
-//					break;
-//				case 3:
-//					int deleteX;
-//					cout << "…æ≥˝À˘”–µƒ‘™Àÿx";
-//					cin >> deleteX;
-//					seqList.DeleteAllX(deleteX);
-//					cout << "…æ≥˝ÕÍ±œ" << endl;
-//					break;
-//				case 4:
-//					int deleteValue;
-//					cout << "…æ≥˝÷∏∂®÷µŒ™xµƒ‘™Àÿ";
-//					cin >> deleteValue;
-//					seqList.DeleteAllX(deleteValue);
-//					cout << "…æ≥˝ÕÍ±œ" << endl;
-//					break;
-//				case 5:
-//					int left, right;
-//					cout << "…æ≥˝÷µ‘⁄lµΩr÷Æº‰µƒÀ˘”–‘™Àÿ";
-//					cout << "«Î ‰»Îl£∫" << endl;
-//					cin >> left;
-//					cout << "«Î ‰»Îr£∫" << endl;
-//					cin >> right;
-//					seqList.DeleteRange(left, right);
-//					cout << "…æ≥˝ÕÍ±œ" << endl;
-//					break;
-//				case 6:
-//					seqList.Unique();
-//					cout << "»•÷ÿÕÍ±œ" << endl;
-//					break;
-//				case 7:
-//					int insertPos, insertValue;
-//					cout << "≤Â»ÎŒª÷√£∫";
-//					cin >> insertPos;
-//					cout << "≤Â»Î÷µ£∫";
-//					cin >> insertValue;
-//					seqList.Insert(insertPos, insertValue);
-//					cout << "≤Â»ÎÕÍ±œ" << endl;
-//					break;
-//				case 8:
-//					int insertIncreasing;
-//					cout << "‘ˆ–Ú≤Â»Î";
-//					cin >> insertIncreasing;
-//					seqList.IncreaseInsert(insertIncreasing);
-//					cout << "≤Â»ÎÕÍ±œ" << endl;
-//					break;
-//				case 9:
-//					seqList.SortOnce();
-//					cout << "≈≈–Ú“ª¬÷" << endl;
-//					break;
-//				case 0:
-//					cout << "ÕÀ≥ˆ." << endl;
-//					break;
-//				default:
-//					cout << "Œ¥÷™ ‰»Î£¨«Î÷ÿ–¬ ‰»Î" << endl;
-//			}
-//		} while (choice != 0);
-//	}
-//
-//
-//	// Tr 1.1 ≈≈–Ú
-//	void TrQuickSort() {
-//		int arr[] = {4, 2, 1, 3}, n = 4;
-//		SeqList<int> a(arr, n);
-//		a.Output();
-//		a.QuickSort(0, n - 1);
-//		a.Output();
-//	}
-//
-//
-//	// Tr 1.1 πÈ≤¢¡Ω∏ˆ”––ÚÀ≥–Ú±Ì
-//	void TrMergeSeqList() {
-//		int arr1[] = {1, 2, 3, 4}, n1 = 4;
-//		int arr2[] = {0, 7, 10}, n2 = 3;
-//		SeqList<int> a(arr1, n1), b(arr2, n2);
-//		a.Output(), b.Output();
-//		a.Merge(b);
-//		a.Output();
-//	}
-//
-//
-//	// Tr 1.2 À≥–Ú±Ì µœ÷£∫…Ã∆∑π‹¿ÌœµÕ≥
-//	void TrSeqManageSystem() {
-//		struct item {
-//			string code; // …Ã∆∑±‡∫≈
-//			string name; // …Ã∆∑√˚≥∆
-//			int price;   // …Ã∆∑º€∏Ò
-//			int num;     // …Ã∆∑ ˝¡ø
-//		};
-//
-//		// ∂¡»°Œƒº˛
-//		ifstream fin("../Homework/ µ—È2_T2.txt");
-//		if (!fin) {
-//			cout << "Œƒº˛¥Úø™ ß∞‹" << endl;
-//			return;
-//		} else {
-//			cout << "Œƒº˛¥Úø™≥…π¶" << endl;
-//		}
-//
-//		// ¥Ê¥¢ ˝æ›
-//		int n;
-//		fin >> n;
-//		SeqList<item> a(n);
-//		for (int i = 0; i < n; i++) {
-//			fin >> a[i].code >> a[i].name >> a[i].price >> a[i].num;
-//		}
-//
-//		// ≤Àµ•—°‘Ò
-//		function<void()> displayMenu = []() {
-//			cout << endl;
-//			cout << "====================" << endl;
-//			cout << "1. ¥Ú”°" << endl;
-//			cout << "2. –ﬁ∏ƒø‚¥Ê or –¬‘ˆº«¬º" << endl;
-//			cout << "3. …æ≥˝÷∏∂®¥˙∫≈µƒ…Ã∆∑" << endl;
-//			cout << "4. ∞¥…Ã∆∑¥˙∫≈∂‘ø‚¥Ê±Ì÷–µƒº«¬º≈≈–Ú" << endl;
-//			cout << "0. ±£¥Ê≤¢ÕÀ≥ˆ" << endl;
-//			cout << "«Î ‰»Îƒ„µƒ—°‘Ò£∫";
-//		};
-//		int choice;
-//		while (true) {
-//			displayMenu();
-//			cin >> choice;
-//			switch (choice) {
-//				case 1: { // ¥Ú”°
-//					for (int i = 0; i < n; i++) {
-//						cout << a[i].code << " " << a[i].name << " " << a[i].price << " " << a[i].num << endl;
-//					}
-//					break;
-//				}
-//				case 2: { // –ﬁ∏ƒø‚¥Ê or –¬‘ˆº«¬º
-//					string nowcode;
-//					cout << "«Î ‰»Î…Ã∆∑±‡∫≈£∫";
-//					cin >> nowcode;
-//					int j = 0;
-//					for (; j < n; j++) {
-//						if (a[j].code == nowcode) {
-//							break;
-//						}
-//					}
-//					if (j == n) {
-//						// –¬‘ˆº«¬º
-//						a[n].code = nowcode;
-//						cout << "«Î ‰»Î…Ã∆∑√˚≥∆£∫";
-//						cin >> a[n].name;
-//						cout << "«Î ‰»Î…Ã∆∑º€∏Ò£∫";
-//						cin >> a[n].price;
-//						cout << "«Î ‰»Î…Ã∆∑ ˝¡ø£∫";
-//						cin >> a[n].num;
-//						n++;
-//					} else {
-//						// –ﬁ∏ƒø‚¥Ê
-//						cout << "«Î ‰»Î…Ã∆∑ ˝¡ø£∫";
-//						cin >> a[j].num;
-//					}
-//					break;
-//				}
-//				case 3: { // …æ≥˝÷∏∂®¥˙∫≈µƒ…Ã∆∑
-//					string nowcode;
-//					cout << "«Î ‰»Î…Ã∆∑±‡∫≈£∫";
-//					cin >> nowcode;
-//					int j = 0;
-//					for (; j < n; j++) {
-//						if (a[j].code == nowcode) {
-//							break;
-//						}
-//					}
-//					if (j == n) {
-//						cout << "Œ¥’“µΩ∏√…Ã∆∑" << endl;
-//					} else {
-//						for (int k = j; k < n - 1; k++) {
-//							a[k] = a[k + 1];
-//						}
-//						n--;
-//					}
-//					break;
-//				}
-//				case 4: { // ∞¥…Ã∆∑¥˙∫≈∂‘ø‚¥Ê±Ì÷–µƒº«¬º≈≈–Ú£¨¥˙∫≈ «◊÷∑˚¥Æ£¨∞¥◊÷µ‰–Ú≈≈–Ú
-//					sort(a.data, a.data + n, [](item a, item b) {
-//						return a.code < b.code;
-//					});
-//					break;
-//				}
-//				case 0: { // ±£¥Ê≤¢ÕÀ≥ˆ
-//					ofstream fout("../Homework/ µ—È2_T2.txt");
-//					fout << n << endl;
-//					for (int i = 0; i < n; i++) {
-//						fout << a[i].code << " " << a[i].name << " " << a[i].price << " " << a[i].num << endl;
-//					}
-//					fout.close();
-//					return;
-//				}
-//			}
-//		}
-//	}
-//
-//
-//	// Tr 1.3 ≤Àµ•≤‚ ‘ LinkList
-//	void TrLinkList() {
-//		int arr[] = {4, 2, 1, 3, 8, 0, 123}, n = 7;
-//		LinkList<int> linkList(arr, n);
-//		int choice;
-//
-//		function<void()> display = []() {
-//			cout << endl;
-//			cout << "====================" << endl;
-//			cout << "1. ¥Ú”°" << endl;
-//			cout << "2. ≤Â»Î" << endl;
-//			cout << "3. ≈≈–Ú≤¢¥Ú”°" << endl;
-//			cout << "0. ÕÀ≥ˆ" << endl;
-//			cout << "«Î ‰»Îƒ„µƒ—°‘Ò£∫";
-//		};
-//
-//		do {
-//			display();
-//			cin >> choice;
-//			cout << "\n";
-//
-//			switch (choice) {
-//				case 1:
-//					cout << "¥Ú”°" << endl;
-//					linkList.Output();
-//					break;
-//				case 2: {
-//					int insertPos, insertValue;
-//					cout << "≤Â»ÎŒª÷√£∫";
-//					cin >> insertPos;
-//					cout << "≤Â»Î÷µ£∫";
-//					cin >> insertValue;
-////					linkList.Insert(insertPos, insertValue);
-//					cout << "≤Â»ÎÕÍ±œ" << endl;
-//					break;
-//				}
-//				case 3: { // ≈≈–Ú≤¢¥Ú”°
-//					cout << "≈≈–ÚÕÍ±œ" << endl;
-////					linkList.SortAndOutput();
-//					break;
-//				}
-//				case 0:
-//					cout << "ÕÀ≥ˆ." << endl;
-//					break;
-//				default:
-//					cout << "Œ¥÷™ ‰»Î£¨«Î÷ÿ–¬ ‰»Î" << endl;
-//			}
-//		} while (choice != 0);
-//	}
-//
-//
-//	// Tr 1.3 ‘≠µÿƒÊ÷√µ•¡¥±Ì
-//	void TrReverseLinkList() {
-////		int arr[] = {4, 2, 1, 3, 8, 0, 123}, n = 7;
-////		LinkList<int> linkList(arr, n);
-////		cout << "‘≠¡¥±Ì£∫";
-////		linkList.Output();
-////
-////		Node<int>* h = linkList.head;
-////		function<Node<int>*(Node<int>*)> Reverse = [&](Node<int>* node) -> Node<int>* {
-////			if (!node || !node->next) return node; // ø’±Ì or Œ≤Ω·µ„
-////			Node<int>* tail = Reverse(node->next);
-////			node->next->next = node;
-////			node->next = nullptr;
-////			return tail;
-////		};
-////		linkList.head = Reverse(linkList.head);
-////
-////		cout << "ƒÊ÷√∫Û£∫";
-////		linkList.Output();
-//	}
-//
-//
-//	// Tr 1.3 πÈ≤¢¡Ω∏ˆ”––Úµ•¡¥±Ì
-//	void TrMergeLinkList() {
-//		int arr1[] = {1, 2, 3, 4}, n1 = 4;
-//		int arr2[] = {0, 7, 10}, n2 = 3;
-//		LinkList<int> a(arr1, n1), b(arr2, n2);
-//		cout << "πÈ≤¢«∞£∫\n";
-//		a.Output(), b.Output();
-//		a.Merge(b);
-//		cout << "πÈ≤¢∫Û£∫";
-//		a.Output();
-//	}
-//
-//
-//	// Tr 1.4 µ•¡¥±Ì µœ÷£∫—ßºÆπ‹¿ÌœµÕ≥
-//	void TrLinkManageSystem() {
-//		struct stu {
-//			string id; // —ß∫≈
-//			string name; // –’√˚
-//			string gender; // –‘±
-//			string major; // ◊®“µ
-//			string birth; // ≥ˆ…˙»’∆⁄
-//		};
-//
-//		// ∂¡»°Œƒº˛
-//		ifstream fin("../Homework/ µ—È2_T4.txt");
-//		if (!fin) {
-//			cout << "Œƒº˛¥Úø™ ß∞‹" << endl;
-//			return;
-//		} else {
-//			cout << "Œƒº˛¥Úø™≥…π¶" << endl;
-//		}
-//
-//		// ¥Ê¥¢ ˝æ›
-//		int n;
-//		fin >> n;
-//		stu arr[n];
-//		for (int i = 0; i < n; i++) {
-//			fin >> arr[i].id >> arr[i].name >> arr[i].gender >> arr[i].major >> arr[i].birth;
-//		}
-//		LinkList<stu> a(arr, n);
-//
-//		// ≤Àµ•—°‘Ò
-//		function<void()> displayMenu = []() {
-//			cout << endl;
-//			cout << "====================" << endl;
-//			cout << "1. ¥Ú”°" << endl;
-//			cout << "2. ‘ˆº”“ªÃı—ß…˙–≈œ¢" << endl;
-//			cout << "3. …æ≥˝“ªÃı—ß…˙–≈œ¢" << endl;
-//			cout << "4. –ﬁ∏ƒ“ªÃı—ß…˙–≈œ¢" << endl;
-//			cout << "0. ±£¥Ê≤¢ÕÀ≥ˆ" << endl;
-//			cout << "«Î ‰»Îƒ„µƒ—°‘Ò£∫";
-//		};
-//
-//		int choice;
-//		while (true) {
-//			displayMenu();
-//			cin >> choice;
-//			switch (choice) {
-//				case 1: { // ¥Ú”°
-//					Node<stu>* p = a.head;
-//					while (p) {
-//						cout << p->data.id << " " << p->data.name << " " << p->data.gender << " " << p->data.major << " "
-//							 << p->data.birth << endl;
-//						p = p->next;
-//					}
-//					break;
-//				}
-//				case 2: { // ‘ˆº”“ªÃı—ß…˙–≈œ¢
-//					cout << "«Î ‰»Î—ß…˙–≈œ¢£∫";
-//					stu now;
-//					cout << "—ß∫≈£∫";
-//					cin >> now.id;
-//					cout << "–’√˚£∫";
-//					cin >> now.name;
-//					cout << "–‘±£∫";
-//					cin >> now.gender;
-//					cout << "◊®“µ£∫";
-//					cin >> now.major;
-//					cout << "≥ˆ…˙»’∆⁄£∫";
-//					cin >> now.birth;
-////					a.Insert(n++, now);
-//					cout << "‘ˆº”ÕÍ±œ" << endl;
-//					break;
-//				}
-//				case 3: { // …æ≥˝“ªÃı—ß…˙–≈œ¢
-//					cout << "«Î ‰»Î—ß…˙—ß∫≈£∫";
-//					string nowid;
-//					cin >> nowid;
-//					Node<stu>* p = a.head, * pre = nullptr;
-//					while (p) {
-//						if (p->data.id == nowid) {
-//							pre->next = p->next;
-//							cout << "…æ≥˝ÕÍ±œ" << endl;
-//							n--;
-//							break;
-//						}
-//						pre = p;
-//						p = p->next;
-//					}
-//					if (!p) {
-//						cout << "Œ¥’“µΩ∏√—ß…˙" << endl;
-//					}
-//					break;
-//				}
-//				case 4: { // –ﬁ∏ƒ“ª∏ˆ—ß…˙µƒ–≈œ¢
-//					cout << "«Î ‰»Î—ß…˙—ß∫≈£∫";
-//					string nowid;
-//					cin >> nowid;
-//					Node<stu>* p = a.head;
-//					while (p) {
-//						if (p->data.id == nowid) {
-//							cout << "«Î ‰»Î—ß…˙–≈œ¢£∫";
-//							stu now;
-//							cout << "—ß∫≈£∫";
-//							cin >> now.id;
-//							cout << "–’√˚£∫";
-//							cin >> now.name;
-//							cout << "–‘±£∫";
-//							cin >> now.gender;
-//							cout << "◊®“µ£∫";
-//							cin >> now.major;
-//							cout << "≥ˆ…˙»’∆⁄£∫";
-//							cin >> now.birth;
-//							p->data = now;
-//							cout << "–ﬁ∏ƒÕÍ±œ" << endl;
-//							break;
-//						}
-//						p = p->next;
-//					}
-//					if (!p) {
-//						cout << "Œ¥’“µΩ∏√—ß…˙" << endl;
-//					}
-//					break;
-//				}
-//				case 0: {
-//					ofstream fout("../Homework/ µ—È2_T4.txt");
-//					fout << n << endl;
-//					Node<stu>* p = a.head;
-//					while (p) {
-//						fout << p->data.id << " " << p->data.name << " " << p->data.gender << " " << p->data.major << " "
-//							 << p->data.birth << endl;
-//						p = p->next;
-//					}
-//					fout.close();
-//					return;
-//				}
-//			}
-//		}
-//	}
+struct item {
+    string id, name;
+    int price, cnt;
+    bool operator< (const item& t) const {
+        return this->id < t.id;
+    }
+    bool operator> (const item& t) const {
+        return this->id > t.id;
+    }
+    bool operator== (const item& t) const {
+        return this->id == t.id;
+    }
+    friend ostream& operator<< (ostream& os, const item& t) {
+        os << t.id << " " << t.name << " " << t.price << " " << t.cnt;
+        return os;
+    }
 };
 
-#endif //CODE_TRAIL_2_H
+struct stu {
+    string id, name, gender, major, birth;
+    bool operator== (const stu& t) const {
+        return this->id == t.id;
+    }
+    friend ostream& operator<< (ostream& os, const stu& t) {
+        os << t.id << " " << t.name << " " << t.gender << " " << t.major << " " << t.birth << endl;
+        return os;
+    }
+};
+
+#ifndef CODE_Experiment_2_H
+#define CODE_Experiment_2_H
+
+class Experiment_2 {
+private:
+    void displaySeqMenu() {
+        cout << endl;
+        cout << "====================" << endl;
+        cout << "1. ÊâìÂç∞" << endl;
+        cout << "2. Âà†Èô§ÊúÄÂ∞èÂÄº" << endl;
+        cout << "3. Âà†Èô§ÊâÄÊúâÂÄº‰∏∫xÁöÑÂÖÉÁ¥†" << endl;
+        cout << "4. Âà†Èô§ÊåáÂÆöÂÄº‰∏∫xÁöÑÂÖÉÁ¥†" << endl;
+        cout << "5. Âà†Èô§ÂÄºÂú®lÂà∞r‰πãÈó¥ÁöÑÊâÄÊúâÂÖÉÁ¥†" << endl;
+        cout << "6. ÂéªÈáç" << endl;
+        cout << "7. ÊèíÂÖ•" << endl;
+        cout << "8. Â¢ûÂ∫èÊèíÂÖ•" << endl;
+        cout << "9. ÊéíÂ∫è‰∏ÄËΩÆ" << endl;
+        cout << "0. ÈÄÄÂá∫" << endl;
+        cout << "ËØ∑ËæìÂÖ•‰Ω†ÁöÑÈÄâÊã©Ôºö";
+    }
+    
+    void displayItemMenu() {
+        cout << endl;
+        cout << "====================" << endl;
+        cout << "1. ÊâìÂç∞" << endl;
+        cout << "2. ‰øÆÊîπÂ∫ìÂ≠ò or Êñ∞Â¢ûËÆ∞ÂΩï" << endl;
+        cout << "3. Âà†Èô§ÊåáÂÆö‰ª£Âè∑ÁöÑÂïÜÂìÅ" << endl;
+        cout << "4. ÊåâÂïÜÂìÅ‰ª£Âè∑ÂØπÂ∫ìÂ≠òË°®‰∏≠ÁöÑËÆ∞ÂΩïÊéíÂ∫è" << endl;
+        cout << "0. ‰øùÂ≠òÂπ∂ÈÄÄÂá∫" << endl;
+        cout << "ËØ∑ËæìÂÖ•‰Ω†ÁöÑÈÄâÊã©Ôºö";
+    }
+    
+    void displayLinkMenu() {
+        cout << endl;
+        cout << "====================" << endl;
+        cout << "1. ÊâìÂç∞" << endl;
+        cout << "2. Â§¥ÊèíÂÖ•" << endl;
+        cout << "3. ÊéíÂ∫èÂπ∂ÊâìÂç∞" << endl;
+        cout << "0. ÈÄÄÂá∫" << endl;
+        cout << "ËØ∑ËæìÂÖ•‰Ω†ÁöÑÈÄâÊã©Ôºö";
+    }
+    
+    void displayStuMenu() {
+        cout << endl;
+        cout << "====================" << endl;
+        cout << "1. ÊâìÂç∞" << endl;
+        cout << "2. Â¢ûÂä†‰∏ÄÊù°Â≠¶Áîü‰ø°ÊÅØ" << endl;
+        cout << "3. Âà†Èô§‰∏ÄÊù°Â≠¶Áîü‰ø°ÊÅØ" << endl;
+        cout << "4. ‰øÆÊîπ‰∏ÄÊù°Â≠¶Áîü‰ø°ÊÅØ" << endl;
+        cout << "0. ‰øùÂ≠òÂπ∂ÈÄÄÂá∫" << endl;
+        cout << "ËØ∑ËæìÂÖ•‰Ω†ÁöÑÈÄâÊã©Ôºö";
+    }
+
+public:
+    // Exp1.1 test Seqlist all functions
+    void testSeqList() {
+        int arr[] = {4, 2, 1, 3, 8, 0, 123}, n = 7;
+        SeqList<int> seqList(arr, n);
+        
+        int choice;
+        while (true) {
+            displaySeqMenu();
+            cin >> choice;
+            cout << endl;
+            
+            switch (choice) {
+                case 1: {
+                    cout << "ÊâìÂç∞" << endl;
+                    seqList.Output();
+                    break;
+                }
+                case 2: {
+                    int minVal = seqList.DeleteMin();
+                    cout << "Âà†Èô§ÊúÄÂ∞èÂÄº " << minVal << " ÂÆåÊØï" << endl;
+                    break;
+                }
+                case 3: {
+                    int deleteX;
+                    cout << "Âà†Èô§ÊâÄÊúâÁöÑÂÖÉÁ¥†x";
+                    cin >> deleteX;
+                    seqList.DeleteAllX(deleteX);
+                    cout << "Âà†Èô§ÂÆåÊØï" << endl;
+                    break;
+                }
+                case 4: {
+                    int deleteValue;
+                    cout << "Âà†Èô§ÊåáÂÆöÂÄº‰∏∫xÁöÑÂÖÉÁ¥†";
+                    cin >> deleteValue;
+                    seqList.DeleteAllX(deleteValue);
+                    cout << "Âà†Èô§ÂÆåÊØï" << endl;
+                    break;
+                }
+                case 5: {
+                    int left, right;
+                    cout << "Âà†Èô§ÂÄºÂú® l Âà∞ r ‰πãÈó¥ÁöÑÊâÄÊúâÂÖÉÁ¥†";
+                    cout << "ËØ∑ËæìÂÖ•lÔºö" << endl;
+                    cin >> left;
+                    cout << "ËØ∑ËæìÂÖ•rÔºö" << endl;
+                    cin >> right;
+                    seqList.DeleteRange(left, right);
+                    cout << "Âà†Èô§ÂÆåÊØï" << endl;
+                    break;
+                }
+                case 6: {
+                    seqList.Unique();
+                    cout << "ÂéªÈáçÂÆåÊØï" << endl;
+                    break;
+                }
+                case 7: {
+                    int insertPos, insertValue;
+                    cout << "ÊèíÂÖ•‰ΩçÁΩÆÔºö";
+                    cin >> insertPos;
+                    cout << "ÊèíÂÖ•ÂÄºÔºö";
+                    cin >> insertValue;
+                    seqList.Insert(insertPos, insertValue);
+                    cout << "ÊèíÂÖ•ÂÆåÊØï" << endl;
+                    break;
+                }
+                case 8: {
+                    int insertIncreasing;
+                    cout << "Â¢ûÂ∫èÊèíÂÖ•";
+                    cin >> insertIncreasing;
+                    seqList.IncreaseInsert(insertIncreasing);
+                    cout << "ÊèíÂÖ•ÂÆåÊØï" << endl;
+                    break;
+                }
+                case 9: {
+                    seqList.SortOnce();
+                    cout << "ÊéíÂ∫è‰∏ÄËΩÆ" << endl;
+                    break;
+                }
+                case 0: {
+                    cout << "ÈÄÄÂá∫." << endl;
+                    break;
+                }
+                default: {
+                    cout << "Êú™Áü•ËæìÂÖ•ÔºåËØ∑ÈáçÊñ∞ËæìÂÖ•" << endl;
+                }
+            }
+        }
+    }
+    
+    
+    // Exp1.2 sort
+    void testSort() {
+        int arr[] = {4, 2, 1, 3}, n = 4;
+        SeqList<int> a(arr, n);
+        a.Output();
+        a.Sort();
+        a.Output();
+    }
+    
+    
+    // Exp 1.2 merge two ordered list
+    void testMergeOrderedSeqList() {
+        int arr1[] = {1, 2, 3, 4}, n1 = 4;
+        int arr2[] = {0, 7, 10}, n2 = 3;
+        SeqList<int> a(arr1, n1), b(arr2, n2);
+        a.Output(), b.Output();
+        a.Merge(b);
+        a.Output();
+    }
+    
+    
+    // Exp2 item manage system with seqlist
+    void testItemManageSystem() {
+        // read data from txt file
+        ifstream fin("HomeWork\\Exp2_T2.txt");
+        if (!fin) {
+            cout << "unsuccessful open file" << endl;
+            exit(1);
+        } else {
+            cout << "successful open file" << endl;
+        }
+        
+        // store data in cpu
+        int n;
+        fin >> n;
+        SeqList<item> a(n);
+        for (int i = 0; i < n; i++) {
+            fin >> a[i].id >> a[i].name >> a[i].price >> a[i].cnt;
+        }
+        
+        int choice;
+        while (true) {
+            displayItemMenu();
+            cin >> choice;
+            switch (choice) {
+                case 1: {
+                    a.Output();
+                    break;
+                }
+                case 2: {
+                    string nowid;
+                    cout << "ËØ∑ËæìÂÖ•ÂïÜÂìÅÁºñÂè∑Ôºö";
+                    cin >> nowid;
+                    if (!a.find({nowid, "", 0, 0})) {
+                        // new item info
+                        item now;
+                        now.id = nowid;
+                        cout << "ËØ∑ËæìÂÖ•ÂïÜÂìÅÂêçÁß∞Ôºö";
+                        cin >> now.name;
+                        cout << "ËØ∑ËæìÂÖ•ÂïÜÂìÅ‰ª∑Ê†ºÔºö";
+                        cin >> now.price;
+                        cout << "ËØ∑ËæìÂÖ•ÂïÜÂìÅÊï∞ÈáèÔºö";
+                        cin >> now.cnt;
+                        a.Insert(n++, now);
+                    } else {
+                        // modify cnt
+                        int cnt;
+                        cout << "ËØ∑ËæìÂÖ•ÂïÜÂìÅÊï∞ÈáèÔºö";
+                        cin >> cnt;
+                        for (int i = 0; i < n; i++) {
+                            if (a[i].id == nowid) {
+                                a[i].cnt += cnt;
+                                break;
+                            }
+                        }
+                    }
+                    break;
+                }
+                case 3: {
+                    string nowid;
+                    cout << "ËØ∑ËæìÂÖ•ÂïÜÂìÅÁºñÂè∑Ôºö";
+                    cin >> nowid;
+                    for (int i = 0; i < n; i++) {
+                        if (a[i].id == nowid) {
+                            a.DeleteAllX({nowid, "", 0, 0});
+                            n--;
+                            break;
+                        }
+                    }
+                    break;
+                }
+                case 4: {
+                    a.Sort();
+                    break;
+                }
+                case 0: {
+                    ofstream fout("HomeWork\\Exp2_T2.txt");
+                    fout << n << endl;
+                    for (int i = 0; i < n; i++) {
+                        fout << a[i].id << " " << a[i].name << " " << a[i].price << " " << a[i].cnt << endl;
+                    }
+                    fout.close();
+                    return;
+                }
+            }
+        }
+    }
+
+
+	// Exp3 test LinkList all functions
+	void testLinkList() {
+		int arr[] = {4, 2, 1, 3, 8, 0, 123}, n = 7;
+		LinkList<int> linkList(arr, n);
+  
+		int choice;
+        while (true) {
+            displayLinkMenu();
+            cin >> choice;
+            cout << "\n";
+            
+            switch (choice) {
+                case 1: {
+                    cout << "ÊâìÂç∞" << endl;
+                    linkList.Output();
+                    break;
+                }
+                case 2: {
+                    cout << "Â§¥ÊèíÂÖ•" << endl;
+                    int insertValue;
+                    cin >> insertValue;
+                    linkList.PushFront(insertValue);
+                    cout << "ÊèíÂÖ•ÂÆåÊØï" << endl;
+                    break;
+                }
+                case 3: {
+                    cout << "ÊéíÂ∫èÂÆåÊØï" << endl;
+                    linkList.PrintInOrder();
+                    break;
+                }
+                case 0:
+                    cout << "ÈÄÄÂá∫." << endl;
+                    return;
+                default:
+                    cout << "Êú™Áü•ËæìÂÖ•ÔºåËØ∑ÈáçÊñ∞ËæìÂÖ•" << endl;
+            }
+        }
+	}
+
+
+	// Exp3.1 reverse list
+	void testReverseLinkList() {
+		int arr[] = {4, 2, 1, 3, 8, 0, 123}, n = 7;
+		LinkList<int> ls(arr, n);
+  
+		cout << "ÂéüÈìæË°®Ôºö";
+		ls.Output();
+        ls.Reverse();
+		cout << "ÈÄÜÁΩÆÂêéÔºö";
+		ls.Output();
+	}
+
+
+	// Exp3.2 merge two ordered linklist
+	void testMergeLinkList() {
+		int arr1[] = {1, 2, 3, 4}, n1 = 4;
+		int arr2[] = {0, 7, 10}, n2 = 3;
+		LinkList<int> a(arr1, n1), b(arr2, n2);
+		cout << "ÂΩíÂπ∂ÂâçÔºö\n";
+		a.Output(), b.Output();
+		a.Merge(b);
+		cout << "ÂΩíÂπ∂ÂêéÔºö";
+		a.Output();
+	}
+
+
+	// Exp4 student manage system with linklist
+	void testStudentManageSystem() {
+		// read data from txt file
+		ifstream fin("Homework\\Exp2_T4.txt");
+		if (!fin) {
+			cout << "unsuccessful open file" << endl;
+			exit(1);
+		} else {
+			cout << "successful open file" << endl;
+		}
+
+		// store data in cpu
+		int n;
+		fin >> n;
+		stu arr[n];
+		for (int i = 0; i < n; i++) {
+			fin >> arr[i].id >> arr[i].name >> arr[i].gender >> arr[i].major >> arr[i].birth;
+		}
+		LinkList<stu> ls(arr, n);
+
+		int choice;
+		while (true) {
+            displayStuMenu();
+			cin >> choice;
+			switch (choice) {
+				case 1: {
+                    ls.Output();
+					break;
+				}
+				case 2: {
+					cout << "ËØ∑ËæìÂÖ•Â≠¶Áîü‰ø°ÊÅØÔºö";
+					stu now;
+					cout << "Â≠¶Âè∑Ôºö";
+					cin >> now.id;
+					cout << "ÂßìÂêçÔºö";
+					cin >> now.name;
+					cout << "ÊÄßÂà´Ôºö";
+					cin >> now.gender;
+					cout << "‰∏ì‰∏öÔºö";
+					cin >> now.major;
+					cout << "Âá∫ÁîüÊó•ÊúüÔºö";
+					cin >> now.birth;
+                    ls.PushFront(now);
+					cout << "Â¢ûÂä†ÂÆåÊØï" << endl;
+					break;
+				}
+				case 3: {
+					cout << "ËØ∑ËæìÂÖ•Â≠¶ÁîüÂ≠¶Âè∑Ôºö";
+					string nowid;
+					cin >> nowid;
+                    ls.Delete({nowid, "", "", "", ""});
+					break;
+				}
+				case 4: {
+                    cout << "ËØ∑ËæìÂÖ•ÂæÖ‰øÆÊîπ‰ø°ÊÅØÁöÑÂ≠¶ÁîüÂ≠¶Âè∑Ôºö";
+                    string nowid;
+                    cin >> nowid;
+                    if (ls.Find({nowid, "", "", "", ""})) {
+                        ls.Delete({nowid, "", "", "", ""});
+                        cout << "ËØ∑ËæìÂÖ•Â≠¶ÁîüÊñ∞‰ø°ÊÅØÔºö";
+                        stu now;
+                        now.id = nowid;
+                        cout << "ÂßìÂêçÔºö";
+                        cin >> now.name;
+                        cout << "ÊÄßÂà´Ôºö";
+                        cin >> now.gender;
+                        cout << "‰∏ì‰∏öÔºö";
+                        cin >> now.major;
+                        cout << "Âá∫ÁîüÊó•ÊúüÔºö";
+                        cin >> now.birth;
+                        ls.PushFront(now);
+                    }
+					break;
+				}
+				case 0: {
+					ls.OutputToFile("Homework\\Exp2_T4.txt");
+					return;
+				}
+			}
+		}
+	}
+};
+
+#endif //CODE_Experiment_2_H

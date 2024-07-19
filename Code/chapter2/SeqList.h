@@ -8,12 +8,12 @@ using namespace std;
 template<class T>
 class SeqList {
 private:
-    void Renew();
-
-public:
     T* data;
     int size;
-    
+    void Renew();
+    void QuickSort(int left, int right);
+
+public:
     SeqList() : data(nullptr), size(0) {}
     SeqList(T a[], int n);
     SeqList(int n) : data(new T[n]), size(n) {}
@@ -26,9 +26,10 @@ public:
     void Insert(int pos, T x);
     void IncreaseInsert(T x);              // T5: insert x to ordered list
     void SortOnce();                       // T9: sort once
-    void QuickSort(int left, int right);   // quick sort
-    void Merge(SeqList<T>& obj);           // merge two ordered list
+    void Sort();                           // exp T1: quick sort
+    void Merge(SeqList<T>& obj);           // exp T1: merge two ordered list
     T& operator[](int idx) { return data[idx]; }
+    bool find(T x);
 };
 
 template<class T>
@@ -63,7 +64,7 @@ SeqList<T>::~SeqList() {
 template<class T>
 void SeqList<T>::Output() {
     for (int i = 0; i < size; i++) {
-        cout << data[i] << " \n"[i == size - 1];
+        cout << data[i] << "\n";
     }
 }
 
@@ -175,11 +176,17 @@ void SeqList<T>::SortOnce() {
 }
 
 template<class T>
+void SeqList<T>::Sort() {
+    QuickSort(0, size - 1);
+}
+
+template<class T>
 void SeqList<T>::QuickSort(int left, int right) {
     if (left == right) {
         return;
     }
-    int i = left - 1, j = right + 1, x = data[(i + j) >> 1];
+    int i = left - 1, j = right + 1;
+    T x = data[(i + j) >> 1];
     while (i < j) {
         while (data[++i] < x);
         while (data[--j] > x);
@@ -191,29 +198,36 @@ void SeqList<T>::QuickSort(int left, int right) {
     QuickSort(j + 1, right);
 }
 
-
-/**
- * @note 1. 对于DT数据类型，delete和delete[]的没有区别
- * @note 2. 对于ADT数据类型，delete只能析构data[0]，delete[]可以析构data[0]到data[size - 1]
- * @note 3. 不要忘记修改size为n + m
- */
-
 template<class T>
 void SeqList<T>::Merge(SeqList<T>& obj) {
     int n = this->size, m = obj.size;
     T* res = new T[n + m];
     int i = 0, j = 0, k = 0;
     
-    while (i < n && j < m)
-        if (data[i] < obj[j]) res[k++] = data[i++];
-        else res[k++] = obj[j++];
+    while (i < n && j < m) {
+        if (data[i] < obj[j]) {
+            res[k++] = data[i++];
+        } else {
+            res[k++] = obj[j++];
+        }
+    }
     
-    while (i < n) res[k++] = data[i++];
-    while (j < m) res[k++] = obj[j++];
+    while (i < n) { res[k++] = data[i++]; }
+    while (j < m) { res[k++] = obj[j++]; }
     
     delete[] data;
     data = res;
     size = n + m;
+}
+
+template<class T>
+bool SeqList<T>::find(T x) {
+    for (int i = 0; i < size; i++) {
+        if (data[i] == x) {
+            return true;
+        }
+    }
+    return false;
 }
 
 #endif //INC_2__DATASTRUCTURES_SEQLIST_H

@@ -20,9 +20,12 @@ public:
     LinkList(LinkList<T>& obj);                      // T7: copy construct
     ~LinkList();
     
-    void Output();                                   // print a list
+    void Output();                                   // print to console
+    void OutputToFile(const string& path);       // print to file
     void PushFront(T x);                             // push node to head
     void Reverse();                                  // public use to reverse a list
+    void Delete(T x);                                // delete item with value of x
+    bool Find(T x);                                  // find item with value of x
     void Split(LinkList<T>& odd, LinkList<T>& even); // T6: split into odd and even
     void PrintInOrder();                             // T8: print list in order
     void Merge(LinkList<T>& obj);                    // T10: merge two ordered list
@@ -68,9 +71,26 @@ template<class T>
 void LinkList<T>::Output() {
     Node<T>* p = head;
     while (p) {
-        cout << p->data << " \n"[!p->next];
+        cout << p->data << "\n";
         p = p->next;
     }
+}
+
+template<class T>
+void LinkList<T>::OutputToFile(const string& path) {
+    ofstream out(path);
+    Node<T>* q = head, * p = head;
+    int cnt = 0;
+    while (q) {
+        cnt++;
+        q = q->next;
+    }
+    out << cnt << "\n";
+    while (p) {
+        out << p->data;
+        p = p->next;
+    }
+    out.close();
 }
 
 template<class T>
@@ -126,6 +146,40 @@ Node<T>* LinkList<T>::Reverse(Node<T>* node) {
 template<class T>
 void LinkList<T>::Reverse() {
     head = Reverse(head);
+}
+
+template<class T>
+void LinkList<T>::Delete(T x) {
+    Node<T>* p = head, * pre = nullptr;
+    while (p) {
+        if (p->data == x) {
+            if (pre) {
+                pre->next = p->next;
+                delete p;
+                return;
+            } else {
+                Node<T>* now = head;
+                head = head->next;
+                delete now;
+                return;
+            }
+        } else {
+            pre = p;
+            p = p->next;
+        }
+    }
+}
+
+template<class T>
+bool LinkList<T>::Find(T x) {
+    Node<T>* p = head;
+    while (p) {
+        if (p->data == x) {
+            return true;
+        }
+        p = p->next;
+    }
+    return false;
 }
 
 template<class T>

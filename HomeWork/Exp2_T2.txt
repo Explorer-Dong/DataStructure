@@ -1,0 +1,5 @@
+4
+c cap 12 934
+p pencil 3 12
+rul rule 2 214
+glass sunglasses 100 3
