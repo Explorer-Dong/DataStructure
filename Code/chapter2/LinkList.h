@@ -21,7 +21,7 @@ public:
     ~LinkList();
     
     void Output();                                   // print to console
-    void OutputToFile(const string& path);       // print to file
+    void OutputToFile(const string& path);           // print to file
     void PushFront(T x);                             // push node to head
     void Reverse();                                  // public use to reverse a list
     void Delete(T x);                                // delete item with value of x
