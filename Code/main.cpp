@@ -2,7 +2,7 @@
 #include "chapter2/Experiment_2.cpp"
 
 #include "chapter3/Homework_3.cpp"
-#include "chapter3/Trail_3.cpp"
+#include "chapter3/Experiment_3.cpp"
 
 #include "chapter4/Homework_4.cpp"
 #include "chapter4/Trail_4.cpp"
@@ -28,7 +28,7 @@ using namespace std;
 
 int main() {
     Experiment_2 exp2;
-	Trail_3 tr3;
+	Experiment_3 exp3;
 	Trail_4 tr4;
 	Trail_5 tr5;
 	Trail_6 tr6;
@@ -45,7 +45,7 @@ int main() {
 	Homework_8 hw8;
 	Homework_10 hw10;
     
-    exp2.testStudentManageSystem();
-
+    hw3.testMid2Post();
+    
 	return 0;
 }

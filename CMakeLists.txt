@@ -21,7 +21,7 @@ add_executable(3__DataStructures
         Code/chapter3/SeqQueueFlag.h
         Code/chapter3/LinkQueue.h
         Code/chapter3/Homework_3.cpp
-        Code/chapter3/Trail_3.cpp
+        Code/chapter3/Experiment_3.cpp
 
         Code/chapter3/SeqQueueNum.h
         Code/chapter3/Dstack2Queue.h
