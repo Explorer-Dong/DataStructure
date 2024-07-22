@@ -88,7 +88,7 @@ public:
     }
     
     
-    // T 1.8 print in order
+    // T1.8 print in order
     void testPrintInOrder() {
         int arr[] = {3, 2, 1, 4}, n = 4;
         LinkList<int> a(arr, n);
