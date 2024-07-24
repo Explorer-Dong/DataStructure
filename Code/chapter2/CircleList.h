@@ -1,62 +1,79 @@
-#include <iostream>
 #include "Node.h"
 
-using namespace std;
+#ifndef CircleList_H
+#define CircleList_H
 
 template<class T>
 class CircleList {
 private:
-    Node<T>* head;
+    Node<T>* tail;
 
 public:
-    CircleList() : head(nullptr) {}
-    CircleList(T a[], int n);
+    CircleList();
     ~CircleList();
     
-    int CountNode();
+    void PushBack(T x);  // push element to end
+    void PopFront();     // pop front element
+    void Clear();        // clear all elements
+    int CountNode();     // count node number
 };
 
 template<class T>
-CircleList<T>::CircleList(T a[], int n) : head(nullptr) {
-    if (!n) return;
-    for (int i = n - 1; i >= 0; i--) {
-        Node<T>* now = new Node<T>(a[i]);
-        now->next = head;
-        head = now;
-    }
-    Node<T>* p = head;
-    while (p->next) {
-        p = p->next;
-    }
-    p->next = head;
+CircleList<T>::CircleList() {
+    tail = new Node<T>();
+    tail->next = tail;
 }
 
 template<class T>
 CircleList<T>::~CircleList() {
-    // 0 node
-    if (!head) {
-        return;
+    while (tail->next != tail) {
+        PopFront();
     }
-    
-    // at least 1 node
-    Node<T>* p = head->next;
-    while (p != head) {
-        Node<T>* now = p;
-        p = p->next;
-        delete now;
+}
+
+template<class T>
+void CircleList<T>::PushBack(T x) {
+    Node<T>* now = new Node<T>(x);
+    Node<T>* temp = tail->next;
+    tail->next = now;
+    tail = now;
+    tail->next = temp;
+}
+
+template<class T>
+void CircleList<T>::PopFront() {
+    if (tail->next == tail) {
+        std::cerr << "empty circle list!" << "\n";
+        exit(1);
     }
-    delete head;
+    if (tail->next->next == tail) {
+        // one node
+        Node<T>* temp = tail;
+        tail = tail->next;
+        tail->next = tail;
+        delete temp;
+    } else {
+        // at least two nodes
+        Node<T>* temp = tail->next->next;
+        tail->next->next = temp->next;
+        delete temp;
+    }
+}
+
+template<class T>
+void CircleList<T>::Clear() {
+    while (tail->next != tail) {
+        PopFront();
+    }
 }
 
 template<class T>
 int CircleList<T>::CountNode() {
-    if (!head) {
-        return 0;
+    int ans = 0;
+    for (Node<T>* p = tail->next; p != tail; p = p->next) {
+        ans++;
     }
-    
-    int res = 1;
-    for (Node<T>* p = head->next; p != head; p = p->next) {
-        res++;
-    }
-    return res;
+    return ans;
 }
+
+#endif

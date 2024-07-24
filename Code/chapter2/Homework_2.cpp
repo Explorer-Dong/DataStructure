@@ -108,8 +108,9 @@ public:
     
     // T1.10 count node of cicle list
     void testCircleListNodeCount() {
-        int arr[] = {4, 2, 1, 9}, n = 4;
-        CircleList<int> a(arr, n);
+        CircleList<int> a;
+        a.PushBack(2), a.PushBack(2), a.PushBack(2), a.PushBack(2);
+        a.PopFront();
         cout << a.CountNode();
     }
 };

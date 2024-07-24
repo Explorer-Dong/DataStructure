@@ -5,7 +5,7 @@
 #include <bits/stdc++.h>
 #include "SeqStack.h"
 #include "SeqDoubleStack.h"
-#include "LinkQueue.h"
+#include "../chapter2/CircleList.h"
 #include "SeqQueueFlag.h"
 #include "SeqQueueNum.h"
 #include "Dstack2Queue.h"
@@ -138,21 +138,18 @@ public:
     }
     
     
-    // T3.6 循环链式队列
-    void testCircleLinkQueue() {
-        LinkQueue<int> lq;
-        lq.Push(1);
-        lq.Push(2);
-        lq.Push(3);
-        lq.Push(4);
-        cout << lq.Pop() << "\n";
-        cout << lq.Pop() << "\n";
-        cout << lq.Pop() << "\n";
-        cout << lq.Pop() << "\n";
+    // T3.6 use cicle list as queue
+    void testCircleList4Queue() {
+        CircleList<int> cl;
+        cl.PushBack(3);
+        cl.PushBack(4);
+        cl.PopFront();
+        cout << cl.CountNode() << "\n";
+        cl.Clear();
     }
     
     
-    // T3.7 循环顺序队列 flag
+    // T3.7 circle queue with a flag variable
     void testSeqQueueFlag() {
         SeqQueueFlag<int, 10> sqf;
         sqf.Push(2);
@@ -162,7 +159,7 @@ public:
     }
     
     
-    // T3.8 循环顺序队列 num
+    // T3.8 circle queue with node number
     void testSeqQueueNum() {
         SeqQueueNum<int, 3> sqn;
         cout << sqn.Empty() << "\n";

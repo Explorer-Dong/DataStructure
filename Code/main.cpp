@@ -45,7 +45,7 @@ int main() {
 	Homework_8 hw8;
 	Homework_10 hw10;
     
-    hw3.testMid2Post();
+    hw3.testCircleList4Queue();
     
 	return 0;
 }
