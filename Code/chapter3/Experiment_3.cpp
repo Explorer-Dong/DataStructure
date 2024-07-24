@@ -4,7 +4,7 @@
 
 #include <bits/stdc++.h>
 #include "SeqStack.h"
-#include "SeqQueueFlag.h"
+#include "CircleSeqQueueWithFlag.h"
 
 using namespace std;
 
@@ -207,7 +207,7 @@ public:
     
     // Exp2.2 test SeqQueue
     void testSeqQueue() {
-        SeqQueueFlag<int, 100> q;
+        CircleSeqQueueWithFlag<int, 100> q;
         
         auto displayMenu = [&]() {
             cout << "====================\n";
@@ -233,7 +233,7 @@ public:
                     break;
                 }
                 case 2: {
-                    cout << q.Pop() << "\n";
+//                    cout << q.Pop() << "\n";
                     cout << "出队成功\n";
                     break;
                 }
@@ -278,7 +278,7 @@ public:
             cout << "请输入你的选择：";
         };
         
-        SeqQueueFlag<string, 100> q;
+        CircleSeqQueueWithFlag<string, 100> q;
         int choice;
         while (true) {
             displayMenu();
@@ -323,7 +323,7 @@ public:
     
     // Exp2.3 求最短路径
     void testShortestPath() {
-        SeqQueueFlag<int, 100> q;
+        CircleSeqQueueWithFlag<int, 100> q;
         
         int m = 4, n = 3;
         vector<vector<int>> g = {
@@ -353,7 +353,7 @@ public:
         vector<pair<int, int>> path; // 最短路径
         vector<vector<int>> d(m, vector<int>(n, INT_MAX)); // 最短路径的长度 d[endi][endj]
         
-        SeqQueueFlag<pair<int, int>, 100> q;
+        CircleSeqQueueWithFlag<pair<int, int>, 100> q;
         
         q.Push({sti, stj});
         d[sti][stj] = 0;

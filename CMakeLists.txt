@@ -18,11 +18,11 @@ add_executable(3__DataStructures
         Code/chapter3/SeqStack.h
         Code/chapter3/LinkStack.h
         Code/chapter3/SeqDoubleStack.h
-        Code/chapter3/SeqQueueFlag.h
+        Code/chapter3/CircleSeqQueueWithFlag.h
         Code/chapter3/Homework_3.cpp
         Code/chapter3/Experiment_3.cpp
-        Code/chapter3/SeqQueueNum.h
-        Code/chapter3/Dstack2Queue.h
+        Code/chapter3/CircleSeqQueueWithNum.h
+        Code/chapter3/DoubleStack4Queue.h
 
         Code/chapter4/Homework_4.cpp
         Code/chapter4/Trail_4.cpp

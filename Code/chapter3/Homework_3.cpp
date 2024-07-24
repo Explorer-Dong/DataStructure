@@ -5,11 +5,11 @@
 #include <bits/stdc++.h>
 #include "SeqStack.h"
 #include "SeqDoubleStack.h"
-#include "../chapter2/CircleList.h"
-#include "SeqQueueFlag.h"
-#include "SeqQueueNum.h"
-#include "Dstack2Queue.h"
 #include "Experiment_3.cpp"
+#include "../chapter2/CircleList.h"
+#include "CircleSeqQueueWithFlag.h"
+#include "CircleSeqQueueWithNum.h"
+#include "DoubleStack4Queue.h"
 
 using namespace std;
 
@@ -149,32 +149,38 @@ public:
     }
     
     
-    // T3.7 circle queue with a flag variable
-    void testSeqQueueFlag() {
-        SeqQueueFlag<int, 10> sqf;
-        sqf.Push(2);
-        sqf.Push(8);
-        sqf.Push(1);
-        cout << sqf.Front() << "\n";
+    // T3.7 circle sequence queue with a flag variable
+    void testCircleSeqQueueWithFlag() {
+        CircleSeqQueueWithFlag<int, 10> queue_flag;
+        queue_flag.Push(2);
+        queue_flag.Push(8);
+        queue_flag.Push(1);
+        cout << queue_flag.Front() << "\n";
+        queue_flag.Pop();
+        queue_flag.Pop();
+        queue_flag.Pop();
+        queue_flag.Pop();
     }
     
     
-    // T3.8 circle queue with node number
-    void testSeqQueueNum() {
-        SeqQueueNum<int, 3> sqn;
-        cout << sqn.Empty() << "\n";
+    // T3.8 circle sequence queue with node number
+    void testCircleSeqQueueWithNum() {
+        CircleSeqQueueWithNum<int, 3> queue_num;
+        queue_num.Push(3);
+        queue_num.Push(3);
+        queue_num.Push(3);
+        queue_num.Push(3);
     }
     
     
-    // T3.9 双栈实现队列
-    void testDstack2Queue() {
-        int cnt = 0;
-        Dstack2Queue<int, 10> dst2q;
-        dst2q.Push(4);
-        dst2q.Push(7);
-        cout << dst2q.Empty() << "\n";
-        cout << dst2q.Front() << "\n";
-        dst2q.Pop();
-        cout << dst2q.Front() << "\n";
+    // T3.9 two stack for queue
+    void testDoubleStack4Queue() {
+        DoubleStack4Queue<int, 10> dq;
+        dq.Push(4);
+        dq.Push(7);
+        cout << dq.Empty() << "\n";
+        cout << dq.Front() << "\n";
+        dq.Pop();
+        cout << dq.Front() << "\n";
     }
 };
