@@ -64,7 +64,7 @@ SeqList<T>::~SeqList() {
 template<class T>
 void SeqList<T>::Output() {
     for (int i = 0; i < size; i++) {
-        cout << data[i] << "\n";
+        cout << data[i] << " \n"[i == size - 1];
     }
 }
 
@@ -127,20 +127,18 @@ void SeqList<T>::DeleteRange(T left, T right) {
 
 template<class T>
 void SeqList<T>::Unique() {
-    // use stl to hash, we can also use bucket to hash if data is not big enough
-    unordered_map<T, bool> hash;
+    unordered_map<T, bool> f;
+    int k = 0;
     for (int i = 0; i < size; i++) {
-        hash[data[i]] = true;
+        if (f.find(data[i]) != f.end()) {
+            continue;
+        } else {
+            f[data[i]] = true;
+        }
+        data[k++] = data[i];
     }
     
-    // hashhing logic looks like a stack, so it's reversed
-    int idx = hash.size() - 1;
-    for (auto& x: hash) {
-        data[idx] = x.first;
-        idx--;
-    }
-    
-    size = hash.size();
+    size = k;
 }
 
 template<class T>
