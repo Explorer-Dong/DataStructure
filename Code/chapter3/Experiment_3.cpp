@@ -1,5 +1,5 @@
 //
-// Created by ∂≠ŒƒΩ‹ on 2023-10-10.
+// Created by Ëë£ÊñáÊù∞ on 2023-10-10.
 //
 
 #include <bits/stdc++.h>
@@ -12,51 +12,129 @@ using namespace std;
 #define CODE_Experiment_3_H
 
 class Experiment_3 {
+private:
+    void displaySeqStackMenu() {
+        cout << "====================\n";
+        cout << "1. ÂÖ•Ê†à\n";
+        cout << "2. Âá∫Ê†à\n";
+        cout << "3. ÂèñÊ†àÈ°∂ÂÖÉÁ¥†\n";
+        cout << "4. Âà§Êñ≠Ê†àÊòØÂê¶‰∏∫Á©∫\n";
+        cout << "0. ÈÄÄÂá∫\n";
+        cout << "ËØ∑ËæìÂÖ•‰Ω†ÁöÑÈÄâÊã©Ôºö";
+    }
+    
+    void displayPatientMenu() {
+        cout << "====================\n";
+        cout << "1. ÊéíÈòüÔºöÊÇ£ËÄÖÂèñÂè∑ÔºåËøõÂÖ•Á≠âÂæÖÈòüÂàó\n";
+        cout << "2. Â∞±ËØäÔºöÊÇ£ËÄÖÂ∞±ËØäÔºåÊü•ÁúãÈòüÈ¶ñÁóÖÂéÜ\n";
+        cout << "3. Êü•ÁúãÔºöÊâìÂç∞ÊâÄÊúâÊÇ£ËÄÖÁöÑÁóÖÂéÜ‰ø°ÊÅØ\n";
+        cout << "0. ‰∏ãÁè≠ÔºöÈÄÄÂá∫\n";
+        cout << "ËØ∑ËæìÂÖ•‰Ω†ÁöÑÈÄâÊã©Ôºö";
+    }
+    
+    std::string genRandStr(int len) {
+        std::string res;
+        for (int i = 0; i < len; i++) {
+            res += to_string(rand() % 10);
+        }
+        return res;
+    }
+    
+    pair<vector<pair<int, int>>, int>
+    getShortestPath(vector<vector<int>>& g, pair<int, int>& st, pair<int, int>& en) {
+        int m = g.size(), n = g[0].size();
+        vector<vector<int>> d(m, vector<int>(n, INT_MAX >> 1));
+        int sti = st.first, stj = st.second;
+        int eni = en.first, enj = en.second;
+        
+        int dx[] = {-1, 1, 0, 0};
+        int dy[] = {0, 0, -1, 1};
+        bool find_path = false;
+        
+        // update dist matrix with bfs algorithm
+        CircleSeqQueueWithFlag<pair<int, int>, 100> q;
+        q.Push({sti, stj});
+        d[sti][stj] = 0;
+        while (!q.Empty()) {
+            auto now = q.Front();
+            q.Pop();
+            
+            int i = now.first, j = now.second;
+            if (i == eni && j == enj) {
+                find_path = true;
+                break;
+            }
+            for (int k = 0; k < 4; k++) {
+                int ni = i + dx[k], nj = j + dy[k];
+                if (ni < 0 || ni >= m || nj < 0 || nj >= n || g[ni][nj] || d[ni][nj] != INT_MAX >> 1) {
+                    continue;
+                }
+                d[ni][nj] = d[i][j] + 1;
+                q.Push({ni, nj});
+            }
+        }
+        
+        // edge case
+        if (!find_path) {
+            cerr << "no valid path!\n";
+            exit(1);
+        }
+        
+        // get path from end point
+        vector<pair<int, int>> path;
+        int i = eni, j = enj;
+        while (i != sti || j != stj) {
+            path.push_back({i, j});
+            for (int k = 0; k < 4; k++) {
+                int ni = i + dx[k], nj = j + dy[k];
+                if (ni < 0 || ni >= m || nj < 0 || nj >= n || g[ni][nj] || d[ni][nj] != d[i][j] - 1) {
+                    continue;
+                }
+                i = ni, j = nj;
+                break;
+            }
+        }
+        path.push_back({sti, stj});
+        reverse(path.begin(), path.end());
+        
+        return make_pair(path, d[eni][enj]);
+    }
+
 public:
     // Exp2.1 test SeqStack
     void testSeqStack() {
         SeqStack<int, 100> s;
         
-        auto displayMenu = [&]() {
-            cout << "====================\n";
-            cout << "1. »Î’ª\n";
-            cout << "2. ≥ˆ’ª\n";
-            cout << "3. »°’ª∂•‘™Àÿ\n";
-            cout << "4. ≈–∂œ’ª «∑ÒŒ™ø’\n";
-            cout << "0. ÕÀ≥ˆ\n";
-            cout << "«Î ‰»Îƒ„µƒ—°‘Ò£∫";
-        };
-        
         int choice;
         while (true) {
-            displayMenu();
+            displaySeqStackMenu();
             cin >> choice;
             switch (choice) {
                 case 1: {
+                    cout << "input push in element: ";
                     int x;
-                    cout << "«Î ‰»Î“™»Î’ªµƒ‘™Àÿ£∫";
                     cin >> x;
                     s.Push(x);
                     break;
                 }
                 case 2: {
-                    cout << s.Pop() << "\n";
+                    s.Pop();
                     break;
                 }
                 case 3: {
-                    cout << "’ª∂•‘™ÀÿŒ™£∫\n";
+                    cout << "top element: ";
                     cout << s.Top() << "\n";
                     break;
                 }
                 case 4: {
-                    cout << s.Empty() << "\n";
+                    cout << (s.Empty() ? "empty stack\n" : "not empty stack\n");
                     break;
                 }
                 case 0: {
                     return;
                 }
                 default: {
-                    cout << " ‰»Î¥ÌŒÛ£¨«Î÷ÿ–¬ ‰»Î\n";
+                    cout << "invalid input, please try again!\n";
                     break;
                 }
             }
@@ -65,19 +143,17 @@ public:
     
     
     // Exp2.1 calc mid
-    void testCalcMid() {
-        unordered_map<char, int> pri{{'+', 1},
+    void testCalcMid(const std::string s = "2*(1+3+1)") {
+        unordered_map<char, int> pri{{'(', 0},
+                                     {'+', 1},
                                      {'-', 1},
                                      {'*', 2},
                                      {'/', 2}};
         
-        string s = "2*(1+3+1)";
-//		cout << "«Î ‰»Î“ª∏ˆ∫œ∑®µƒ÷–◊∫±Ì¥Ô Ω£∫\n";
-//		cin >> s;
         SeqStack<int, 100> num;
         SeqStack<char, 100> op;
         
-        auto calc = [&]() {
+        auto calc = [&]() -> void {
             int b = num.Top();
             num.Pop();
             int a = num.Top();
@@ -91,53 +167,46 @@ public:
             else num.Push(a * b);
         };
         
-        int i = 0;
-        while (i < s.size()) {
+        for (int i = 0; i < s.size(); i++) {
             if (isdigit(s[i])) {
-                int x = 0;
-                while (i < s.size() && isdigit(s[i])) {
-                    x = x * 10 + s[i] - '0';
-                    i++;
+                int x = 0, j = i;
+                while (j < s.size() && isdigit(s[j])) {
+                    x = x * 10 + s[j++] - '0';
                 }
                 num.Push(x);
+                i = j - 1;
             } else if (s[i] == '(') {
-                op.Push(s[i++]);
+                op.Push(s[i]);
             } else if (s[i] == ')') {
-                while (op.Top() != '(') calc();
+                while (op.Top() != '(') {
+                    calc();
+                }
                 op.Pop();
-                i++;
             } else {
-                while (!op.Empty() && op.Top() != '(' && pri[op.Top()] >= pri[s[i]]) calc();
-                op.Push(s[i++]);
+                while (!op.Empty() && pri[op.Top()] >= pri[s[i]]) {
+                    calc();
+                }
+                op.Push(s[i]);
             }
         }
-        while (!op.Empty()) calc();
         
-        cout << "º∆À„Ω·π˚Œ™: " << num.Top() << "\n";
+        while (!op.Empty()) {
+            calc();
+        }
+        
+        cout << "result: " << num.Top() << "\n";
     }
     
     
-    // Exp2.1 mid to post and calc post
-    void testMid2PostCalcPost() {
-        string s = "2*(1+3)";
-//		cin >> s;
-        
-        string post = Mid2Post(s);
-        cout << "∫Û◊∫±Ì¥Ô ΩŒ™£∫\n";
-        cout << post << "\n";
-        
-        int res = CalcPost(post);
-        cout << "∫Û◊∫±Ì¥Ô Ωµƒº∆À„Ω·π˚Œ™£∫\n";
-        // 2 1 3 + *
-        cout << res << "\n";
-    }
-    
-    
-    // mid to post
-    string Mid2Post(const string& s) {
+    // Exp2.1 mid to post
+    std::string Mid2Post(const std::string& s) {
         string post;
         
-        unordered_map<char, int> pri{{'(', 0}, {'+', 1}, {'-', 1}, {'*', 2}, {'/', 2}};
+        unordered_map<char, int> pri{{'(', 0},
+                                     {'+', 1},
+                                     {'-', 1},
+                                     {'*', 2},
+                                     {'/', 2}};
         SeqStack<char, 100> op;
         
         for (int i = 0; i < s.size(); i++) {
@@ -174,20 +243,19 @@ public:
     }
     
     
-    // calc post
-    int CalcPost(string& post) {
+    // Exp2.1 calc post
+    int CalcPost(const std::string& post) {
         SeqStack<int, 100> num;
-        int i = 0, n = post.size();
-        while (i < n) {
+        for (int i = 0; i < post.size(); i++) {
             if (isdigit(post[i])) {
-                int x = 0;
-                while (i < n && isdigit(post[i])) {
-                    x = x * 10 + post[i] - '0';
-                    i++;
+                int x = 0, j = i;
+                while (j < post.size() && isdigit(post[j])) {
+                    x = x * 10 + post[j++] - '0';
                 }
                 num.Push(x);
+                i = j - 1;
             } else if (post[i] == ' ') {
-                i++;
+                continue;
             } else {
                 int b = num.Top();
                 num.Pop();
@@ -197,11 +265,22 @@ public:
                 else if (post[i] == '-') num.Push(a - b);
                 else if (post[i] == '/') num.Push(a / b);
                 else num.Push(a * b);
-                i++;
             }
         }
         
         return num.Top();
+    }
+    
+    
+    // Exp2.1 mid to post and calc post
+    void testMid2PostAndCalcPost(const std::string mid = "12*(1+3)") {
+        cout << "mid expression: " << mid << "\n";
+        
+        string post = Mid2Post(mid);
+        cout << "post expression: " << post << "\n";
+        
+        int res = CalcPost(post);
+        cout << "calc post result: " << res << "\n";
     }
     
     
@@ -211,12 +290,12 @@ public:
         
         auto displayMenu = [&]() {
             cout << "====================\n";
-            cout << "1. »Î∂”\n";
-            cout << "2. ≥ˆ∂”\n";
-            cout << "3. »°∂”Õ∑\n";
-            cout << "4. ≈–∂œ∂”¡– «∑ÒŒ™ø’\n";
-            cout << "0. ÕÀ≥ˆ\n";
-            cout << "«Î ‰»Îƒ„µƒ—°‘Ò£∫";
+            cout << "1. ÂÖ•Èòü\n";
+            cout << "2. Âá∫Èòü\n";
+            cout << "3. ÂèñÈòüÂ§¥\n";
+            cout << "4. Âà§Êñ≠ÈòüÂàóÊòØÂê¶‰∏∫Á©∫\n";
+            cout << "0. ÈÄÄÂá∫\n";
+            cout << "ËØ∑ËæìÂÖ•‰Ω†ÁöÑÈÄâÊã©Ôºö";
         };
         
         int choice;
@@ -226,19 +305,19 @@ public:
             switch (choice) {
                 case 1: {
                     int x;
-                    cout << "«Î ‰»Î“™»Î∂”µƒ‘™Àÿ£∫";
+                    cout << "ËØ∑ËæìÂÖ•Ë¶ÅÂÖ•ÈòüÁöÑÂÖÉÁ¥†Ôºö";
                     cin >> x;
                     q.Push(x);
-                    cout << "»Î∂”≥…π¶\n";
+                    cout << "ÂÖ•ÈòüÊàêÂäü\n";
                     break;
                 }
                 case 2: {
 //                    cout << q.Pop() << "\n";
-                    cout << "≥ˆ∂”≥…π¶\n";
+                    cout << "Âá∫ÈòüÊàêÂäü\n";
                     break;
                 }
                 case 3: {
-                    cout << "∂”Õ∑‘™ÀÿŒ™£∫\n";
+                    cout << "ÈòüÂ§¥ÂÖÉÁ¥†‰∏∫Ôºö\n";
                     cout << q.Front() << "\n";
                     break;
                 }
@@ -250,7 +329,7 @@ public:
                     return;
                 }
                 default: {
-                    cout << " ‰»Î¥ÌŒÛ£¨«Î÷ÿ–¬ ‰»Î\n";
+                    cout << "ËæìÂÖ•ÈîôËØØÔºåËØ∑ÈáçÊñ∞ËæìÂÖ•\n";
                     break;
                 }
             }
@@ -260,48 +339,30 @@ public:
     
     // Exp2.2 test patient
     void testPatient() {
-        // ÀÊª˙…˙≥…“ª∏ˆ÷ª”– ˝◊÷µƒ◊÷∑˚¥Æ
-        auto genRandStr = [](int len) {
-            string res;
-            for (int i = 0; i < len; i++) {
-                res += to_string(rand() % 10);
-            }
-            return res;
-        };
-        
-        auto displayMenu = []() {
-            cout << "====================\n";
-            cout << "1. ≈≈∂”£∫ªº’ﬂ»°∫≈\n";
-            cout << "2. æÕ’Ô£∫ªº’ﬂæÕ’Ô\n";
-            cout << "3. ≤Èø¥£∫¥Ú”°À˘”–ªº’ﬂµƒ≤°¿˙∫≈\n";
-            cout << "0. œ¬∞‡£∫ÕÀ≥ˆ\n";
-            cout << "«Î ‰»Îƒ„µƒ—°‘Ò£∫";
-        };
-        
         CircleSeqQueueWithFlag<string, 100> q;
         int choice;
         while (true) {
-            displayMenu();
+            displayPatientMenu();
             cin >> choice;
             switch (choice) {
                 case 1: {
-                    string x = genRandStr(6);
-                    q.Push(x);
-                    cout << "ªº’ﬂ»°∫≈≥…π¶£¨≤°¿˙∫≈Œ™£∫\n";
-                    cout << x << "\n";
+                    string info = genRandStr(4);
+                    q.Push(info);
+                    cout << "info: " << info << "\n";
                     break;
                 }
                 case 2: {
                     if (q.Empty()) {
-                        cout << "µ±«∞√ª”–ªº’ﬂ‘⁄µ»¥˝æÕ’Ô\n";
+                        cout << "no patient!\n";
+                    } else {
+                        cout << "patient: " << q.Front() << " successful!\n";
+                        q.Pop();
                     }
-                    cout << "ªº’ﬂ " << q.Front() << " æÕ’Ô≥…π¶\n";
-                    q.Pop();
                     break;
                 }
                 case 3: {
                     vector<string> t;
-                    cout << "µ±«∞À˘”–ªº’ﬂµƒ≤°¿˙∫≈Œ™£∫\n";
+                    cout << "all patients' info:\n";
                     while (!q.Empty()) {
                         t.push_back(q.Front());
                         cout << q.Front() << ' ';
@@ -321,80 +382,29 @@ public:
     }
     
     
-    // Exp2.3 «Û◊Ó∂Ã¬∑æ∂
+    // Exp2.3 shortest path
     void testShortestPath() {
-        CircleSeqQueueWithFlag<int, 100> q;
+        vector<vector<int>> g = {{0, 1, 1},
+                                 {0, 0, 1},
+                                 {1, 0, 0},
+                                 {0, 1, 0}};
+        pair<int, int> st = {0, 0};
+        pair<int, int> en = {3, 2};
         
-        int m = 4, n = 3;
-        vector<vector<int>> g = {
-                {0, 1, 1},
-                {0, 0, 1},
-                {1, 0, 0},
-                {0, 1, 0}
-        };
+        pair<vector<pair<int, int>>, int> res = getShortestPath(g, st, en);
         
-        pair<vector<pair<int, int>>, int> res = get_shortest_path(g, 0, 0, m - 1, n - 1, m, n);
-        
-        vector<pair<int, int>> path = res.first;
-        int min_dist = res.second;
-        
-        cout << "◊Ó∂Ã¬∑æ∂Œ™£∫\n";
-        for (auto& x: path) {
-            cout << "(" << x.first << "," << x.second << ")" << ' ';
-        }
-        
-        cout << "\n◊Ó∂Ã¬∑æ∂µƒ≥§∂»Œ™£∫\n";
-        cout << min_dist << "\n";
-    }
-    
-    
-    // Exp2.3 get shortest path
-    pair<vector<pair<int, int>>, int> get_shortest_path(vector<vector<int>>& g, int sti, int stj, int endi, int endj, int m, int n) {
-        vector<pair<int, int>> path; // ◊Ó∂Ã¬∑æ∂
-        vector<vector<int>> d(m, vector<int>(n, INT_MAX)); // ◊Ó∂Ã¬∑æ∂µƒ≥§∂» d[endi][endj]
-        
-        CircleSeqQueueWithFlag<pair<int, int>, 100> q;
-        
-        q.Push({sti, stj});
-        d[sti][stj] = 0;
-        
-        int dx[] = {0, 1, 0, -1, 1, 1, -1, -1}, dy[] = {1, 0, -1, 0, 1, -1, 1, -1};
-        
-        while (!q.Empty()) {
-            auto now = q.Front();
-            q.Pop();
-            
-            int i = now.first, j = now.second;
-            
-            if (i == endi && j == endj) {
-                break;
-            }
-            
-            for (int k = 0; k < 8; k++) {
-                int ni = i + dx[k], nj = j + dy[k];
-                if (ni >= 0 && ni < m && nj >= 0 && nj < n && g[ni][nj] == 0 && d[ni][nj] == INT_MAX) {
-                    d[ni][nj] = d[i][j] + 1;
-                    q.Push({ni, nj});
-                }
+        auto all_path = res.first;
+        auto min_dist = res.second;
+        cout << "shortest path:\n";
+        for (int i = 0; i < all_path.size(); i++) {
+            cout << '(' << all_path[i].first << ',' << all_path[i].second << ')';
+            if (i == all_path.size() - 1) {
+                cout << "\n";
+            } else {
+                cout << " -> ";
             }
         }
-        
-        // ¥”÷’µ„ø™ ºªÿÀ›«Û◊Ó∂Ã¬∑æ∂
-        int i = endi, j = endj;
-        while (i != sti || j != stj) {
-            path.push_back({i, j});
-            for (int k = 0; k < 8; k++) {
-                int ni = i + dx[k], nj = j + dy[k];
-                if (ni >= 0 && ni < m && nj >= 0 && nj < n && g[ni][nj] == 0 && d[ni][nj] == d[i][j] - 1) {
-                    i = ni;
-                    j = nj;
-                    break;
-                }
-            }
-        }
-        
-        reverse(path.begin(), path.end());
-        return make_pair(path, d[endi][endj]);
+        cout << "shortest path length: " << min_dist << "\n";
     }
 };
 
