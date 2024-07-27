@@ -1,5 +1,5 @@
 //
-// Created by 董文杰 on 2023-10-10.
+// Created by Wenjie Dong on 2023-10-10.
 //
 
 #include <bits/stdc++.h>
@@ -15,21 +15,31 @@ class Experiment_3 {
 private:
     void displaySeqStackMenu() {
         cout << "====================\n";
-        cout << "1. 入栈\n";
-        cout << "2. 出栈\n";
-        cout << "3. 取栈顶元素\n";
-        cout << "4. 判断栈是否为空\n";
-        cout << "0. 退出\n";
-        cout << "请输入你的选择：";
+        cout << "1. push in stack\n";
+        cout << "2. pop top element\n";
+        cout << "3. get top element\n";
+        cout << "4. judge empty stack\n";
+        cout << "0. exit\n";
+        cout << "please input your choice:";
+    }
+    
+    void displaySeqQueueMenu() {
+        cout << "====================\n";
+        cout << "1. push in queue\n";
+        cout << "2. pop front element\n";
+        cout << "3. get front element\n";
+        cout << "4. judge empty queue\n";
+        cout << "0. exit\n";
+        cout << "please input your choice:";
     }
     
     void displayPatientMenu() {
         cout << "====================\n";
-        cout << "1. 排队：患者取号，进入等待队列\n";
-        cout << "2. 就诊：患者就诊，查看队首病历\n";
-        cout << "3. 查看：打印所有患者的病历信息\n";
-        cout << "0. 下班：退出\n";
-        cout << "请输入你的选择：";
+        cout << "1. in queue: get id and push in queue\n";
+        cout << "2. out queue: get front id\n";
+        cout << "3. get queue: print all id info\n";
+        cout << "0. exit\n";
+        cout << "please input your choice:";
     }
     
     std::string genRandStr(int len) {
@@ -288,48 +298,35 @@ public:
     void testSeqQueue() {
         CircleSeqQueueWithFlag<int, 100> q;
         
-        auto displayMenu = [&]() {
-            cout << "====================\n";
-            cout << "1. 入队\n";
-            cout << "2. 出队\n";
-            cout << "3. 取队头\n";
-            cout << "4. 判断队列是否为空\n";
-            cout << "0. 退出\n";
-            cout << "请输入你的选择：";
-        };
-        
         int choice;
         while (true) {
-            displayMenu();
+            displaySeqQueueMenu();
             cin >> choice;
             switch (choice) {
                 case 1: {
+                    cout << "input push element:";
                     int x;
-                    cout << "请输入要入队的元素：";
                     cin >> x;
                     q.Push(x);
-                    cout << "入队成功\n";
                     break;
                 }
                 case 2: {
-//                    cout << q.Pop() << "\n";
-                    cout << "出队成功\n";
+                    q.Pop();
                     break;
                 }
                 case 3: {
-                    cout << "队头元素为：\n";
-                    cout << q.Front() << "\n";
+                    cout << "queue front:\n" << q.Front() << "\n";
                     break;
                 }
                 case 4: {
-                    cout << q.Empty() << "\n";
+                    cout << (q.Empty() ? "empty queue\n" : "not empty queue\n");
                     break;
                 }
                 case 0: {
                     return;
                 }
                 default: {
-                    cout << "输入错误，请重新输入\n";
+                    cout << "invalid input, please input again!\n";
                     break;
                 }
             }

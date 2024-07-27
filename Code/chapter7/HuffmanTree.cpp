@@ -1,5 +1,5 @@
 //
-// Created by ╤╜нд╫э on 2023-11-28.
+// Created by Wenjie Dong on 2023-11-28.
 //
 
 #include "HuffmanTree.h"

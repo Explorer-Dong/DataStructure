@@ -1,5 +1,5 @@
 //
-// Created by 董文杰 on 2023-10-10.
+// Created by Wenjie Dong on 2023-10-10.
 //
 
 #include "SeqStack.h"

@@ -45,7 +45,7 @@ int main() {
 	Homework_8 hw8;
 	Homework_10 hw10;
     
-    exp3.testMid2PostAndCalcPost();
+    exp3.testSeqQueue();
     
 	return 0;
 }
