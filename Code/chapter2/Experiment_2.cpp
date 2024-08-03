@@ -347,7 +347,7 @@ public:
 	// Exp4 student manage system with linklist
 	void testStudentManageSystem() {
 		// read data from txt file
-		ifstream fin("Homework\\Exp2_T4.txt");
+		ifstream fin("Exp2_T4.txt");
 		if (!fin) {
 			cout << "unsuccessful open file" << endl;
 			exit(1);
@@ -419,7 +419,7 @@ public:
 					break;
 				}
 				case 0: {
-					ls.OutputToFile("Homework\\Exp2_T4.txt");
+					ls.OutputToFile("Exp2_T4.txt");
 					return;
 				}
 			}
