@@ -2,174 +2,201 @@
 // Created by Wenjie Dong on 2023-10-12.
 //
 
-#include <bits/stdc++.h>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <stack>
+#include <unordered_map>
 
 using namespace std;
 
+#ifndef CODE_Homework_4
+#define CODE_Homework_4
+
 class Homework_4 {
 public:
-	// T 4.1 计算模板串的 next 数组
-	vector<int> GetNext(const string& str) {
-		int m = str.size();
-		vector<int> ne(m + 1);
-		string t = "1" + str; // 扩展下标为从1开始
-
-		for (int i = 2, j = 0; i <= m; i++) {
-			while (j && t[i] != t[j + 1]) {
-				// 未匹配上则不断回溯
-				j = ne[j];
-			}
-			if (t[i] == t[j + 1]) {
-				// 匹配上了则j指针后移一位
-				j++;
-			}
-			ne[i] = j;
-		}
-
-		return ne;
-	}
-
-
-	// T 4.2 统计s串中t串的个数
-	int TestContain(const string& s, const string& t) {
-		int cnt = 0;
-
-		vector<int> ne = GetNext(t);
-		int n = s.size(), m = t.size();
-
-		string news = "1" + s;
-		string newt = "1" + t;
-
-		for (int i = 1, j = 0; i <= n; i++) {
-			while (j && news[i] != newt[j + 1]) {
-				// 未匹配上则不断回溯
-				j = ne[j];
-			}
-			if (news[i] == newt[j + 1]) {
-				// 匹配上了则j指针后移一位
-				j++;
-			}
-
-			if (j == m) {
-				// 匹配完全，则统计并且回溯
-				cnt++;
-				j = ne[j];
-			}
-		}
-
-		return cnt;
-	}
-
-
-	// T 4.3 删除s串中所有t串
-	string TestDelete(const string& s, const string& t) {
-		string res;
-
-		int n = s.size(), m = t.size();
-		string news = "1" + s;
-		string newt = "1" + t;
-		vector<int> ne = GetNext(t);
-
-		int l = 1, r = -1;
-		for (int i = 1, j = 0; i <= n; i++) {
-			while (j && news[i] != newt[j + 1]) {
-				j = ne[j];
-			}
-
-			if (news[i] == newt[j + 1]) {
-				j++;
-			}
-
-			if (j == m) {
-				r = i - m;
-				for (int c = l; c <= r; c++) {
-					res += news[c];
-				}
-				l = i + 1;
-				j = ne[j];
-			}
-		}
-
-		// 收尾
-		for (int c = l; c <= n; c++) {
-			res += news[c];
-		}
-
-		return res.size() ? res : s;
-	}
-
-
-	// T 4.4 返回所有的最大公共子串 TODO
-	vector<string> LongestCommomSubstring(const string& s, const string& t) {
-		vector<string> res;
-
-		int n = s.size(), m = t.size();
-		string news = "1" + s;
-		string newt = "1" + t;
-
-		// dp[i][j]表示s串的[1,i]个字符和t串的[1,j]个字符的最长公共子串长度
-		vector<vector<int>> dp(n + 1, vector<int>(m + 1, 0));
-		int ma = 0; // 最长公共子串的长度 ma
-
-		// 求解最大公共子串的长度
-		for (int i = 1; i <= n; i++) {
-			for (int j = 1; j <= m; j++) {
-				if (news[i] == newt[j]) {
-					dp[i][j] = dp[i - 1][j - 1] + 1;
-					ma = max(ma, dp[i][j]);
-				} else {
-					dp[i][j] = 0;
-				}
-			}
-		}
-
-		// 根据最大长度找到公共子串
-		for (int i = 1; i <= n; i++) {
-			for (int j = 1; j <= m; j++) {
-				if (dp[i][j] == ma) {
-					res.emplace_back(s.substr(i - ma, ma));
-				}
-			}
-		}
-
-		return res;
-	}
-
-
-	// T 4.5 反转句子中单词的顺序
-	string TestReverse(const string& s) {
-		string res;
-
-		int n = s.size(), l = 0;
-		for (int r = 0; r < n; r++) {
-			if (s[r] == ' ') {
-				res = s.substr(l, r - l) + res;
-				res = " " + res;
-				l = r + 1;
-			}
-		}
-
-		// 收尾
-		res = s.substr(l) + res;
-
-		return res;
-	}
+    // T4.1 get next array of child string
+    vector<int> getNext(const string& child) {
+        int m = child.size();
+        vector<int> ne(m + 1);
+        string t = " " + child;
+        
+        for (int i = 2, j = 0; i <= m; i++) {
+            while (j && t[i] != t[j + 1]) {
+                j = ne[j];
+            }
+            if (t[i] == t[j + 1]) {
+                j++;
+            }
+            ne[i] = j;
+        }
+        
+        return ne;
+    }
+    
+    
+    // T4.2 count t in s
+    int countKMP(const string& s = "abccabaccaba", const string& t = "ab") {
+        int cnt = 0;
+        int n = s.size(), m = t.size();
+        string news = " " + s;
+        string newt = " " + t;
+        vector<int> ne = getNext(t);
+        
+        for (int i = 1, j = 0; i <= n; i++) {
+            while (j && news[i] != newt[j + 1]) {
+                j = ne[j];
+            }
+            if (news[i] == newt[j + 1]) {
+                j++;
+            }
+            if (j == m) {
+                cnt++;
+                j = ne[j];
+            }
+        }
+        
+        return cnt;
+    }
+    
+    
+    // T4.3 del all t in s
+    string deleteKMP(const string& s = "abccabaccaba", const string& t = "ab") {
+        string res;
+        int n = s.size(), m = t.size();
+        string news = " " + s;
+        string newt = " " + t;
+        vector<int> ne = getNext(t);
+        
+        int l = 1;
+        for (int i = 1, j = 0; i <= n; i++) {
+            while (j && news[i] != newt[j + 1]) {
+                j = ne[j];
+            }
+            if (news[i] == newt[j + 1]) {
+                j++;
+            }
+            if (j == m) {
+                res += news.substr(l, i - m - l + 1);
+                l = i + 1;
+                j = ne[j];
+            }
+        }
+        
+        // get possible end
+        res += news.substr(l);
+        
+        return res.size() ? res : s;
+    }
+    
+    
+    // T4.4 get all longest common substrings - kmp
+    vector<string> getLongestCommomSubstring_kmp(const string& s = "abaadqbacaba", const string& t = "abac") {
+        vector<string> res;
+        
+        int m = t.size();
+        for (int len = m; len >= 1; len--) {
+            bool ok = false;
+            for (int i = 0; i < m - len + 1; i++) {
+                string tt = t.substr(i, len);
+                if (countKMP(s, tt)) {
+                    ok = true;
+                    res.push_back(tt);
+                }
+            }
+            if (ok) {
+                return res;
+            }
+        }
+        
+        return res;
+    }
+    
+    
+    // T4.4 get all longest common substrings - dp
+    vector<string> getLongestCommomSubstring_dp(const string& s = "abaadqbacaba", const string& t = "abac") {
+        string news = " " + s;
+        string newt = " " + t;
+        int n = s.size(), m = t.size();
+        
+        vector<vector<int>> dp(n + 1, vector<int>(m + 1, 0));
+        int ma = 0;
+        
+        // update dp table
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= m; j++) {
+                if (news[i] == newt[j]) {
+                    dp[i][j] = dp[i - 1][j - 1] + 1;
+                    ma = max(ma, dp[i][j]);
+                }
+            }
+        }
+        
+        // find all longest common substrings
+        unordered_map<string, bool> dict;
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= m; j++) {
+                if (dp[i][j] == ma) {
+                    dict[news.substr(i - ma + 1, ma)] = true;
+                }
+            }
+        }
+        
+        // get result
+        vector<string> res;
+        for (auto& [lcs, _]: dict) {
+            res.push_back(lcs);
+        }
+        
+        return res;
+    }
+    
+    
+    // T4.5 reverse words order in sentence - change original string
+    string reverseOrigin(string s = "Do or do not, there is no try.") {
+        int n = s.size();
+        
+        reverse(s.begin(), s.end());
+        
+        int i = 0;
+        while (i < n) {
+            int j = i;
+            while (j < n && s[j] != ' ') {
+                j++;
+            }
+            reverse(s.begin() + i, s.begin() + j);
+            i = j + 1;
+        }
+        
+        return s;
+    }
+    
+    
+    // T4.5 reverse words order in sentence - use stack to reverse
+    string reverseWithStack(const string& s = "Do or do not, there is no try.") {
+        int n = s.size();
+        
+        // get words
+        stack<string> stk;
+        int i = 0;
+        while (i < n) {
+            int j = i;
+            while (s[j] != ' ') {
+                j++;
+            }
+            stk.push(s.substr(i, j - i));
+            i = j + 1;
+        }
+        
+        // splice result
+        string res;
+        while (stk.size()) {
+            res += stk.top() + " ";
+            stk.pop();
+        }
+        
+        return res;
+    }
 };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#endif // CODE_Homework_4

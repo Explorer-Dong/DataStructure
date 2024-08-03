@@ -2,166 +2,123 @@
 // Created by Wenjie Dong on 2023-10-16.
 //
 
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <fstream>
+#include <filesystem>
+#include "Homework_4.cpp"
 
 using namespace std;
 
-#ifndef CODE_TRAIL_4_H
-#define CODE_TRAIL_4_H
+#ifndef CODE_Experiment_4_H
+#define CODE_Experiment_4_H
 
-class Trail_4 {
+class Experiment_4 {
 public:
-	// Tr 4.1 BF模式匹配
-	int TrBF(const string& s, const string& t) {
-		int pos = -1;
-
-		string news = "$" + s;
-		string newt = "$" + t;
-
-		int n = s.size(), m = t.size();
-
-		for (int i = 1; i <= n - m + 1; i++) {
-			int j = 1, k = i;
-			for (; j <= m; j++, k++) {
-				if (news[k] != newt[j]) {
-					break;
-				}
-			}
-			if (j == m + 1) {
-				pos = i - 1;
-				break;
-			}
-		}
-
-		if (pos == -1) {
-			cerr << "no match\n";
-		} else {
-			return pos;
-		}
-	}
-
-
-	// Tr 4.2 求next
-	vector<int> GetNext(const string& str) {
-		int m = str.size();
-		vector<int> ne(m + 1);
-		string t = "1" + str; // 扩展下标为从1开始
-
-		for (int i = 2, j = 0; i <= m; i++) {
-			while (j && t[i] != t[j + 1]) {
-				// 未匹配上则不断回溯
-				j = ne[j];
-			}
-			if (t[i] == t[j + 1]) {
-				// 匹配上了则j指针后移一位
-				j++;
-			}
-			ne[i] = j;
-		}
-
-		return ne;
-	}
-
-
-	// Tr 4.1 KMP未优化的模式匹配
-	int TrKMP(const string& s, const string& t) {
-		int pos = -1;
-
-		string news = "$" + s;
-		string newt = "$" + t;
-
-		int n = s.size(), m = t.size();
-
-		vector<int> ne = GetNext(t);
-
-		for (int i = 1, j = 0; i <= n; i++) {
-			if (j && news[i] != newt[j + 1]) {
-				j = ne[j];
-			}
-
-			if (news[i] == newt[j + 1]) {
-				j++;
-			}
-
-			if (j == m) {
-				pos = i - m;
-				break;
-			}
-		}
-
-		if (pos == -1) {
-			cerr << "no match\n";
-		} else {
-			return pos;
-		}
-	}
-
-
-	// Tr 4.1 KMP优化的模式匹配
-	int TrKMPFinal(const string& s, const string& t) {
-		int pos = -1;
-
-		string news = "$" + s;
-		string newt = "$" + t;
-
-		int n = s.size(), m = t.size();
-
-		vector<int> ne = GetNext(t);
-
-		for (int i = 1, j = 0; i <= n; i++) {
-			while (j && news[i] != newt[j + 1]) {
-				j = ne[j];
-			}
-
-			if (news[i] == newt[j + 1]) {
-				j++;
-			}
-
-			if (j == m) {
-				pos = i - m;
-				break;
-			}
-		}
-
-		if (pos == -1) {
-			cerr << "no match\n";
-		} else {
-			return pos;
-		}
-	}
-
-
-	// Tr 4.2 凯撒密码：加密
-	void TrCaesarCipher(char* input, char* output, int dx) {
-		ifstream fin(input);
-		ofstream fout(output);
-
-		string s;
-		fin >> s;
-
-		int n = s.size();
-		for (int i = 0; i < n; i++) {
-			char c;
-			if (islower(s[i])) {
-				c = (s[i] - 'a' + dx) % 26 + 'a';
-			} else if (isupper(s[i])) {
-				c = (s[i] - 'A' + dx) % 26 + 'A';
-			} else {
-				cerr << "unknow character\n";
-				break;
-			}
-			fout << c;
-		}
-
-		fin.close();
-		fout.close();
-	}
-
-
-	// Tr 4.2 凯撒密码：解密
-	void TrCaesarDecipher(char* in, char* out, int dx) {
-		TrCaesarCipher(out, in, 26 - dx);
-	}
+    // Exp4.1 find first match position - brute force
+    int bruteForce(const string& s = "abccabaccaba", const string& t = "aba") {
+        string news = " " + s;
+        string newt = " " + t;
+        int n = s.size(), m = t.size();
+        
+        for (int i = 1; i <= n - m + 1; i++) {
+            int j = 1;
+            for (int k = i; j <= m; j++, k++) {
+                if (news[k] != newt[j]) {
+                    break;
+                }
+            }
+            if (j == m + 1) {
+                return i - 1;
+            }
+        }
+        
+        return -1;
+    }
+    
+    
+    // Exp4.1 find first match position - KMP original
+    int originalKMP(const string& s = "abccabaccaba", const string& t = "aba") {
+        string news = " " + s;
+        string newt = " " + t;
+        int n = s.size(), m = t.size();
+        
+        Homework_4 obj;
+        vector<int> ne = obj.getNext(newt);
+        
+        for (int i = 1, j = 0; i <= n; i++) {
+            if (j && news[i] != newt[j + 1]) {
+                j = ne[j];
+            }
+            if (news[i] == newt[j + 1]) {
+                j++;
+            }
+            if (j == m) {
+                return i - m;
+            }
+        }
+        
+        return -1;
+    }
+    
+    
+    // Exp4.1 find first match position - KMP optimized
+    int optimizedKMP(const string& s = "abccabaccaba", const string& t = "aba") {
+        string news = " " + s;
+        string newt = " " + t;
+        int n = s.size(), m = t.size();
+        
+        Homework_4 obj;
+        vector<int> ne = obj.getNext(newt);
+        
+        for (int i = 1, j = 0; i <= n; i++) {
+            while (j && news[i] != newt[j + 1]) {
+                j = ne[j];
+            }
+            if (news[i] == newt[j + 1]) {
+                j++;
+            }
+            if (j == m) {
+                return i - m;
+            }
+        }
+        
+        return -1;
+    }
+    
+    
+    // Exp4.2 caesar cipher
+    void caesarCipher(string in = "Exp4_T4_in.txt", string out = "Exp4_T4_cipher.txt", int dx = 3) {
+        string cwd = std::filesystem::current_path().string() + "\\Code\\chapter4\\";
+        
+        ifstream fin(cwd + in);
+        ofstream fout(cwd + out);
+        
+        string s;
+        while (getline(fin, s)) {
+            string trans;
+            for (char ch: s) {
+                if (islower(ch)) {
+                    trans += (ch - 'a' + dx) % 26 + 'a';
+                } else if (isupper(ch)) {
+                    trans += (ch - 'A' + dx) % 26 + 'A';
+                } else {
+                    cerr << "invalid character\n";
+                    exit(1);
+                }
+            }
+            fout << trans << "\n";
+        }
+        
+        fin.close();
+        fout.close();
+    }
+    
+    
+    // Exp4.2 caesar decipher
+    void caesarDecipher(string cipher = "Exp4_T4_cipher.txt", string decipher = "Exp4_T4_decipher.txt", int dx = 3) {
+        caesarCipher(cipher, decipher, 26 - dx);
+    }
 };
 
-#endif //CODE_TRAIL_4_H
+#endif //CODE_Experiment_4_H

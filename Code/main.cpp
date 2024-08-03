@@ -5,7 +5,7 @@
 #include "chapter3/Experiment_3.cpp"
 
 #include "chapter4/Homework_4.cpp"
-#include "chapter4/Trail_4.cpp"
+#include "chapter4/Experiment_4.cpp"
 
 #include "chapter5/Homework_5.cpp"
 #include "chapter5/Trail_5.cpp"
@@ -29,7 +29,7 @@ using namespace std;
 int main() {
     Experiment_2 exp2;
 	Experiment_3 exp3;
-	Trail_4 tr4;
+    Experiment_4 exp4;
 	Trail_5 tr5;
 	Trail_6 tr6;
 	Trail_7 tr7;
@@ -45,7 +45,7 @@ int main() {
 	Homework_8 hw8;
 	Homework_10 hw10;
     
-    exp3.testSeqQueue();
+    exp4.caesarDecipher();
     
 	return 0;
 }
