@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.26)
 project(DataStructure)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 
 include_directories(
         Code/chapter2/h
@@ -25,7 +25,7 @@ add_executable(3__DataStructures
         Code/chapter3/DoubleStack4Queue.h
 
         Code/chapter4/Homework_4.cpp
-        Code/chapter4/Trail_4.cpp
+        Code/chapter4/Experiment_4.cpp
 
         Code/chapter5/Triple.h
         Code/chapter5/SparseMatrix.h
