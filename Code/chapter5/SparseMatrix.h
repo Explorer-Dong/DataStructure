@@ -14,95 +14,77 @@ using namespace std;
 template<class T>
 class SparseMatrix {
 private:
-	vector<Triple<T>> data;
-	int row, col, size;
+    vector<Triple<T>> data;
+    int row, col;
+    const int MaxSize;
 
 public:
-	SparseMatrix() : row(0), col(0), size(0) {};
-	SparseMatrix(vector<vector<T>>& obj);
-	vector<vector<T>> Trans();
-	vector<vector<T>> Plus(SparseMatrix& obj);
-	vector<vector<T>> Minus(SparseMatrix& obj);
+    SparseMatrix() : row(0), col(0), MaxSize(1000) {};
+    void update(Triple<T> x);
+    vector<vector<T>> transpose();
+    vector<vector<T>> plus(SparseMatrix& sm, bool is_plus = true);
+    vector<vector<T>> minus(SparseMatrix& sm);
+    T sumOfDiag();
 };
 
 template<class T>
-SparseMatrix<T>::SparseMatrix(vector<vector<T>>& obj) {
-	if (obj.empty() || obj[0].empty()) {
-		return;
-	}
-
-	row = obj.size(), col = obj[0].size();
-
-	for (int i = 0; i < row; i++) {
-		for (int j = 0; j < col; j++) {
-			if (obj[i][j]) {
-				Triple<T> t(i, j, obj[i][j]);
-				data.emplace_back(t);
-				size++;
-			}
-		}
-	}
+void SparseMatrix<T>::update(Triple<T> x) {
+    data.push_back(x);
+    row = max(row, x.r);
+    col = max(col, x.c);
+    if (row > MaxSize || col > MaxSize) {
+        cerr << "matrix is too big to contain!" << "\n";
+        exit(1);
+    }
 }
 
 template<class T>
-vector<vector<T>> SparseMatrix<T>::Trans() {
-	vector<vector<T>> res(col, vector<T>(row, 0));
-
-	for (auto& x: data) {
-		int i = x.r, j = x.c;
-		T val = x.elem;
-		res[j][i] = val;
-	}
-
-	return res;
+vector<vector<T>> SparseMatrix<T>::transpose() {
+    swap(row, col);
+    vector<vector<T>> res(row + 1, vector<T>(col + 1, 0));
+    for (auto& tri: data) {
+        res[tri.c][tri.r] = tri.value;
+        swap(tri.r, tri.c);
+    }
+    return res;
 }
 
 template<class T>
-vector<vector<T>> SparseMatrix<T>::Plus(SparseMatrix<T>& obj) {
-	if (row != obj.row || col != obj.col) {
-		cerr << "形状不同！" << "\n";
-		exit(1);
-	}
-
-	vector<vector<T>> res(row, vector<T>(col, 0));
-
-	for (auto& x: data) {
-		int i = x.r, j = x.c;
-		T val = x.elem;
-		res[i][j] += val;
-	}
-
-	for (auto& x: obj.data) {
-		int i = x.r, j = x.c;
-		T val = x.elem;
-		res[i][j] += val;
-	}
-
-	return res;
+vector<vector<T>> SparseMatrix<T>::plus(SparseMatrix<T>& sm, bool is_plus) {
+    if (row != sm.row || col != sm.col) {
+        cerr << "different shape! can't calculate" << "\n";
+        exit(1);
+    }
+    
+    vector<vector<T>> res(row + 1, vector<T>(col + 1, 0));
+    for (auto& tri: data) {
+        int r = tri.r, c = tri.c;
+        T value = tri.value;
+        res[r][c] += value;
+    }
+    for (auto& tri: sm.data) {
+        int r = tri.r, c = tri.c;
+        T value = tri.value;
+        res[r][c] += is_plus ? value : -value;
+    }
+    
+    return res;
 }
 
 template<class T>
-vector<vector<T>> SparseMatrix<T>::Minus(SparseMatrix<T>& obj) {
-	if (row != obj.row || col != obj.col) {
-		cerr << "形状不同！" << "\n";
-		exit(1);
-	}
+vector<vector<T>> SparseMatrix<T>::minus(SparseMatrix<T>& sm) {
+    return plus(sm, false);
+}
 
-	vector<vector<T>> res(row, vector<T>(col, 0));
-
-	for (auto& x: data) {
-		int i = x.r, j = x.c;
-		T val = x.elem;
-		res[i][j] += val;
-	}
-
-	for (auto& x: obj.data) {
-		int i = x.r, j = x.c;
-		T val = x.elem;
-		res[i][j] -= val; // 与加法唯一的区别
-	}
-
-	return res;
+template<class T>
+T SparseMatrix<T>::sumOfDiag() {
+    T res = 0;
+    for (auto t: data) {
+        if (t.r == t.c) {
+            res += t.value;
+        }
+    }
+    return res;
 }
 
 #endif //INC_3__DATASTRUCTURES_SPARSEMATRIX_H

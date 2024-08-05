@@ -3,11 +3,7 @@ project(DataStructure)
 
 set(CMAKE_CXX_STANDARD 17)
 
-include_directories(
-        Code/chapter2/h
-)
-
-add_executable(3__DataStructures
+add_executable(DataStructure
         Code/chapter2/SeqList.h
         Code/chapter2/Node.h
         Code/chapter2/LinkList.h
@@ -30,7 +26,7 @@ add_executable(3__DataStructures
         Code/chapter5/Triple.h
         Code/chapter5/SparseMatrix.h
         Code/chapter5/Homework_5.cpp
-        Code/chapter5/Trail_5.cpp
+        Code/chapter5/Experiment_5.cpp
 
         Code/chapter6/GListNode.h
         Code/chapter6/GList.h
