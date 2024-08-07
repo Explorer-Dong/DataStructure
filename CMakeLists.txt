@@ -28,10 +28,9 @@ add_executable(DataStructure
         Code/chapter5/Homework_5.cpp
         Code/chapter5/Experiment_5.cpp
 
-        Code/chapter6/GListNode.h
         Code/chapter6/GList.h
         Code/chapter6/Homework_6.cpp
-        Code/chapter6/Trail_6.cpp
+        Code/chapter6/Experiment_6.cpp
 
         Code/chapter7/BTree.h
         Code/chapter7/CSTree.h

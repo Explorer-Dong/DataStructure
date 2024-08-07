@@ -3,200 +3,241 @@
 //
 
 #include <iostream>
-#include "GListNode.h"
+#include <string>
 
 using namespace std;
 
-#ifndef INC_3__DATASTRUCTURES_GLIST_H
-#define INC_3__DATASTRUCTURES_GLIST_H
+#ifndef GLIST_H
+#define GLIST_H
+
+enum GListNodeType { ATOM, LIST };
 
 template<class T>
-class GList{
-private:
-	GListNode<T>* DoCreat(char s[], int& i);
-	void DoOutput(GListNode<T>* h);
-	int Length(GListNode<T>* h);
-	void Depth(GListNode<T>* h, int& depth, int now_depth, bool pre_is_sub);
-	void Replace(GListNode<T>* h, T ori, T x);
-	void Delete(GListNode<T>* pre, GListNode<T>* h, T x, bool pre_is_sub);
-
-public:
-	GListNode<T>* head;
-	GList();
-	GList(char s[]);			// 传入字符串进行构造
-//	GList(GList<T>& obj);
-//	~GList();
-
-	int Length();				// 计算广义表的长度
-	int Depth();				// 计算广义表的深度
-	void Output();				// 打印广义表
-	void Replace(T ori, T x);	// 替换广义表中值为 ori 的元素为 x
-	void Delete(T x);			// 删除广义表中值为 x 的元素
+struct GListNode {
+    GListNodeType type;
+    union {
+        T data;
+        GListNode* sublist;
+    };
+    GListNode<T>* next;
 };
 
 template<class T>
-GListNode<T>* GList<T>::DoCreat(char s[], int& i) {
-	while (s[i] == ' ' || s[i] == ',') i++;
-	char now = s[i++];
+class GList {
+private:
+    GListNode<T>* create(const string& s, int& i);
+    void decreate(GListNode<T>* now);
+    void print(GListNode<T>* now);
+    int length(GListNode<T>* now);
+    int depth(GListNode<T>* now);
+    void replaceAtom(GListNode<T>* h, T origin, T target);
+    void deleteAtom(GListNode<T>* pre, GListNode<T>* now, T x);
+    bool same(GListNode<T>* pa, GListNode<T>* pb);
 
-	GListNode<T>* h;
+public:
+    GListNode<T>* head;
+    GList();
+    GList(const string& s);               // create with string
+    ~GList();
+    
+    void print();                         // print glist
+    int length();                         // calculate glist length
+    int depth();                          // calculate glist depth
+    void replaceAtom(T origin, T target); // replace atoms from origin to target
+    void deleteAtom(T x);                 // delete atoms of x
+    bool same(GList<T>& obj);             // compare to another glist
+};
 
-	if (now == '(') {
-		h = new GListNode<T>;
-		h->type = LIST;
-		h->sublist = DoCreat(s, i);
-		h->next = DoCreat(s, i);
-		return h;
-	} else if (now == ')' || now == '\0') {
-		return nullptr;
-	} else { // now == ATOM
-		h = new GListNode<T>;
-		h->type = ATOM;
-		h->data = now;
-		h->next = DoCreat(s, i);
-		return h;
-	}
+template<class T>
+GListNode<T>* GList<T>::create(const string& s, int& i) {
+    while (i < s.size() && (s[i] == ' ' || s[i] == ',')) {
+        i++;
+    }
+    
+    if (i == s.size()) {
+        return nullptr;
+    } else if (s[i] == ')') {
+        i++;
+        return nullptr;
+    }
+    
+    GListNode<T>* h = new GListNode<T>;
+    T now = s[i++];
+    
+    if (now == '(') {
+        h->type = LIST;
+        h->sublist = create(s, i);
+        h->next = create(s, i);
+    } else {
+        h->type = ATOM;
+        h->data = now;
+        h->next = create(s, i);
+    }
+    
+    return h;
 }
 
 template<class T>
-void GList<T>::DoOutput(GListNode<T>* h) {
-	if (h == nullptr) {
-		return;
-	} else if (h->type == ATOM) {
-		cout << h->data;
-	} else { // h->type == LIST
-		cout << '(';
-		DoOutput(h->sublist);
-		cout << ')';
-	}
-
-	if (h->next) {
-		cout << ',';
-		DoOutput(h->next);
-	}
+void GList<T>::decreate(GListNode<T>* now) {
+    if (!now) {
+        return;
+    }
+    if (now->type == LIST) {
+        decreate(now->sublist);
+        decreate(now->next);
+    } else {
+        decreate(now->next);
+    }
+    delete now;
 }
 
 template<class T>
-int GList<T>::Length(GListNode<T>* h) {
-	if (!h) {
-		return 0;
-	}
-
-	return Length(h->next) + 1;
+void GList<T>::print(GListNode<T>* now) {
+    if (!now) {
+        return;
+    }
+    
+    if (now->type == ATOM) {
+        cout << now->data;
+    } else { // now->type == LIST
+        cout << '(';
+        print(now->sublist);
+        cout << ')';
+    }
+    
+    if (now->next) {
+        cout << ',';
+        print(now->next);
+    }
 }
 
 template<class T>
-void GList<T>::Depth(GListNode<T>* h, int& max_depth, int now_depth, bool pre_is_sub) {
-	/**
-	 * @param h 当前结点
-	 * @param max_depth 最大深度
-	 * @param now_depth 当前深度
-	 * @param pre_is_sub 上一个结点的类型
-	 */
-
-	if (!h) {
-		if (pre_is_sub) {
-			max_depth = max(max_depth, now_depth);
-		}
-		return;
-	}
-
-	max_depth = max(max_depth, now_depth);
-
-	if (h->type == LIST) {
-		Depth(h->sublist, max_depth, now_depth + 1, true);
-		Depth(h->next, max_depth, now_depth, false);
-	} else {
-		Depth(h->next, max_depth, now_depth, false);
-	}
+int GList<T>::length(GListNode<T>* now) {
+    if (!now) {
+        return 0;
+    }
+    return length(now->next) + 1;
 }
 
 template<class T>
-void GList<T>::Replace(GListNode<T>* h, T ori, T x) {
-	if (!h) {
-		return;
-	}
-
-	if (h->type == ATOM) {
-		if (h->data == ori) {
-			h->data = x;
-		}
-		Replace(h->next, ori, x);
-	} else {
-		Replace(h->sublist, ori, x);
-		Replace(h->next, ori, x);
-	}
+int GList<T>::depth(GListNode<T>* now) {
+    if (!now) {
+        return 0;
+    }
+    if (now->type == ATOM) {
+        return depth(now->next);
+    } else {
+        return max(1 + depth(now->sublist), depth(now->next));
+    }
 }
 
 template<class T>
-void GList<T>::Delete(GListNode<T>* pre, GListNode<T>* h, T c, bool pre_is_sub) {
-	if (!h) {
-		return;
-	}
-
-	if (h->type == LIST) { // 当前是子表
-		Delete(h, h->sublist, c, true);
-		Delete(h, h->next, c, false);
-	} else { // 当前是原子
-		if (h->data == c) {
-			GListNode<char>* now = h;
-			h = h->next;
-			delete now;
-			if (pre_is_sub) {
-				pre->sublist = h;
-			} else {
-				pre->next = h;
-			}
-		}
-		Delete(h, h->next, c, false);
-	}
+void GList<T>::replaceAtom(GListNode<T>* now, T origin, T target) {
+    if (!now) {
+        return;
+    }
+    
+    if (now->type == ATOM) {
+        if (now->data == origin) {
+            now->data = target;
+        }
+        replaceAtom(now->next, origin, target);
+    } else {
+        replaceAtom(now->sublist, origin, target);
+        replaceAtom(now->next, origin, target);
+    }
 }
 
-// -------------------------以下为用户可调用函数--------------------------
+template<class T>
+void GList<T>::deleteAtom(GListNode<T>* pre, GListNode<T>* now, T x) {
+    if (!now) {
+        return;
+    }
+    
+    if (now->type == LIST) {
+        deleteAtom(now, now->sublist, x);
+        deleteAtom(now, now->next, x);
+    } else if (now->data == x) {
+        GListNode<T>* temp = now;
+        now = now->next;
+        delete temp;
+        if (pre->type == LIST) {
+            pre->sublist = now;
+        } else {
+            pre->next = now;
+        }
+        deleteAtom(now, now->next, x);
+    } else {
+        deleteAtom(now, now->next, x);
+    }
+}
+
+template<class T>
+bool GList<T>::same(GListNode<T>* pa, GListNode<T>* pb) {
+    if (!pa && !pb) {
+        return true;
+    } else if (pa && !pb || !pa && pb) {
+        return false;
+    } else if (pa->type != pb->type) {
+        return false;
+    } else if (pa->type == ATOM) {
+        // both are atom
+        return pa->data == pb->data && same(pa->next, pb->next);
+    } else {
+        // both are list
+        return same(pa->sublist, pb->sublist) && same(pa->next, pb->next);
+    }
+}
 
 template<class T>
 GList<T>::GList() {
-	head = new GListNode<T>;
-	head->type = LIST;
-	head->sublist = nullptr;
-	head->next = nullptr;
+    head = new GListNode<T>;
+    head->type = LIST;
+    head->sublist = nullptr;
+    head->next = nullptr;
 }
 
 template<class T>
-GList<T>::GList(char s[]) {
-	int* i = new int(0);
-	head = DoCreat(s, *i);
+GList<T>::GList(const string& s) {
+    int i = 0;
+    head = create(s, i);
 }
 
 template<class T>
-int GList<T>::Length() {
-	int res = Length(head->sublist);
-	return res;
+GList<T>::~GList() {
+    decreate(head);
 }
 
 template<class T>
-int GList<T>::Depth() {
-	int max_depth = 0;
-	int now_depth = 0;
-	bool pre_is_sub = false;
-	Depth(head, max_depth, now_depth, pre_is_sub);
-	return max_depth;
+void GList<T>::print() {
+    print(head);
+    cout << "\n";
 }
 
 template<class T>
-void GList<T>::Output() {
-	DoOutput(head);
-	cout << "\n";
+int GList<T>::length() {
+    int res = length(head->sublist);
+    return res;
 }
 
 template<class T>
-void GList<T>::Replace(T ori, T x) {
-	Replace(head, ori, x);
+int GList<T>::depth() {
+    return depth(head);
 }
 
 template<class T>
-void GList<T>::Delete(T x) {
-	Delete(head, head->sublist, x, true);
+void GList<T>::replaceAtom(T origin, T target) {
+    replaceAtom(head, origin, target);
 }
 
-#endif //INC_3__DATASTRUCTURES_GLIST_H
+template<class T>
+void GList<T>::deleteAtom(T x) {
+    deleteAtom(head, head->sublist, x);
+}
+
+template<class T>
+bool GList<T>::same(GList<T>& obj) {
+    return same(this->head, obj.head);
+}
+
+#endif //GLIST_H
