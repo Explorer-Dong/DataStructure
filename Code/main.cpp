@@ -9,7 +9,7 @@
 #include "./chapter6/Homework_6.cpp"
 #include "./chapter6/Experiment_6.cpp"
 #include "./chapter7/Homework_7.cpp"
-#include "./chapter7/Trail_7.cpp"
+#include "./chapter7/Experiment_7.cpp"
 #include "./chapter8/Homework_8.cpp"
 #include "./chapter8/Trail_8.cpp"
 #include "./chapter9/Trail_9.cpp"
@@ -22,7 +22,7 @@ int main() {
     Experiment_4 exp4;
     Experiment_5 exp5;
     Experiment_6 exp6;
-    Trail_7 tr7;
+    Experiment_7 exp7;
     Trail_8 tr8;
     Trail_9 tr9;
     Trail_10 tr10;
@@ -35,7 +35,7 @@ int main() {
     Homework_8 hw8;
     Homework_10 hw10;
     
-    exp6.testGList();
+    exp7.testCount();
     
     return 0;
 }
