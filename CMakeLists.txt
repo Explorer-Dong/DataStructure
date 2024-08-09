@@ -32,13 +32,13 @@ add_executable(DataStructure
         Code/chapter6/Homework_6.cpp
         Code/chapter6/Experiment_6.cpp
 
-        Code/chapter7/BTree.h
-        Code/chapter7/CSTree.h
+        Code/chapter7/BinaryTree.h
+        Code/chapter7/ChildSiblingTree.h
         Code/chapter7/HuffmanNode.h
         Code/chapter7/HuffmanTree.h
         Code/chapter7/HuffmanTree.cpp
         Code/chapter7/Homework_7.cpp
-        Code/chapter7/Trail_7.cpp
+        Code/chapter7/Experiment_7.cpp
 
         Code/chapter8/MGraph.h
         Code/chapter8/ALGraph.h
