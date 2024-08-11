@@ -8,33 +8,53 @@
 
 using namespace std;
 
+/** build with pre(taged): ab#f##gh###
+ *               a
+ * 	         b       g
+ *        #   f    h   #
+ *          #  #  #  #
+ */
+
 class Experiment_7 {
 public:
     // 7.1(1) create with pre(taged)
     void testCreateWithPreTaged() {
         string pre_with_tag = "ab#f##gh###";
+        BinaryTree<char> tree(pre_with_tag, true);
+        tree.prePrint();
     }
     
     // supplement: create with post(taged)
     void testCreateWithPostTaged() {
         string post_with_tag = "###fb##h#ga";
+        BinaryTree<char> tree(post_with_tag, false);
+        tree.prePrint();
     }
     
     // 7.1(2) create with pre and mid:
     void testCreateWithPreMid() {
         string pre = "abfgh";
         string mid = "bfahg";
+        BinaryTree<char> tree(pre, mid, true);
+        tree.prePrint();
     }
     
     // supplement: create with mid and post:
     void testCreateWithMidPost() {
         string mid = "bfahg";
         string post = "fbhga";
+        BinaryTree<char> tree(mid, post, false);
+        tree.prePrint();
     }
     
     // 7.1(3) print pre, mid, post, level
     void testPrint() {
-    
+        string s = "ab#f##gh###";
+        BinaryTree<char> tree(s, true);
+        tree.prePrint(); cout << "\n";
+        tree.midPrint(); cout << "\n";
+        tree.postPrint(); cout << "\n";
+        tree.levelPrint(); cout << "\n";
     }
     
     // supplement: print pre without recursion TODO
@@ -51,17 +71,18 @@ public:
     
     // 7.1(5) calculate the height of each node
     void testHeight() {
-    
+        string s = "ab#f##gh###";
+        BinaryTree<char> tree(s, true);
+        cout << tree.hight() << "\n";
     }
     
     // 7.1(6) swap left and right child
     void testSwapChild() {
-    
-    }
-    
-    // 7.1(7) get path from root to leaf
-    void testGetPathFromRootToLeaf() {
-    
+        string s = "ab#f##gh###";
+        BinaryTree<char> tree(s, true);
+        tree.prePrint(); cout << "\n";
+        tree.swapChild();
+        tree.prePrint(); cout << "\n";
     }
     
     // 7.2(1) 用序偶集合构造对象，约定：对于<ai, aj>，在插入aj时，ai已经存在于树结构中

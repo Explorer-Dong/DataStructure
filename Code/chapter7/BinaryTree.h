@@ -6,6 +6,7 @@
 #include <string>
 #include <vector>
 #include <queue>
+#include <unordered_map>
 
 using namespace std;
 
@@ -24,15 +25,22 @@ template<class T>
 class BinaryTree {
 private:
     BinaryTreeNode<T>* root;
-    BinaryTreeNode<T>* createWithPreTaged(string& pre_of_tag, int& i);
-    BinaryTreeNode<T>* createWithPostTaged(string& post_of_tag, int& i);
-    BinaryTreeNode<T>* createWithPreMid(string& pre, string& mid, int ipre, int imid, int n);
-    BinaryTreeNode<T>* createWithMidPost(string& mid, string& post, int imid, int ipost, int n);
+    BinaryTreeNode<T>* createWithPreTagged(string& pre_of_tag, int& i);
+    BinaryTreeNode<T>* createWithPostTagged(string& post_of_tag, int& i);
+    BinaryTreeNode<T>* createWithPreMid(string pre, string mid);
+    BinaryTreeNode<T>* createWithMidPost(string mid, string post);
     void decreate(BinaryTreeNode<T>* now);
     
     void prePrint(BinaryTreeNode<T>* now);
     void midPrint(BinaryTreeNode<T>* now);
     void postPrint(BinaryTreeNode<T>* now);
+    int hight(BinaryTreeNode<T>* now, vector<pair<T, int>>& res);
+    int hight(BinaryTreeNode<T>* now);
+    void dfs(BinaryTreeNode<T>* now, int depth, unordered_map<int, int>& f);
+    void dfs(BinaryTreeNode<T>* now, vector<T>& path, vector<vector<T>>& res);
+    void dfs(BinaryTreeNode<T>* now, vector<T>& path, vector<T>& res, T target);
+    void dfs(BinaryTreeNode<T>* now, BinaryTreeNode<T>*& pre, BinaryTreeNode<T>*& head);
+    void dfs(BinaryTreeNode<T>* now);
 
 public:
     BinaryTree() : root(nullptr) {};
@@ -50,81 +58,82 @@ public:
     vector<pair<T, int>> calcHightSub();
     int countKthLevelNode(int k);
     vector<vector<T>> getPathFromRootToLeaf();
-    T getLowestCommonAcestor(T a, T b);
+    T getLowestCommonAncestor(T a, T b);
     vector<T> getPathFromRootToNode(T target);
     bool isCompleteBinaryTree();
     int width();
-    int height();
+    int hight();
     BinaryTreeNode<T>* linkLeaf();
     void swapChild();
 };
 
 template<class T>
-BinaryTreeNode<T>* BinaryTree<T>::createWithPreTaged(string& pre_of_tag, int& i) {
+BinaryTreeNode<T>* BinaryTree<T>::createWithPreTagged(string& pre_of_tag, int& i) {
     T e = pre_of_tag[i++];
     if (e == '#') {
         return nullptr;
     }
     BinaryTreeNode<T>* now = new BinaryTreeNode<T>(e);
-    now->lchild = createWithPreTaged(pre_of_tag, i);
-    now->rchild = createWithPreTaged(pre_of_tag, i);
+    now->lchild = createWithPreTagged(pre_of_tag, i);
+    now->rchild = createWithPreTagged(pre_of_tag, i);
     return now;
 }
 
 template<class T>
-BinaryTreeNode<T>* BinaryTree<T>::createWithPostTaged(string& post_of_tag, int& i) {
+BinaryTreeNode<T>* BinaryTree<T>::createWithPostTagged(string& post_of_tag, int& i) {
     T e = post_of_tag[i--];
     if (e == '#') {
         return nullptr;
     }
     BinaryTreeNode<T>* now = new BinaryTreeNode<T>(e);
-    now->rchild = createWithPostTaged(post_of_tag, i);
-    now->lchild = createWithPostTaged(post_of_tag, i);
+    now->rchild = createWithPostTagged(post_of_tag, i);
+    now->lchild = createWithPostTagged(post_of_tag, i);
     return now;
 }
 
 template<class T>
-BinaryTreeNode<T>* BinaryTree<T>::createWithPreMid(string& pre, string& mid, int ipre, int imid, int n) {
-    /**
-     * 用先序和中序进行构造
-     * @param pre 先序序列
-     * @param mid 中序序列
-     * @param ipre 先序序列的起始位置
-     * @param imid 中序序列的起始位置
-     * @param n 以当前节点为根节点的子树的节点个数
-     * @note 用先序序列的第一个元素作为根节点，然后在中序序列中找到该元素，将中序序列分为左右两部分，左边为左子树，右边为右子树
-     * @note 然后在先序序列中，根据左右子树的节点个数，将先序序列分为左右两部分，左边为左子树，右边为右子树
-     * @note 递归构造左右子树
-     * @note 递归终止条件：节点个数为0
-     */
-    if (!n) {
+BinaryTreeNode<T>* BinaryTree<T>::createWithPreMid(string pre, string mid) {
+    if (pre.size() == 0) {
         return nullptr;
     }
-    T e = pre[ipre];
-    BinaryTreeNode<T>* now = new BinaryTreeNode<T>(e);
-    int i = imid;
-    while (i < imid + n && mid[i] != e) i++;
-    int llen = i - imid;
-    int rlen = n - llen - 1;
-    now->lchild = createWithPreMid(pre, mid, ipre + 1, imid, llen);
-    now->rchild = createWithPreMid(pre, mid, ipre + llen + 1, imid + llen + 1, rlen);
-    return now;
+    BinaryTreeNode<T>* now_root = new BinaryTreeNode<T>(pre[0]);
+    string mid_left, mid_right;
+    for (int i = 0; i < mid.size(); i++) {
+        if (mid[i] == pre[0]) {
+            mid_left = mid.substr(0, i);
+            mid_right = mid.substr(i + 1);
+            break;
+        }
+    }
+    int len_left = mid_left.size();
+    string pre_left = pre.substr(1, len_left);
+    string pre_right = pre.substr(len_left + 1);
+    now_root->lchild = createWithPreMid(pre_left, mid_left);
+    now_root->rchild = createWithPreMid(pre_right, mid_right);
+    return now_root;
 }
 
 template<class T>
-BinaryTreeNode<T>* BinaryTree<T>::createWithMidPost(string& mid, string& post, int imid, int ipost, int n) {
-    if (!n) {
+BinaryTreeNode<T>* BinaryTree<T>::createWithMidPost(string mid, string post) {
+    if (post.size() == 0) {
         return nullptr;
     }
-    T e = post[ipost + n - 1];
-    BinaryTreeNode<T>* now = new BinaryTreeNode<T>(e);
-    int i = imid;
-    while (i < imid + n && mid[i] != e) i++;
-    int llen = i - imid;
-    int rlen = n - llen - 1;
-    now->lchild = createWithMidPost(mid, post, imid, ipost, llen);
-    now->rchild = createWithMidPost(mid, post, imid + llen + 1, ipost + llen, rlen);
-    return now;
+    BinaryTreeNode<T>* now_root = new BinaryTreeNode<T>(post.back());
+    string mid_left, mid_right;
+    for (int i = 0; i < mid.size(); i++) {
+        if (mid[i] == post.back()) {
+            mid_left = mid.substr(0, i);
+            mid_right = mid.substr(i + 1);
+            break;
+        }
+    }
+    int len_left = mid_left.size();
+    int len_right = mid_right.size();
+    string post_left = post.substr(0, len_left);
+    string post_right = post.substr(len_left, len_right);
+    now_root->lchild = createWithMidPost(mid_left, post_left);
+    now_root->rchild = createWithMidPost(mid_right, post_right);
+    return now_root;
 }
 
 template<class T>
@@ -166,15 +175,104 @@ void BinaryTree<T>::postPrint(BinaryTreeNode<T>* now) {
 }
 
 template<class T>
+int BinaryTree<T>::hight(BinaryTreeNode<T>* now, vector<pair<T, int>>& res) {
+    if (!now) {
+        return 0;
+    }
+    int lh = hight(now->lchild, res);
+    int rh = hight(now->rchild, res);
+    res.push_back({now->data, abs(lh - rh)});
+    return max(lh, rh) + 1;
+}
+
+template<class T>
+int BinaryTree<T>::hight(BinaryTreeNode<T>* now) {
+    if (!now) {
+        return 0;
+    }
+    return max(hight(now->lchild), hight(now->rchild)) + 1;
+}
+
+template<class T>
+void BinaryTree<T>::dfs(BinaryTreeNode<T>* now, int depth, unordered_map<int, int>& f) {
+    if (!now) {
+        return;
+    }
+    f[depth]++;
+    dfs(now->lchild, depth + 1, f);
+    dfs(now->rchild, depth + 1, f);
+}
+
+template<class T>
+void BinaryTree<T>::dfs(BinaryTreeNode<T>* now, vector<T>& path, vector<vector<T>>& res) {
+    if (!now) {
+        return;
+    }
+    path.push_back(now->data);
+    if (!now->lchild && !now->rchild) {
+        res.push_back(path);
+        path.pop_back();
+        return;
+    }
+    dfs(now->lchild, path, res);
+    dfs(now->rchild, path, res);
+    path.pop_back();
+}
+
+template<class T>
+void BinaryTree<T>::dfs(BinaryTreeNode<T>* now, vector<T>& path, vector<T>& res, T target) {
+    if (!now) {
+        return;
+    }
+    path.push_back(now->data);
+    if (now->data == target) {
+        res = path;
+        path.pop_back();
+        return;
+    }
+    dfs(now->lchild, path, res, target);
+    dfs(now->rchild, path, res, target);
+    path.pop_back();
+}
+
+template<class T>
+void BinaryTree<T>::dfs(BinaryTreeNode<T>* now, BinaryTreeNode<T>*& pre, BinaryTreeNode<T>*& head) {
+    if (!now) {
+        return;
+    }
+    if (!now->lchild && !now->rchild) {
+        if (!head) {
+            head = pre = now;
+        } else {
+            pre->rchild = now;
+            pre = now;
+        }
+        return;
+    }
+    dfs(now->lchild, pre, head);
+    dfs(now->rchild, pre, head);
+}
+
+template<class T>
+void BinaryTree<T>::dfs(BinaryTreeNode<T>* now) {
+    if (!now) {
+        return;
+    }
+    swap(now->lchild, now->rchild);
+    dfs(now->lchild);
+    dfs(now->rchild);
+}
+
+template<class T>
 BinaryTree<T>::BinaryTree(string& s, bool is_pre) {
     if (is_pre) {
-        // create with pre(taged) sequence
+        // create with pre(tagged) sequence
         int p = 0;
-        root = createWithPreTaged(s, p);
+        root = createWithPreTagged(s, p);
     } else {
-        // create with post(taged) sequence
+        // create with post(tagged) sequence
         int p = s.size() - 1;
-        root = createWithPostTaged(s, p);
+        root = createWithPostTagged(s, p);
     }
 }
 
@@ -182,12 +280,10 @@ template<class T>
 BinaryTree<T>::BinaryTree(string& s, string& t, bool is_pre_and_mid) {
     if (is_pre_and_mid) {
         // create with pre and mid sequence
-        int n = s.size();
-        root = createWithPreMid(s, t, 0, 0, n);
+        root = createWithPreMid(s, t);
     } else {
         // create with mid and post sequence
-        int n = s.size();
-        root = createWithMidPost(s, t, 0, 0, n);
+        root = createWithMidPost(s, t);
     }
 }
 
@@ -283,6 +379,121 @@ int BinaryTree<T>::countLeafNode() {
         }
     }
     return cnt;
+}
+
+template<class T>
+vector<pair<T, int>> BinaryTree<T>::calcHightSub() {
+    vector<pair<T, int>> res;
+    hight(root, res);
+    return res;
+}
+
+template<class T>
+int BinaryTree<T>::countKthLevelNode(int k) {
+    unordered_map<int, int> f;
+    dfs(root, 1, f);
+    return f[k];
+}
+
+template<class T>
+vector<vector<T>> BinaryTree<T>::getPathFromRootToLeaf() {
+    vector<vector<T>> res;
+    vector<T> path;
+    dfs(root, path, res);
+    return res;
+}
+
+template<class T>
+T BinaryTree<T>::getLowestCommonAncestor(T a, T b) {
+    vector<T> path_to_a = getPathFromRootToNode(a);
+    vector<T> path_to_b = getPathFromRootToNode(b);
+    T res;
+    for (int i = 0; i < path_to_a.size(); i++) {
+        if (path_to_a[i] == path_to_b[i]) {
+            res = path_to_a[i];
+        } else {
+            break;
+        }
+    }
+    return res;
+}
+
+template<class T>
+vector<T> BinaryTree<T>::getPathFromRootToNode(T target) {
+    vector<T> path, res;
+    dfs(root, path, res, target);
+    return res;
+}
+
+template<class T>
+bool BinaryTree<T>::isCompleteBinaryTree() {
+    queue<BinaryTreeNode<T>*> q;
+    q.push(root);
+    while (q.size()) {
+        bool appear = false; // pre appear not double branch node
+        vector<BinaryTreeNode<T>*> level;
+        while (q.size()) {
+            auto now = q.front();
+            q.pop();
+            if (!now) {
+                continue;
+            }
+            level.push_back(now);
+            if (!now->lchild || !now->rchild) {
+                appear = true;
+            }
+            if (appear && (now->lchild || now->rchild)) {
+                return false;
+            }
+        }
+        for (auto node: level) {
+            q.push(node->lchild);
+            q.push(node->rchild);
+        }
+    }
+    return true;
+}
+
+template<class T>
+int BinaryTree<T>::width() {
+    int res = 0;
+    queue<BinaryTreeNode<T>*> q;
+    q.push(root);
+    while (q.size()) {
+        vector<BinaryTreeNode<T>*> level;
+        while (q.size()) {
+            auto now = q.front();
+            q.pop();
+            if (!now) {
+                continue;
+            }
+            level.push_back(now);
+        }
+        res = max(res, int(level.size()));
+        for (auto node: level) {
+            q.push(node->lchild);
+            q.push(node->rchild);
+        }
+    }
+    return res;
+}
+
+template<class T>
+int BinaryTree<T>::hight() {
+    return hight(root);
+}
+
+template<class T>
+BinaryTreeNode<T>* BinaryTree<T>::linkLeaf() {
+    BinaryTreeNode<T>* head = nullptr;
+    BinaryTreeNode<T>* pre = nullptr;
+    dfs(root, pre, head);
+    return head;
+}
+
+template<class T>
+void BinaryTree<T>::swapChild() {
+    dfs(root);
 }
 
 #endif //BINARYTREE_H
