@@ -391,7 +391,8 @@ void BinaryTree<T>::dfs(BinaryTreeNode<T>* now,
 
 ```cpp
 template<class T>
-BinaryTreeNode<T>* BinaryTree<T>::createWithPreTaged(string& pre_of_tag, int& i) {
+BinaryTreeNode<T>* BinaryTree<T>::createWithPreTaged(string& pre_of_tag, 
+                                                     int& i) {
     T e = pre_of_tag[i++];
     if (e == '#') {
         return nullptr;
@@ -407,7 +408,8 @@ BinaryTreeNode<T>* BinaryTree<T>::createWithPreTaged(string& pre_of_tag, int& i)
 
 ```cpp
 template<class T>
-BinaryTreeNode<T>* BinaryTree<T>::createWithPostTaged(string& post_of_tag, int& i) {
+BinaryTreeNode<T>* BinaryTree<T>::createWithPostTaged(string& post_of_tag, 
+                                                      int& i) {
     T e = post_of_tag[i--];
     if (e == '#') {
         return nullptr;
@@ -423,7 +425,8 @@ BinaryTreeNode<T>* BinaryTree<T>::createWithPostTaged(string& post_of_tag, int& 
 
 ```cpp
 template<class T>
-BinaryTreeNode<T>* BinaryTree<T>::createWithPreMid(string pre, string mid) {
+BinaryTreeNode<T>* BinaryTree<T>::createWithPreMid(string pre, 
+                                                   string mid) {
     if (pre.size() == 0) {
         return nullptr;
     }
@@ -449,7 +452,8 @@ BinaryTreeNode<T>* BinaryTree<T>::createWithPreMid(string pre, string mid) {
 
 ```cpp
 template<class T>
-BinaryTreeNode<T>* BinaryTree<T>::createWithMidPost(string mid, string post) {
+BinaryTreeNode<T>* BinaryTree<T>::createWithMidPost(string mid, 
+                                                    string post) {
     if (post.size() == 0) {
         return nullptr;
     }
@@ -528,6 +532,244 @@ void BinaryTree<T>::dfs(BinaryTreeNode<T>* now) {
 
 ![第七章实验 - 2](https://dwj-oss.oss-cn-nanjing.aliyuncs.com/images/202408081608671.png)
 
+构造函数：对于每一条边，先从根开始 find 到当前边的双亲节点 parent，然后将孩子结点插入到合适的位置。
+
+```cpp
+template<class T>
+ChildSiblingTree<T>::ChildSiblingTree(vector<pair<T, T>>& edges) {
+    if (edges.empty()) {
+        root = nullptr;
+        return;
+    }
+    root = new ChildSiblingTreeNode<T>(edges[0].first);
+    for (auto [u, v]: edges) {
+        ChildSiblingTreeNode<T>* child = new ChildSiblingTreeNode<T>(v);
+        ChildSiblingTreeNode<T>* parent = find(root, u);
+        if (!parent->first_child) {
+            parent->first_child = child;
+        } else {
+            parent = parent->first_child;
+            while (parent->next_sibling) {
+                parent = parent->next_sibling;
+            }
+            parent->next_sibling = child;
+        }
+    }
+}
+
+template<class T>
+ChildSiblingTreeNode<T>*
+ChildSiblingTree<T>::find(ChildSiblingTreeNode<T>* now, T e) {
+    if (!now) {
+        return nullptr;
+    }
+    if (now->data == e) {
+        return now;
+    }
+    ChildSiblingTreeNode<T>* l = find(now->first_child, e);
+    if (l) {
+        return l;
+    } else {
+        return find(now->next_sibling, e);
+    }
+}
+```
+
+析构函数：
+
+```cpp
+template<class T>
+void ChildSiblingTree<T>::decreate(ChildSiblingTreeNode<T>* now) {
+    if (!now) {
+        return;
+    }
+    decreate(now->first_child);
+    decreate(now->next_sibling);
+    delete now;
+}
+```
+
+先根遍历：先遍历根，再遍历所有孩子。也就是二叉树中的「根、左、右」的逻辑。
+
+```cpp
+template<class T>
+void ChildSiblingTree<T>::prePrint(ChildSiblingTreeNode<T>* now) {
+    if (!now) {
+        return;
+    }
+    cout << "data: " << now->data << " degree: " << now->degree << "\n";
+    prePrint(now->first_child);
+    prePrint(now->next_sibling);
+}
+```
+
+后根遍历：先遍历所有孩子，再遍历根。也就是二叉树中的「左、根、右」的逻辑。
+
+```cpp
+template<class T>
+void ChildSiblingTree<T>::postPrint(ChildSiblingTreeNode<T>* now) {
+    if (!now) {
+        return;
+    }
+    postPrint(now->first_child);
+    cout << "data: " << now->data << " degree: " << now->degree << "\n";
+    postPrint(now->next_sibling);
+}
+```
+
+计算每个结点的度：对于每一个结点都访问左孩子和其所有的右兄弟。时间复杂度 $O(n^2)$
+
+```cpp
+template<class T>
+void ChildSiblingTree<T>::countDegree(ChildSiblingTreeNode<T>* now) {
+    if (!now) {
+        return;
+    }
+    if (now->first_child) {
+        now->degree++;
+        ChildSiblingTreeNode<T>* t = now->first_child;
+        while (t->next_sibling) {
+            now->degree++;
+            t = t->next_sibling;
+        }
+    } else {
+        now->degree = 0;
+    }
+    countDegree(now->first_child);
+    countDegree(now->next_sibling);
+}
+```
+
+计算树高：
+
+```cpp
+template<class T>
+int ChildSiblingTree<T>::height(ChildSiblingTreeNode<T>* now, int depth) {
+    if (!now) {
+        return depth;
+    }
+    return max(height(now->first_child, depth + 1),
+               height(now->next_sibling, depth));
+}
+```
+
+输出根到每个叶子结点的路径：
+
+```cpp
+template<class T>
+void ChildSiblingTree<T>::getPathFromRootToLeaf(
+        ChildSiblingTreeNode<T>* now, vector<T>& path,
+        vector<vector<T>>& res) {
+    if (!now) {
+        return;
+    }
+    path.push_back(now->data);
+    if (!now->first_child) {
+        res.push_back(path);
+    } else {
+        getPathFromRootToLeaf(now->first_child, path, res);
+    }
+    path.pop_back();
+    getPathFromRootToLeaf(now->next_sibling, path, res);
+}
+```
+
 ### T3
 
 ![第七章实验 - 3](https://dwj-oss.oss-cn-nanjing.aliyuncs.com/images/202408081608481.png)
+
+哈夫曼树由于结点数量已知为 $2n - 1$，因此可以用静态数组作为存储结构，每个结点存储：左孩子、右孩子、双亲、权重、数据、相对地址，共五个域。
+
+构造函数：
+
+```cpp
+HuffmanTree::HuffmanTree(string& info) {
+    // store the frequency of each character
+    unordered_map<char, int> dict;
+    for (auto c: info) {
+        dict[c]++;
+    }
+    n = dict.size();
+    tree.resize(2 * n - 1);
+    
+    // init the forest of n trees
+    priority_queue<HuffmanNode> q;
+    int idx = 0;
+    for (auto [c, freq]: dict) {
+        tree[idx] = HuffmanNode(c, freq, -1, -1, -1, idx);
+        q.push(tree[idx++]);
+    }
+    
+    // create n-1 internal nodes
+    for (int i = n; i < 2 * n - 1; i++) {
+        HuffmanNode l_node = q.top();
+        q.pop();
+        HuffmanNode r_node = q.top();
+        q.pop();
+        tree[l_node.idx].parent = tree[r_node.idx].parent = i;
+        tree[i] = HuffmanNode(' ', l_node.weight + r_node.weight,
+                              -1, l_node.idx, r_node.idx, i);
+        q.push(tree[i]);
+    }
+}
+```
+
+编码：从每一个叶子结点开始向根寻找编码。
+
+```cpp
+pair<unordered_map<char, string>, string> HuffmanTree::encode(string& source) {
+    // traverse the tree to get the code of each character
+    unordered_map<char, string> dict;
+    for (int i = 0; i < n; i++) {
+        string code;
+        int now = i;
+        int pa = tree[i].parent;
+        while (pa != -1) {
+            if (tree[pa].lchild == now) {
+                code = "0" + code;
+            } else {
+                code = "1" + code;
+            }
+            now = pa;
+            pa = tree[pa].parent;
+        }
+        dict[tree[i].data] = code;
+    }
+    
+    // encode the source
+    string res;
+    for (auto c: source) {
+        if (dict.find(c) == dict.end()) {
+            dict[c] = "|unknown character|";
+        }
+        res += dict[c];
+    }
+    
+    return {dict, res};
+}
+```
+
+译码：
+
+```cpp
+string HuffmanTree::decode(string& secret) {
+    string res;
+    int root = tree.size() - 1;
+    int i = 0;
+    while (i < secret.size()) {
+        int now = root;
+        while (tree[now].lchild != -1 && tree[now].rchild != -1) {
+            if (secret[i] == '1') {
+                now = tree[now].rchild;
+            } else if (secret[i] == '0') {
+                now = tree[now].lchild;
+            } else {
+                return "|invalid secret|";
+            }
+            i++;
+        }
+        res += tree[now].data;
+    }
+    return res;
+}
+```

@@ -5,6 +5,7 @@
 #include <vector>
 
 using namespace std;
+
 #ifndef BINARYTREE_H
 #define BINARYTREE_H
 

@@ -34,7 +34,6 @@ add_executable(DataStructure
 
         Code/chapter7_Tree/BinaryTree.h
         Code/chapter7_Tree/ChildSiblingTree.h
-        Code/chapter7_Tree/HuffmanNode.h
         Code/chapter7_Tree/HuffmanTree.h
         Code/chapter7_Tree/HuffmanTree.cpp
         Code/chapter7_Tree/Homework_7.cpp

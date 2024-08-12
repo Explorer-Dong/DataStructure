@@ -1,6 +1,9 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <functional>
 
 using namespace std;
+
 #ifndef CHILDSIBLINGTREE_H
 #define CHILDSIBLINGTREE_H
 
@@ -8,146 +11,91 @@ template<class T>
 struct ChildSiblingTreeNode {
     T data;
     int degree;
-    ChildSiblingTreeNode* first_child, * next_sibling;
+    ChildSiblingTreeNode* first_child;
+    ChildSiblingTreeNode* next_sibling;
     
-    ChildSiblingTreeNode() : degree(0), first_child(nullptr), next_sibling(nullptr) {};
+    ChildSiblingTreeNode()
+            : degree(0), first_child(nullptr), next_sibling(nullptr) {};
     
-    ChildSiblingTreeNode(T _data) : degree(0), data(_data), first_child(nullptr), next_sibling(nullptr) {};
+    ChildSiblingTreeNode(T data)
+            : degree(0), data(data), first_child(nullptr), next_sibling(nullptr) {};
 };
 
 template<class T>
 class ChildSiblingTree {
 private:
     ChildSiblingTreeNode<T>* root;
-    void Free(ChildSiblingTreeNode<T>* now);
-    void add(pair<T, T>& edge); // 添加一条从edge.first到edge.second的边
-    ChildSiblingTreeNode<T>* Find(ChildSiblingTreeNode<T>* now, T e); // 寻找e的父结点
-    void PreOutput(ChildSiblingTreeNode<T>* now);
-    void PostOutput(ChildSiblingTreeNode<T>* now);
-    void CountDegree(ChildSiblingTreeNode<T>* now);
-    void Height(ChildSiblingTreeNode<T>* now, int dep, int& resv);
-    int Height_(ChildSiblingTreeNode<T>* now);
-public:
-    ChildSiblingTree() : root(nullptr) {};
-    ChildSiblingTree(vector<pair<T, T>>& a); // 用边集a构造树
-    ~ChildSiblingTree();
+    void decreate(ChildSiblingTreeNode<T>* now);
+    ChildSiblingTreeNode<T>* find(ChildSiblingTreeNode<T>* now, T e); // find the parent of e
+    void prePrint(ChildSiblingTreeNode<T>* now);
+    void postPrint(ChildSiblingTreeNode<T>* now);
+    void countDegree(ChildSiblingTreeNode<T>* now);
+    int height(ChildSiblingTreeNode<T>* now, int depth);
+    void getPathFromRootToLeaf(
+            ChildSiblingTreeNode<T>* now, vector<T>& path,
+            vector<vector<T>>& res);
 
-// -------------------------以下为用户可调用函数--------------------------
+public:
+    ChildSiblingTree() : root(nullptr) {}
     
-    void PreOutput() {
-        PreOutput(root);
-        cout << endl;
-    }
-    
-    void PostOutput() {
-        PostOutput(root);
-        cout << endl;
-    }
-    
-    void CountDegree() {
-        CountDegree(root);
-    }
-    
-    int Height() {
-        int res = 0;
-        Height(root, 1, res);
-        return res;
-    }
-    
-    int Height_() {
-        return Height_(root);
-    }
-    
-    vector<vector<T>> Path2Leaf();
+    ChildSiblingTree(vector<pair<T, T>>& edges); // create a tree from a vector of edges
+    ~ChildSiblingTree();
+    void prePrint();
+    void postPrint();
+    void countDegree();
+    int height();
+    vector<vector<T>> getPathFromRootToLeaf();
 };
 
-// -------------------------以下为构造与析构函数--------------------------
-
 template<class T>
-ChildSiblingTree<T>::ChildSiblingTree(vector<pair<T, T>>& a) {
-    if (a.empty()) {
-        root = nullptr;
-        return;
-    }
-    root = new ChildSiblingTreeNode<T>(a[0].first);
-    for (auto& edge: a) {
-        add(edge);
-    }
-}
-
-template<class T>
-ChildSiblingTree<T>::~ChildSiblingTree() {
-    Free(root);
-}
-
-// -------------------------以下为私有函数--------------------------
-
-template<class T>
-void ChildSiblingTree<T>::Free(ChildSiblingTreeNode<T>* now) {
+void ChildSiblingTree<T>::decreate(ChildSiblingTreeNode<T>* now) {
     if (!now) {
         return;
     }
-    Free(now->first_child);
-    Free(now->next_sibling);
+    decreate(now->first_child);
+    decreate(now->next_sibling);
     delete now;
 }
 
 template<class T>
-void ChildSiblingTree<T>::add(pair<T, T>& edge) {
-    // 创建子结点
-    ChildSiblingTreeNode<T>* child = new ChildSiblingTreeNode<T>(edge.second);
-    
-    // 连接父结点
-    ChildSiblingTreeNode<T>* fa = Find(root, edge.first);
-    if (!fa->first_child) {
-        fa->first_child = child;
-    } else {
-        fa = fa->first_child;
-        while (fa->next_sibling) {
-            fa = fa->next_sibling;
-        }
-        fa->next_sibling = child;
-    }
-}
-
-template<class T>
-ChildSiblingTreeNode<T>* ChildSiblingTree<T>::Find(ChildSiblingTreeNode<T>* now, T e) {
+ChildSiblingTreeNode<T>*
+ChildSiblingTree<T>::find(ChildSiblingTreeNode<T>* now, T e) {
     if (!now) {
         return nullptr;
     }
     if (now->data == e) {
         return now;
     }
-    ChildSiblingTreeNode<T>* l = Find(now->first_child, e);
+    ChildSiblingTreeNode<T>* l = find(now->first_child, e);
     if (l) {
         return l;
     } else {
-        return Find(now->next_sibling, e);
+        return find(now->next_sibling, e);
     }
 }
 
 template<class T>
-void ChildSiblingTree<T>::PreOutput(ChildSiblingTreeNode<T>* now) {
+void ChildSiblingTree<T>::prePrint(ChildSiblingTreeNode<T>* now) {
     if (!now) {
         return;
     }
-    cout << now->data << ": " << now->degree << "  ";
-    PreOutput(now->first_child);
-    PreOutput(now->next_sibling);
+    cout << "data: " << now->data << " degree: " << now->degree << "\n";
+    prePrint(now->first_child);
+    prePrint(now->next_sibling);
 }
 
 template<class T>
-void ChildSiblingTree<T>::PostOutput(ChildSiblingTreeNode<T>* now) {
+void ChildSiblingTree<T>::postPrint(ChildSiblingTreeNode<T>* now) {
     if (!now) {
         return;
     }
-    PostOutput(now->first_child);
-    cout << now->data << " ";
-    PostOutput(now->next_sibling);
+    postPrint(now->first_child);
+    cout << "data: " << now->data << " degree: " << now->degree << "\n";
+    postPrint(now->next_sibling);
 }
 
 template<class T>
-void ChildSiblingTree<T>::CountDegree(ChildSiblingTreeNode<T>* now) {
+void ChildSiblingTree<T>::countDegree(ChildSiblingTreeNode<T>* now) {
     if (!now) {
         return;
     }
@@ -161,52 +109,91 @@ void ChildSiblingTree<T>::CountDegree(ChildSiblingTreeNode<T>* now) {
     } else {
         now->degree = 0;
     }
-    CountDegree(now->first_child);
-    CountDegree(now->next_sibling);
+    countDegree(now->first_child);
+    countDegree(now->next_sibling);
 }
 
 template<class T>
-void ChildSiblingTree<T>::Height(ChildSiblingTreeNode<T>* now, int dep, int& res) {
+int ChildSiblingTree<T>::height(ChildSiblingTreeNode<T>* now, int depth) {
+    if (!now) {
+        return depth;
+    }
+    return max(height(now->first_child, depth + 1),
+               height(now->next_sibling, depth));
+}
+
+template<class T>
+void ChildSiblingTree<T>::getPathFromRootToLeaf(
+        ChildSiblingTreeNode<T>* now, vector<T>& path,
+        vector<vector<T>>& res) {
     if (!now) {
         return;
     }
-    res = max(res, dep);
-    Height(now->first_child, dep + 1, res);
-    Height(now->next_sibling, dep, res);
+    path.push_back(now->data);
+    if (!now->first_child) {
+        res.push_back(path);
+    } else {
+        getPathFromRootToLeaf(now->first_child, path, res);
+    }
+    path.pop_back();
+    getPathFromRootToLeaf(now->next_sibling, path, res);
 }
 
 template<class T>
-int ChildSiblingTree<T>::Height_(ChildSiblingTreeNode<T>* now) {
-    if (!now) {
-        return 0;
+ChildSiblingTree<T>::ChildSiblingTree(vector<pair<T, T>>& edges) {
+    if (edges.empty()) {
+        root = nullptr;
+        return;
     }
-    int max_Height = 0;
-    
-    // 计算子树中的最大高度
-    for (ChildSiblingTreeNode<T>* p = now->first_child; p; p = p->next_sibling) {
-        max_Height = max(max_Height, Height_(p));
+    root = new ChildSiblingTreeNode<T>(edges[0].first);
+    for (auto [u, v]: edges) {
+        ChildSiblingTreeNode<T>* child = new ChildSiblingTreeNode<T>(v);
+        ChildSiblingTreeNode<T>* parent = find(root, u);
+        if (!parent->first_child) {
+            parent->first_child = child;
+        } else {
+            parent = parent->first_child;
+            while (parent->next_sibling) {
+                parent = parent->next_sibling;
+            }
+            parent->next_sibling = child;
+        }
     }
-    return max_Height + 1;
 }
 
 template<class T>
-vector<vector<T>> ChildSiblingTree<T>::Path2Leaf() {
-    vector<vector<T>> paths;
+ChildSiblingTree<T>::~ChildSiblingTree() {
+    decreate(root);
+}
+
+template<class T>
+void ChildSiblingTree<T>::prePrint() {
+    prePrint(root);
+    cout << endl;
+}
+
+template<class T>
+void ChildSiblingTree<T>::postPrint() {
+    postPrint(root);
+    cout << endl;
+}
+
+template<class T>
+void ChildSiblingTree<T>::countDegree() {
+    countDegree(root);
+}
+
+template<class T>
+int ChildSiblingTree<T>::height() {
+    return height(root, 0);
+}
+
+template<class T>
+vector<vector<T>> ChildSiblingTree<T>::getPathFromRootToLeaf() {
+    vector<vector<T>> res;
     vector<T> path;
-    function<void(ChildSiblingTreeNode<T>*)> dfs = [&](ChildSiblingTreeNode<T>* now) {
-        if (!now) {
-            return;
-        }
-        path.push_back(now->data);
-        if (!now->first_child) {
-            paths.push_back(path);
-        }
-        dfs(now->first_child);
-        path.pop_back();
-        dfs(now->next_sibling);
-    };
-    dfs(root);
-    return paths;
+    getPathFromRootToLeaf(root, path, res);
+    return res;
 }
 
 #endif //CHILDSIBLINGTREE_H
