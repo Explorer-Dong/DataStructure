@@ -5,8 +5,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#ifndef INC_3__DATASTRUCTURES_ALGRAPH_H
-#define INC_3__DATASTRUCTURES_ALGRAPH_H
+#ifndef ALGRAPH_H
+#define ALGRAPH_H
 
 template<class T>
 struct EdgeNode {   // 边点集
@@ -270,4 +270,4 @@ bool ALGraph<T>::FindPathFromA2BLengthK(int a, int b, int k) {
 	return paths.size() >= 1;
 }
 
-#endif //INC_3__DATASTRUCTURES_ALGRAPH_H
+#endif //ALGRAPH_H

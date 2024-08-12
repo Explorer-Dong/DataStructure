@@ -1,4 +1,4 @@
-#include "Node.h"
+#include "./Node.h"
 
 #ifndef CircleList_H
 #define CircleList_H

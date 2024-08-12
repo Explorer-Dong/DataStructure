@@ -2,9 +2,9 @@
 // Created by Wenjie Dong on 2023-10-10.
 //
 
-#include "SeqList.h"
-#include "LinkList.h"
-#include "CircleList.h"
+#include "./SeqList.h"
+#include "./LinkList.h"
+#include "./CircleList.h"
 
 using namespace std;
 

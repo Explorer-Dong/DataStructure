@@ -3,8 +3,8 @@
 //
 
 #include <vector>
-#include "Triple.h"
-#include "SparseMatrix.h"
+#include "./Triple.h"
+#include "./SparseMatrix.h"
 
 using namespace std;
 

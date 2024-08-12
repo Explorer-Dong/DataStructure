@@ -3,12 +3,12 @@
 //
 
 #include <bits/stdc++.h>
-#include "MGraph.h"
-#include "ALGraph.h"
+#include "./MGraph.h"
+#include "./ALGraph.h"
 
 using namespace std;
 
-class Trail_8 {
+class Experiment_8 {
 public:
 	// -------------------------------实验1-------------------------------
 

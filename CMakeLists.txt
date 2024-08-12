@@ -4,51 +4,51 @@ project(DataStructure)
 set(CMAKE_CXX_STANDARD 17)
 
 add_executable(DataStructure
-        Code/chapter2/SeqList.h
-        Code/chapter2/Node.h
-        Code/chapter2/LinkList.h
-        Code/chapter2/CircleList.h
-        Code/chapter2/Homework_2.cpp
-        Code/chapter2/Experiment_2.cpp
+        Code/chapter2_List/SeqList.h
+        Code/chapter2_List/Node.h
+        Code/chapter2_List/LinkList.h
+        Code/chapter2_List/CircleList.h
+        Code/chapter2_List/Homework_2.cpp
+        Code/chapter2_List/Experiment_2.cpp
 
-        Code/chapter3/SeqStack.h
-        Code/chapter3/LinkStack.h
-        Code/chapter3/SeqDoubleStack.h
-        Code/chapter3/CircleSeqQueueWithFlag.h
-        Code/chapter3/Homework_3.cpp
-        Code/chapter3/Experiment_3.cpp
-        Code/chapter3/CircleSeqQueueWithNum.h
-        Code/chapter3/DoubleStack4Queue.h
+        Code/chapter3_Stack_Queue/SeqStack.h
+        Code/chapter3_Stack_Queue/LinkStack.h
+        Code/chapter3_Stack_Queue/SeqDoubleStack.h
+        Code/chapter3_Stack_Queue/DoubleStack4Queue.h
+        Code/chapter3_Stack_Queue/CircleSeqQueueWithFlag.h
+        Code/chapter3_Stack_Queue/CircleSeqQueueWithNum.h
+        Code/chapter3_Stack_Queue/Homework_3.cpp
+        Code/chapter3_Stack_Queue/Experiment_3.cpp
 
-        Code/chapter4/Homework_4.cpp
-        Code/chapter4/Experiment_4.cpp
+        Code/chapter4_String/Homework_4.cpp
+        Code/chapter4_String/Experiment_4.cpp
 
-        Code/chapter5/Triple.h
-        Code/chapter5/SparseMatrix.h
-        Code/chapter5/Homework_5.cpp
-        Code/chapter5/Experiment_5.cpp
+        Code/chapter5_Array_Matrix/Triple.h
+        Code/chapter5_Array_Matrix/SparseMatrix.h
+        Code/chapter5_Array_Matrix/Homework_5.cpp
+        Code/chapter5_Array_Matrix/Experiment_5.cpp
 
-        Code/chapter6/GList.h
-        Code/chapter6/Homework_6.cpp
-        Code/chapter6/Experiment_6.cpp
+        Code/chapter6_GeneralizedList/GList.h
+        Code/chapter6_GeneralizedList/Homework_6.cpp
+        Code/chapter6_GeneralizedList/Experiment_6.cpp
 
-        Code/chapter7/BinaryTree.h
-        Code/chapter7/ChildSiblingTree.h
-        Code/chapter7/HuffmanNode.h
-        Code/chapter7/HuffmanTree.h
-        Code/chapter7/HuffmanTree.cpp
-        Code/chapter7/Homework_7.cpp
-        Code/chapter7/Experiment_7.cpp
+        Code/chapter7_Tree/BinaryTree.h
+        Code/chapter7_Tree/ChildSiblingTree.h
+        Code/chapter7_Tree/HuffmanNode.h
+        Code/chapter7_Tree/HuffmanTree.h
+        Code/chapter7_Tree/HuffmanTree.cpp
+        Code/chapter7_Tree/Homework_7.cpp
+        Code/chapter7_Tree/Experiment_7.cpp
 
-        Code/chapter8/MGraph.h
-        Code/chapter8/ALGraph.h
-        Code/chapter8/Homework_8.cpp
-        Code/chapter8/Trail_8.cpp
+        Code/chapter8_Graph/MGraph.h
+        Code/chapter8_Graph/ALGraph.h
+        Code/chapter8_Graph/Homework_8.cpp
+        Code/chapter8_Graph/Experiment_8.cpp
 
-        Code/chapter9/Trail_9.cpp
+        Code/chapter9_Search/Experiment_9.cpp
 
-        Code/chapter10/Trail_10.cpp
-        Code/chapter10/Homework_10.cpp
+        Code/chapter10_Sort/Homework_10.cpp
+        Code/chapter10_Sort/Experiment_10.cpp
 
         Code/main.cpp
 )

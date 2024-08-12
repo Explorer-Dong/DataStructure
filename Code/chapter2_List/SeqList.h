@@ -1,9 +1,10 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <unordered_map>
 
 using namespace std;
 
-#ifndef INC_2__DATASTRUCTURES_SEQLIST_H
-#define INC_2__DATASTRUCTURES_SEQLIST_H
+#ifndef SEQLIST_H
+#define SEQLIST_H
 
 template<class T>
 class SeqList {
@@ -228,4 +229,4 @@ bool SeqList<T>::find(T x) {
     return false;
 }
 
-#endif //INC_2__DATASTRUCTURES_SEQLIST_H
+#endif //SEQLIST_H

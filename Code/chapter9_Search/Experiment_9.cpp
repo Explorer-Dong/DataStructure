@@ -6,7 +6,7 @@
 #include <vector>
 #include <bits/stdc++.h>
 
-class Trail_9 {
+class Experiment_9 {
 private:
 	// seq
 	int SeqSearch(std::vector<int>& a, int n, int target) {

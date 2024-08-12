@@ -2,10 +2,10 @@
 // Created by Wenjie Dong on 2023-10-10.
 //
 
-#include "SeqList.h"
-#include "LinkList.h"
 #include <iostream>
 #include <fstream>
+#include "./SeqList.h"
+#include "./LinkList.h"
 
 using namespace std;
 
@@ -38,8 +38,8 @@ struct stu {
     }
 };
 
-#ifndef CODE_Experiment_2_H
-#define CODE_Experiment_2_H
+#ifndef Experiment_2_H
+#define Experiment_2_H
 
 class Experiment_2 {
 private:
@@ -427,4 +427,4 @@ public:
 	}
 };
 
-#endif //CODE_Experiment_2_H
+#endif //Experiment_2_H

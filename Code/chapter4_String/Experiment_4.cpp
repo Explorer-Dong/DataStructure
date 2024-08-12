@@ -6,12 +6,12 @@
 #include <vector>
 #include <fstream>
 #include <filesystem>
-#include "Homework_4.cpp"
+#include "./Homework_4.cpp"
 
 using namespace std;
 
-#ifndef CODE_Experiment_4_H
-#define CODE_Experiment_4_H
+#ifndef Experiment_4_H
+#define Experiment_4_H
 
 class Experiment_4 {
 public:
@@ -89,7 +89,7 @@ public:
     
     // Exp4.2 caesar cipher
     void caesarCipher(string in = "Exp4_T4_in.txt", string out = "Exp4_T4_cipher.txt", int dx = 3) {
-        string cwd = std::filesystem::current_path().string() + "\\Code\\chapter4\\";
+        string cwd = std::filesystem::current_path().string() + "\\Code\\chapter4_String\\";
         
         ifstream fin(cwd + in);
         ofstream fout(cwd + out);
@@ -121,4 +121,4 @@ public:
     }
 };
 
-#endif //CODE_Experiment_4_H
+#endif //Experiment_4_H

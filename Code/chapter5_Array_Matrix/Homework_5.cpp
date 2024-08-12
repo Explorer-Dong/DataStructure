@@ -5,7 +5,7 @@
 #include <vector>
 #include <array>
 #include <climits>
-#include "SparseMatrix.h"
+#include "./SparseMatrix.h"
 
 using namespace std;
 

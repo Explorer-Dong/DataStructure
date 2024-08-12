@@ -1,11 +1,11 @@
 #include <iostream>
 #include <queue>
-#include "Node.h"
+#include "./Node.h"
 
 using namespace std;
 
-#ifndef INC_2__DATASTRUCTURES_LINKLIST_H
-#define INC_2__DATASTRUCTURES_LINKLIST_H
+#ifndef LINKLIST_H
+#define LINKLIST_H
 
 template<class T>
 class LinkList {
@@ -244,4 +244,4 @@ void LinkList<T>::Merge(LinkList<T>& obj) {
     head = Reverse(head);
 }
 
-#endif //INC_2__DATASTRUCTURES_LINKLIST_H
+#endif //LINKLIST_H

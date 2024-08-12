@@ -3,7 +3,7 @@
 //
 
 #include <bits/stdc++.h>
-#include "Trail_10.cpp"
+#include "Experiment_10.cpp"
 
 using namespace std;
 

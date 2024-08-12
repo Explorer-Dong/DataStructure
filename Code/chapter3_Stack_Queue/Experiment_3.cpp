@@ -2,14 +2,18 @@
 // Created by Wenjie Dong on 2023-10-10.
 //
 
-#include <bits/stdc++.h>
-#include "SeqStack.h"
-#include "CircleSeqQueueWithFlag.h"
+#include <iostream>
+#include <vector>
+#include <string>
+#include <unordered_map>
+#include <algorithm>
+#include "./SeqStack.h"
+#include "./CircleSeqQueueWithFlag.h"
 
 using namespace std;
 
-#ifndef CODE_Experiment_3_H
-#define CODE_Experiment_3_H
+#ifndef Experiment_3_H
+#define Experiment_3_H
 
 class Experiment_3 {
 private:
@@ -405,4 +409,4 @@ public:
     }
 };
 
-#endif //CODE_Experiment_3_H
+#endif //Experiment_3_H

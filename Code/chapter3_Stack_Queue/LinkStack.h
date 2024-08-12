@@ -3,12 +3,12 @@
 //
 
 #include <iostream>
-#include "../chapter2/Node.h"
+#include "../chapter2_List//Node.h"
 
 using namespace std;
 
-#ifndef INC_3__DATASTRUCTURES_LINKSTACK_H
-#define INC_3__DATASTRUCTURES_LINKSTACK_H
+#ifndef LINKSTACK_H
+#define LINKSTACK_H
 
 template<class T>
 class LinkStack {
@@ -66,4 +66,4 @@ bool LinkStack<T>::Empty() {
     return !top;
 }
 
-#endif //INC_3__DATASTRUCTURES_LINKSTACK_H
+#endif //LINKSTACK_H

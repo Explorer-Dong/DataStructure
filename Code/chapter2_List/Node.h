@@ -9,4 +9,4 @@ struct Node {
     Node(T x) : data(x), next(nullptr) {}
 };
 
-#endif
+#endif //NODE_H

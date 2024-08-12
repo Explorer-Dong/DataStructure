@@ -6,8 +6,8 @@
 
 using namespace std;
 
-#ifndef INC_3__DATASTRUCTURES_SEQDOUBLESTACK_H
-#define INC_3__DATASTRUCTURES_SEQDOUBLESTACK_H
+#ifndef SEQDOUBLESTACK_H
+#define SEQDOUBLESTACK_H
 
 template<class T, int MaxSize>
 class SeqDoubleStack {
@@ -72,4 +72,4 @@ void SeqDoubleStack<T, MaxSize>::Output() {
     }
 }
 
-#endif //INC_3__DATASTRUCTURES_SEQDOUBLESTACK_H
+#endif //SEQDOUBLESTACK_H

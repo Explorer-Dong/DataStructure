@@ -3,7 +3,7 @@
 //
 
 #include <string>
-#include "GList.h"
+#include "./GList.h"
 
 using namespace std;
 

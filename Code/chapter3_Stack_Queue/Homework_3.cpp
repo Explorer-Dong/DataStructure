@@ -2,14 +2,16 @@
 // Created by Wenjie Dong on 2023-10-10.
 //
 
-#include <bits/stdc++.h>
+#include <vector>
+#include <iostream>
+#include <string>
 #include "SeqStack.h"
 #include "SeqDoubleStack.h"
 #include "Experiment_3.cpp"
-#include "../chapter2/CircleList.h"
-#include "CircleSeqQueueWithFlag.h"
-#include "CircleSeqQueueWithNum.h"
-#include "DoubleStack4Queue.h"
+#include "../chapter2_List/CircleList.h"
+#include "./CircleSeqQueueWithFlag.h"
+#include "./CircleSeqQueueWithNum.h"
+#include "./DoubleStack4Queue.h"
 
 using namespace std;
 

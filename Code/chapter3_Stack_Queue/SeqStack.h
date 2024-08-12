@@ -5,8 +5,8 @@
 
 using namespace std;
 
-#ifndef INC_3__DATASTRUCTURES_SEQSTACK_H
-#define INC_3__DATASTRUCTURES_SEQSTACK_H
+#ifndef SEQSTACK_H
+#define SEQSTACK_H
 
 template<class T, int MaxSize>
 class SeqStack {
@@ -55,4 +55,4 @@ bool SeqStack<T, MaxSize>::Empty() {
     return top == -1;
 }
 
-#endif //INC_3__DATASTRUCTURES_SEQSTACK_H
+#endif //SEQSTACK_H

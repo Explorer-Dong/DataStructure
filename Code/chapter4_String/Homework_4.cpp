@@ -10,8 +10,8 @@
 
 using namespace std;
 
-#ifndef CODE_Homework_4
-#define CODE_Homework_4
+#ifndef Homework_4_H
+#define Homework_4_H
 
 class Homework_4 {
 public:
@@ -199,4 +199,4 @@ public:
     }
 };
 
-#endif // CODE_Homework_4
+#endif // Homework_4_H

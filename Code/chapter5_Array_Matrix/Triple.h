@@ -2,8 +2,8 @@
 // Created by Wenjie Dong on 2023-10-23.
 //
 
-#ifndef INC_3__DATASTRUCTURES_TRIPLE_H
-#define INC_3__DATASTRUCTURES_TRIPLE_H
+#ifndef TRIPLE_H
+#define TRIPLE_H
 
 template<class T>
 struct Triple {
@@ -12,4 +12,4 @@ struct Triple {
     Triple(int r, int c, T value) : r(r), c(c), value(value) {}
 };
 
-#endif //INC_3__DATASTRUCTURES_TRIPLE_H
+#endif //TRIPLE_H

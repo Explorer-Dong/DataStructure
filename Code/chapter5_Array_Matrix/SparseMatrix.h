@@ -4,12 +4,12 @@
 
 #include <iostream>
 #include <vector>
-#include "Triple.h"
+#include "./Triple.h"
 
 using namespace std;
 
-#ifndef INC_3__DATASTRUCTURES_SPARSEMATRIX_H
-#define INC_3__DATASTRUCTURES_SPARSEMATRIX_H
+#ifndef SPARSEMATRIX_H
+#define SPARSEMATRIX_H
 
 template<class T>
 class SparseMatrix {
@@ -87,4 +87,4 @@ T SparseMatrix<T>::sumOfDiag() {
     return res;
 }
 
-#endif //INC_3__DATASTRUCTURES_SPARSEMATRIX_H
+#endif //SPARSEMATRIX_H

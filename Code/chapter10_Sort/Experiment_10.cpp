@@ -6,10 +6,10 @@
 
 using namespace std;
 
-#ifndef INC_3__DATASTRUCTURES_TRAIL_10_H
-#define INC_3__DATASTRUCTURES_TRAIL_10_H
+#ifndef Experiment_10_H
+#define Experiment_10_H
 
-class Trail_10 {
+class Experiment_10 {
 public:
 	// Generate num random numbers in [0, range)
 	vector<int> Generate(int num, int range) {
@@ -149,4 +149,4 @@ public:
 	}
 };
 
-#endif //INC_3__DATASTRUCTURES_TRAIL_10_H
+#endif //Experiment_10_H

@@ -5,8 +5,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#ifndef INC_3__DATASTRUCTURES_MGRAPH_H
-#define INC_3__DATASTRUCTURES_MGRAPH_H
+#ifndef MGRAPH_H
+#define MGRAPH_H
 
 enum GraphType {undigraph, undinetwork, digraph, dinetwork};
 
@@ -448,4 +448,4 @@ vector<tuple<int, int, vector<int>>> MGraph<T>::Floyd() {
 
 	return res;
 }
-#endif //INC_3__DATASTRUCTURES_MGRAPH_H
+#endif //MGRAPH_H

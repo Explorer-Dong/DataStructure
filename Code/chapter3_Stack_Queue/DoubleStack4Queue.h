@@ -2,7 +2,7 @@
 // Created by Wenjie Dong on 2023-10-10.
 //
 
-#include "SeqStack.h"
+#include "./SeqStack.h"
 
 #ifndef DOUBLESTACK4QUEUE_H
 #define DOUBLESTACK4QUEUE_H

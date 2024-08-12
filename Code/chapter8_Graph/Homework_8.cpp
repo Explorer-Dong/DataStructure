@@ -3,8 +3,8 @@
 //
 
 #include <bits/stdc++.h>
-#include "MGraph.h"
-#include "ALGraph.h"
+#include "./MGraph.h"
+#include "./ALGraph.h"
 
 using namespace std;
 
