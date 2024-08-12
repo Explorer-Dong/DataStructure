@@ -1,11 +1,6 @@
-//
-// Created by Wenjie Dong on 2023-11-26.
-//
-
 #include <bits/stdc++.h>
 
 using namespace std;
-
 #ifndef CHILDSIBLINGTREE_H
 #define CHILDSIBLINGTREE_H
 
@@ -14,7 +9,9 @@ struct ChildSiblingTreeNode {
     T data;
     int degree;
     ChildSiblingTreeNode* first_child, * next_sibling;
+    
     ChildSiblingTreeNode() : degree(0), first_child(nullptr), next_sibling(nullptr) {};
+    
     ChildSiblingTreeNode(T _data) : degree(0), data(_data), first_child(nullptr), next_sibling(nullptr) {};
 };
 
@@ -30,7 +27,6 @@ private:
     void CountDegree(ChildSiblingTreeNode<T>* now);
     void Height(ChildSiblingTreeNode<T>* now, int dep, int& resv);
     int Height_(ChildSiblingTreeNode<T>* now);
-
 public:
     ChildSiblingTree() : root(nullptr) {};
     ChildSiblingTree(vector<pair<T, T>>& a); // 用边集a构造树
@@ -42,21 +38,26 @@ public:
         PreOutput(root);
         cout << endl;
     }
+    
     void PostOutput() {
         PostOutput(root);
         cout << endl;
     }
+    
     void CountDegree() {
         CountDegree(root);
     }
+    
     int Height() {
         int res = 0;
         Height(root, 1, res);
         return res;
     }
+    
     int Height_() {
         return Height_(root);
     }
+    
     vector<vector<T>> Path2Leaf();
 };
 
@@ -68,9 +69,7 @@ ChildSiblingTree<T>::ChildSiblingTree(vector<pair<T, T>>& a) {
         root = nullptr;
         return;
     }
-    
     root = new ChildSiblingTreeNode<T>(a[0].first);
-    
     for (auto& edge: a) {
         add(edge);
     }
@@ -116,13 +115,10 @@ ChildSiblingTreeNode<T>* ChildSiblingTree<T>::Find(ChildSiblingTreeNode<T>* now,
     if (!now) {
         return nullptr;
     }
-    
     if (now->data == e) {
         return now;
     }
-    
     ChildSiblingTreeNode<T>* l = Find(now->first_child, e);
-    
     if (l) {
         return l;
     } else {
@@ -155,7 +151,6 @@ void ChildSiblingTree<T>::CountDegree(ChildSiblingTreeNode<T>* now) {
     if (!now) {
         return;
     }
-    
     if (now->first_child) {
         now->degree++;
         ChildSiblingTreeNode<T>* t = now->first_child;
@@ -166,7 +161,6 @@ void ChildSiblingTree<T>::CountDegree(ChildSiblingTreeNode<T>* now) {
     } else {
         now->degree = 0;
     }
-    
     CountDegree(now->first_child);
     CountDegree(now->next_sibling);
 }
@@ -176,7 +170,6 @@ void ChildSiblingTree<T>::Height(ChildSiblingTreeNode<T>* now, int dep, int& res
     if (!now) {
         return;
     }
-    
     res = max(res, dep);
     Height(now->first_child, dep + 1, res);
     Height(now->next_sibling, dep, res);
@@ -187,14 +180,12 @@ int ChildSiblingTree<T>::Height_(ChildSiblingTreeNode<T>* now) {
     if (!now) {
         return 0;
     }
-    
     int max_Height = 0;
     
     // 计算子树中的最大高度
     for (ChildSiblingTreeNode<T>* p = now->first_child; p; p = p->next_sibling) {
         max_Height = max(max_Height, Height_(p));
     }
-    
     return max_Height + 1;
 }
 
@@ -202,24 +193,20 @@ template<class T>
 vector<vector<T>> ChildSiblingTree<T>::Path2Leaf() {
     vector<vector<T>> paths;
     vector<T> path;
-    
     function<void(ChildSiblingTreeNode<T>*)> dfs = [&](ChildSiblingTreeNode<T>* now) {
         if (!now) {
             return;
         }
-        
         path.push_back(now->data);
-        
         if (!now->first_child) {
             paths.push_back(path);
         }
-        
         dfs(now->first_child);
         path.pop_back();
         dfs(now->next_sibling);
     };
-    
     dfs(root);
     return paths;
 }
+
 #endif //CHILDSIBLINGTREE_H

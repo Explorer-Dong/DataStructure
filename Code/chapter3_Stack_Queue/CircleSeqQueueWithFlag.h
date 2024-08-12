@@ -1,7 +1,3 @@
-//
-// Created by Wenjie Dong on 2023-10-09.
-//
-
 #include <iostream>
 
 using namespace std;
@@ -18,9 +14,11 @@ private:
 
 public:
     CircleSeqQueueWithFlag() : head(0), tail(-1), is_empty(true) {}
+    
     void Push(T x);
     void Pop();
     T Front();
+    
     bool Empty() { return is_empty; }
 };
 

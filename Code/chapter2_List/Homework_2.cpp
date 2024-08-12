@@ -1,7 +1,3 @@
-//
-// Created by Wenjie Dong on 2023-10-10.
-//
-
 #include "./SeqList.h"
 #include "./LinkList.h"
 #include "./CircleList.h"
@@ -27,7 +23,6 @@ public:
         b.Output();
     }
     
-    
     // T1.2 delete all elements equal to x
     void testDeleteAllX() {
         int arr[] = {2, 4, 1, 2, 5, 2}, n = 6;
@@ -36,7 +31,6 @@ public:
         a.DeleteAllX(2);
         a.Output();
     }
-    
     
     // T1.3 delete ordered list's all elements range from s to t
     void testDeleteRange() {
@@ -47,7 +41,6 @@ public:
         a.Output();
     }
     
-    
     // T1.4 unique
     void testUnique() {
         int arr[] = {3, 2, 5, 4, 2, 3, 9}, n = 7;
@@ -57,7 +50,6 @@ public:
         a.Output();
     }
     
-    
     // T1.5 insert to ordered list
     void testInsert() {
         int arr[] = {2, 3, 5, 7, 10}, n = 5;
@@ -66,7 +58,6 @@ public:
         a.IncreaseInsert(-1);
         a.Output();
     }
-    
     
     // T1.6 split into odd and even
     void testSplit() {
@@ -78,7 +69,6 @@ public:
         even.Output();
     }
     
-    
     // T1.7 copy list
     void testCopy() {
         int arr[] = {1, 2, 3, 4}, n = 4;
@@ -87,14 +77,12 @@ public:
         b.Output();
     }
     
-    
     // T1.8 print in order
     void testPrintInOrder() {
         int arr[] = {3, 2, 1, 4}, n = 4;
         LinkList<int> a(arr, n);
         a.PrintInOrder();
     }
-    
     
     // T1.9 sort once
     void testSortOnce() {
@@ -104,7 +92,6 @@ public:
         a.SortOnce();
         a.Output();
     }
-    
     
     // T1.10 count node of cicle list
     void testCircleListNodeCount() {

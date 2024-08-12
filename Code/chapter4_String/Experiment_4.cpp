@@ -1,7 +1,3 @@
-//
-// Created by Wenjie Dong on 2023-10-16.
-//
-
 #include <iostream>
 #include <vector>
 #include <fstream>
@@ -36,13 +32,11 @@ public:
         return -1;
     }
     
-    
     // Exp4.1 find first match position - KMP original
     int originalKMP(const string& s = "abccabaccaba", const string& t = "aba") {
         string news = " " + s;
         string newt = " " + t;
         int n = s.size(), m = t.size();
-        
         Homework_4 obj;
         vector<int> ne = obj.getNext(newt);
         
@@ -61,13 +55,11 @@ public:
         return -1;
     }
     
-    
     // Exp4.1 find first match position - KMP optimized
     int optimizedKMP(const string& s = "abccabaccaba", const string& t = "aba") {
         string news = " " + s;
         string newt = " " + t;
         int n = s.size(), m = t.size();
-        
         Homework_4 obj;
         vector<int> ne = obj.getNext(newt);
         
@@ -86,14 +78,11 @@ public:
         return -1;
     }
     
-    
     // Exp4.2 caesar cipher
     void caesarCipher(string in = "Exp4_T4_in.txt", string out = "Exp4_T4_cipher.txt", int dx = 3) {
         string cwd = std::filesystem::current_path().string() + "\\Code\\chapter4_String\\";
-        
         ifstream fin(cwd + in);
         ofstream fout(cwd + out);
-        
         string s;
         while (getline(fin, s)) {
             string trans;
@@ -113,7 +102,6 @@ public:
         fin.close();
         fout.close();
     }
-    
     
     // Exp4.2 caesar decipher
     void caesarDecipher(string cipher = "Exp4_T4_cipher.txt", string decipher = "Exp4_T4_decipher.txt", int dx = 3) {

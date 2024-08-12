@@ -1,7 +1,3 @@
-//
-// Created by Wenjie Dong on 2023-10-19.
-//
-
 #include <string>
 #include "./GList.h"
 

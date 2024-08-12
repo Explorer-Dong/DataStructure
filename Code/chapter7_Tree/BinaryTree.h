@@ -1,15 +1,10 @@
-//
-// Created by Wenjie Dong on 2023-11-02.
-//
-
 #include <iostream>
-#include <string>
-#include <vector>
 #include <queue>
+#include <string>
 #include <unordered_map>
+#include <vector>
 
 using namespace std;
-
 #ifndef BINARYTREE_H
 #define BINARYTREE_H
 
@@ -18,6 +13,7 @@ struct BinaryTreeNode {
     T data;
     BinaryTreeNode* lchild;
     BinaryTreeNode* rchild;
+    
     BinaryTreeNode(T x) : data(x), lchild(nullptr), rchild(nullptr) {}
 };
 
@@ -30,7 +26,6 @@ private:
     BinaryTreeNode<T>* createWithPreMid(string pre, string mid);
     BinaryTreeNode<T>* createWithMidPost(string mid, string post);
     void decreate(BinaryTreeNode<T>* now);
-    
     void prePrint(BinaryTreeNode<T>* now);
     void midPrint(BinaryTreeNode<T>* now);
     void postPrint(BinaryTreeNode<T>* now);
@@ -47,7 +42,6 @@ public:
     BinaryTree(string& s, bool is_pre);
     BinaryTree(string& s, string& t, bool is_pre_and_mid);
     ~BinaryTree();
-    
     void prePrint();
     void midPrint();
     void postPrint();
@@ -311,7 +305,6 @@ template<class T>
 void BinaryTree<T>::levelPrint() {
     queue<BinaryTreeNode<T>*> q;
     q.push(root);
-    
     while (q.size()) {
         auto h = q.front();
         q.pop();
@@ -430,7 +423,7 @@ bool BinaryTree<T>::isCompleteBinaryTree() {
     queue<BinaryTreeNode<T>*> q;
     q.push(root);
     while (q.size()) {
-        bool appear = false; // pre appear not double branch node
+        bool appear = false;// pre appear not double branch node
         vector<BinaryTreeNode<T>*> level;
         while (q.size()) {
             auto now = q.front();

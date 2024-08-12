@@ -16,10 +16,10 @@ private:
 public:
     
     LinkList() : head(nullptr) {}
+    
     LinkList(T a[], int n);
     LinkList(LinkList<T>& obj);                      // T7: copy construct
     ~LinkList();
-    
     void Output();                                   // print to console
     void OutputToFile(const string& path);           // print to file
     void PushFront(T x);                             // push node to head

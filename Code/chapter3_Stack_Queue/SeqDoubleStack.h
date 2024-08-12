@@ -1,7 +1,3 @@
-//
-// Created by Wenjie Dong on 2023-10-06.
-//
-
 #include <iostream>
 
 using namespace std;
@@ -17,6 +13,7 @@ private:
 
 public:
     SeqDoubleStack() : l(-1), r(MaxSize) {}
+    
     void Push_front(T x);
     T Pop_front();
     void Push_back(T x);

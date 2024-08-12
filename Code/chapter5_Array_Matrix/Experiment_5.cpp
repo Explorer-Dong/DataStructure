@@ -1,7 +1,3 @@
-//
-// Created by Wenjie Dong on 2023-10-23.
-//
-
 #include <vector>
 #include "./Triple.h"
 #include "./SparseMatrix.h"
@@ -32,7 +28,7 @@ public:
                 cout << trans[i][j] << " \n"[j == trans[0].size() - 1];
             }
         }
-
+        
         // plus
         vector<vector<int>> plus = sm.plus(sm);
         cout << "\nplus result:\n";

@@ -16,8 +16,11 @@ private:
 
 public:
     SeqList() : data(nullptr), size(0) {}
+    
     SeqList(T a[], int n);
+    
     SeqList(int n) : data(new T[n]), size(n) {}
+    
     ~SeqList();
     void Output();
     T DeleteMin();                         // T1: delete and return min
@@ -30,6 +33,7 @@ public:
     void Sort();                           // exp T1: quick sort
     void Merge(SeqList<T>& obj);           // exp T1: merge two ordered list
     T& operator[](int idx) { return data[idx]; }
+    
     bool find(T x);
 };
 

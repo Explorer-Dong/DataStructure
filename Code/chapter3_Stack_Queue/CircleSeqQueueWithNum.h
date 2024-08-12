@@ -1,7 +1,3 @@
-//
-// Created by Wenjie Dong on 2023-10-10.
-//
-
 #ifndef CIRCLESEQQUEUEWITHNUM_H
 #define CIRCLESEQQUEUEWITHNUM_H
 
@@ -14,9 +10,11 @@ private:
 
 public:
     CircleSeqQueueWithNum() : head(0), tail(-1), num(0) {}
+    
     void Push(T x);
     void Pop();
     T Front();
+    
     bool Empty() { return !num; }
 };
 

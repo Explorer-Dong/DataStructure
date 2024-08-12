@@ -1,7 +1,3 @@
-//
-// Created by Wenjie Dong on 2023-10-23.
-//
-
 #include <iostream>
 #include <string>
 
@@ -10,8 +6,9 @@ using namespace std;
 #ifndef GLIST_H
 #define GLIST_H
 
-enum GListNodeType { ATOM, LIST };
-
+enum GListNodeType {
+    ATOM, LIST
+};
 template<class T>
 struct GListNode {
     GListNodeType type;
@@ -39,7 +36,6 @@ public:
     GList();
     GList(const string& s);               // create with string
     ~GList();
-    
     void print();                         // print glist
     int length();                         // calculate glist length
     int depth();                          // calculate glist depth

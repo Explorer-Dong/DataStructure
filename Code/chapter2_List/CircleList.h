@@ -11,7 +11,6 @@ private:
 public:
     CircleList();
     ~CircleList();
-    
     void PushBack(T x);  // push element to end
     void PopFront();     // pop front element
     void Clear();        // clear all elements
@@ -76,4 +75,4 @@ int CircleList<T>::CountNode() {
     return ans;
 }
 
-#endif
+#endif // CircleList_H

@@ -1,7 +1,3 @@
-//
-// Created by Wenjie Dong on 2023-09-28.
-//
-
 #include <iostream>
 #include "../chapter2_List//Node.h"
 
@@ -17,8 +13,8 @@ private:
 
 public:
     LinkStack() : top(nullptr) {}
-    ~LinkStack();
     
+    ~LinkStack();
     void Push(T x);
     void Pop();
     T Top();

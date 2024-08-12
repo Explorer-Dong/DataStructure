@@ -1,7 +1,3 @@
-//
-// Created by Wenjie Dong on 2023-10-23.
-//
-
 #include <iostream>
 #include <vector>
 #include "./Triple.h"

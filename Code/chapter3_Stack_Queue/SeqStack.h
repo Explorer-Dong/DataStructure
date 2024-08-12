@@ -1,6 +1,3 @@
-//
-// Created by Wenjie Dong on 2023-09-28.
-//
 #include <iostream>
 
 using namespace std;
@@ -13,7 +10,7 @@ class SeqStack {
 private:
     T data[MaxSize];
     int top;
-    
+
 public:
     SeqStack() : top(-1) {}
     

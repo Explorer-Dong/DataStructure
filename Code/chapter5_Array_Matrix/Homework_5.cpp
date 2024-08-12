@@ -1,7 +1,3 @@
-//
-// Created by Wenjie Dong on 2023-10-19.
-//
-
 #include <vector>
 #include <array>
 #include <climits>
@@ -40,7 +36,6 @@ public:
         
         return res;
     }
-    
     
     // T5.3 calc sum of the diagonal elements of a sparse matrix
     int calcDiagSumOfSparseMatrix() {

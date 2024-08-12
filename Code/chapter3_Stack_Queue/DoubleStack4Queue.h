@@ -1,7 +1,3 @@
-//
-// Created by Wenjie Dong on 2023-10-10.
-//
-
 #include "./SeqStack.h"
 
 #ifndef DOUBLESTACK4QUEUE_H
@@ -15,6 +11,7 @@ private:
 
 public:
     DoubleStack4Queue() {}
+    
     void Push(T x);
     void Pop();
     T Front();

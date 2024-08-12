@@ -1,7 +1,3 @@
-//
-// Created by Wenjie Dong on 2023-10-30.
-//
-
 #include <string>
 #include "./GList.h"
 
@@ -23,7 +19,6 @@ public:
     // test glist: print all, lenth, depth
     void testGList(const string& s = "((a, (), b), g, a, f)") {
         GList<char> g(s);
-        
         int choice;
         while (true) {
             displayGListMenu();

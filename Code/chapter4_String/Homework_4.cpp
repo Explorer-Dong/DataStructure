@@ -1,7 +1,3 @@
-//
-// Created by Wenjie Dong on 2023-10-12.
-//
-
 #include <vector>
 #include <string>
 #include <algorithm>
@@ -34,7 +30,6 @@ public:
         return ne;
     }
     
-    
     // T4.2 count t in s
     int countKMP(const string& s = "abccabaccaba", const string& t = "ab") {
         int cnt = 0;
@@ -59,7 +54,6 @@ public:
         return cnt;
     }
     
-    
     // T4.3 del all t in s
     string deleteKMP(const string& s = "abccabaccaba", const string& t = "ab") {
         string res;
@@ -67,7 +61,6 @@ public:
         string news = " " + s;
         string newt = " " + t;
         vector<int> ne = getNext(t);
-        
         int l = 1;
         for (int i = 1, j = 0; i <= n; i++) {
             while (j && news[i] != newt[j + 1]) {
@@ -89,11 +82,9 @@ public:
         return res.size() ? res : s;
     }
     
-    
     // T4.4 get all longest common substrings - kmp
     vector<string> getLongestCommomSubstring_kmp(const string& s = "abaadqbacaba", const string& t = "abac") {
         vector<string> res;
-        
         int m = t.size();
         for (int len = m; len >= 1; len--) {
             bool ok = false;
@@ -112,13 +103,11 @@ public:
         return res;
     }
     
-    
     // T4.4 get all longest common substrings - dp
     vector<string> getLongestCommomSubstring_dp(const string& s = "abaadqbacaba", const string& t = "abac") {
         string news = " " + s;
         string newt = " " + t;
         int n = s.size(), m = t.size();
-        
         vector<vector<int>> dp(n + 1, vector<int>(m + 1, 0));
         int ma = 0;
         
@@ -151,7 +140,6 @@ public:
         return res;
     }
     
-    
     // T4.5 reverse words order in sentence - change original string
     string reverseOrigin(string s = "Do or do not, there is no try.") {
         int n = s.size();
@@ -170,7 +158,6 @@ public:
         
         return s;
     }
-    
     
     // T4.5 reverse words order in sentence - use stack to reverse
     string reverseWithStack(const string& s = "Do or do not, there is no try.") {

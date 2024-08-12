@@ -1,7 +1,3 @@
-//
-// Created by Wenjie Dong on 2023-10-10.
-//
-
 #include <iostream>
 #include <fstream>
 #include "./SeqList.h"
@@ -12,16 +8,20 @@ using namespace std;
 struct item {
     string id, name;
     int price, cnt;
-    bool operator< (const item& t) const {
+    
+    bool operator<(const item& t) const {
         return this->id < t.id;
     }
-    bool operator> (const item& t) const {
+    
+    bool operator>(const item& t) const {
         return this->id > t.id;
     }
-    bool operator== (const item& t) const {
+    
+    bool operator==(const item& t) const {
         return this->id == t.id;
     }
-    friend ostream& operator<< (ostream& os, const item& t) {
+    
+    friend ostream& operator<<(ostream& os, const item& t) {
         os << t.id << " " << t.name << " " << t.price << " " << t.cnt;
         return os;
     }
@@ -29,10 +29,12 @@ struct item {
 
 struct stu {
     string id, name, gender, major, birth;
-    bool operator== (const stu& t) const {
+    
+    bool operator==(const stu& t) const {
         return this->id == t.id;
     }
-    friend ostream& operator<< (ostream& os, const stu& t) {
+    
+    friend ostream& operator<<(ostream& os, const stu& t) {
         os << t.id << " " << t.name << " " << t.gender << " " << t.major << " " << t.birth << endl;
         return os;
     }
@@ -96,7 +98,6 @@ public:
     void testSeqList() {
         int arr[] = {4, 2, 1, 3, 8, 0, 123}, n = 7;
         SeqList<int> seqList(arr, n);
-        
         int choice;
         while (true) {
             displaySeqMenu();
@@ -170,7 +171,6 @@ public:
         }
     }
     
-    
     // Exp1.2 sort
     void testSort() {
         int arr[] = {4, 2, 1, 3}, n = 4;
@@ -179,7 +179,6 @@ public:
         a.Sort();
         a.Output();
     }
-    
     
     // Exp 1.2 merge two ordered list
     void testMergeOrderedSeqList() {
@@ -190,7 +189,6 @@ public:
         a.Merge(b);
         a.Output();
     }
-    
     
     // Exp2 item manage system with seqlist
     void testItemManageSystem() {
@@ -278,14 +276,12 @@ public:
             }
         }
     }
-
-
-	// Exp3 test LinkList all functions
-	void testLinkList() {
-		int arr[] = {4, 2, 1, 3, 8, 0, 123}, n = 7;
-		LinkList<int> linkList(arr, n);
-  
-		int choice;
+    
+    // Exp3 test LinkList all functions
+    void testLinkList() {
+        int arr[] = {4, 2, 1, 3, 8, 0, 123}, n = 7;
+        LinkList<int> linkList(arr, n);
+        int choice;
         while (true) {
             displayLinkMenu();
             cin >> choice;
@@ -315,89 +311,85 @@ public:
                     cout << "invalid input!" << endl;
             }
         }
-	}
-
-
-	// Exp3.1 reverse list
-	void testReverseLinkList() {
-		int arr[] = {4, 2, 1, 3, 8, 0, 123}, n = 7;
-		LinkList<int> ls(arr, n);
-  
-		cout << "original:";
-		ls.Output();
+    }
+    
+    // Exp3.1 reverse list
+    void testReverseLinkList() {
+        int arr[] = {4, 2, 1, 3, 8, 0, 123}, n = 7;
+        LinkList<int> ls(arr, n);
+        
+        cout << "original:";
+        ls.Output();
         ls.Reverse();
-		cout << "reversed:";
-		ls.Output();
-	}
-
-
-	// Exp3.2 merge two ordered linklist
-	void testMergeLinkList() {
-		int arr1[] = {1, 2, 3, 4}, n1 = 4;
-		int arr2[] = {0, 7, 10}, n2 = 3;
-		LinkList<int> a(arr1, n1), b(arr2, n2);
-		cout << "original:\n";
-		a.Output(), b.Output();
-		a.Merge(b);
-		cout << "merged:";
-		a.Output();
-	}
-
-
-	// Exp4 student manage system with linklist
-	void testStudentManageSystem() {
-		// read data from txt file
-		ifstream fin("Exp2_T4.txt");
-		if (!fin) {
-			cout << "unsuccessful open file" << endl;
-			exit(1);
-		} else {
-			cout << "successful open file" << endl;
-		}
-
-		// store data in cpu
-		int n;
-		fin >> n;
-		stu arr[n];
-		for (int i = 0; i < n; i++) {
-			fin >> arr[i].id >> arr[i].name >> arr[i].gender >> arr[i].major >> arr[i].birth;
-		}
-		LinkList<stu> ls(arr, n);
-
-		int choice;
-		while (true) {
+        cout << "reversed:";
+        ls.Output();
+    }
+    
+    // Exp3.2 merge two ordered linklist
+    void testMergeLinkList() {
+        int arr1[] = {1, 2, 3, 4}, n1 = 4;
+        int arr2[] = {0, 7, 10}, n2 = 3;
+        LinkList<int> a(arr1, n1), b(arr2, n2);
+        cout << "original:\n";
+        a.Output(), b.Output();
+        a.Merge(b);
+        cout << "merged:";
+        a.Output();
+    }
+    
+    // Exp4 student manage system with linklist
+    void testStudentManageSystem() {
+        // read data from txt file
+        ifstream fin("Exp2_T4.txt");
+        if (!fin) {
+            cout << "unsuccessful open file" << endl;
+            exit(1);
+        } else {
+            cout << "successful open file" << endl;
+        }
+        
+        // store data in cpu
+        int n;
+        fin >> n;
+        stu arr[n];
+        for (int i = 0; i < n; i++) {
+            fin >> arr[i].id >> arr[i].name >> arr[i].gender >> arr[i].major >> arr[i].birth;
+        }
+        LinkList<stu> ls(arr, n);
+        int choice;
+        while (true) {
             displayStuMenu();
-			cin >> choice;
-			switch (choice) {
-				case 1: {
+            cin >> choice;
+            switch (choice) {
+                case 1: {
                     ls.Output();
-					break;
-				}
-				case 2: {
-					cout << "input student info:";
-					stu now;
-					cout << "id:";
-					cin >> now.id;
-					cout << "name:";
-					cin >> now.name;
-					cout << "gender:";
-					cin >> now.gender;
-					cout << "major:";
-					cin >> now.major;
-					cout << "birth:";
-					cin >> now.birth;
+                    break;
+                }
+                case 2: {
+                    cout << "input student info:";
+                    stu now;
+                    cout << "id:";
+                    cin >> now.id;
+                    cout << "name:";
+                    cin >> now.name;
+                    cout << "gender:";
+                    cin >> now.gender;
+                    cout << "major:";
+                    cin >> now.major;
+                    cout << "birth:";
+                    cin >> now.birth;
                     ls.PushFront(now);
-					cout << "over" << endl;
-					break;
-				}
-				case 3: {
+                    cout << "over" << endl;
+                    break;
+                }
+                case 3: {
                     cout << "input student id:";
                     string nowid;
-					cin >> nowid;
+                    cin >> nowid;
                     ls.Delete({nowid, "", "", "", ""});
-					break;
-				}
-				case 4: {
+                    break;
+                }
+                case 4: {
                     cout << "input student id:";
                     string nowid;
                     cin >> nowid;
@@ -416,15 +408,15 @@ public:
                         cin >> now.birth;
                         ls.PushFront(now);
                     }
-					break;
-				}
-				case 0: {
-					ls.OutputToFile("Exp2_T4.txt");
-					return;
-				}
-			}
-		}
-	}
+                    break;
+                }
+                case 0: {
+                    ls.OutputToFile("Exp2_T4.txt");
+                    return;
+                }
+            }
+        }
+    }
 };
 
 #endif //Experiment_2_H

@@ -1,7 +1,3 @@
-//
-// Created by Wenjie Dong on 2023-10-10.
-//
-
 #include <iostream>
 #include <vector>
 #include <string>
@@ -60,7 +56,6 @@ private:
         vector<vector<int>> d(m, vector<int>(n, INT_MAX >> 1));
         int sti = st.first, stj = st.second;
         int eni = en.first, enj = en.second;
-        
         int dx[] = {-1, 1, 0, 0};
         int dy[] = {0, 0, -1, 1};
         bool find_path = false;
@@ -118,7 +113,6 @@ public:
     // Exp2.1 test SeqStack
     void testSeqStack() {
         SeqStack<int, 100> s;
-        
         int choice;
         while (true) {
             displaySeqStackMenu();
@@ -155,7 +149,6 @@ public:
         }
     }
     
-    
     // Exp2.1 calc mid
     void testCalcMid(const std::string s = "2*(1+3+1)") {
         unordered_map<char, int> pri{{'(', 0},
@@ -163,10 +156,8 @@ public:
                                      {'-', 1},
                                      {'*', 2},
                                      {'/', 2}};
-        
         SeqStack<int, 100> num;
         SeqStack<char, 100> op;
-        
         auto calc = [&]() -> void {
             int b = num.Top();
             num.Pop();
@@ -211,11 +202,9 @@ public:
         cout << "result: " << num.Top() << "\n";
     }
     
-    
     // Exp2.1 mid to post
     std::string Mid2Post(const std::string& s) {
         string post;
-        
         unordered_map<char, int> pri{{'(', 0},
                                      {'+', 1},
                                      {'-', 1},
@@ -256,7 +245,6 @@ public:
         return post;
     }
     
-    
     // Exp2.1 calc post
     int CalcPost(const std::string& post) {
         SeqStack<int, 100> num;
@@ -285,7 +273,6 @@ public:
         return num.Top();
     }
     
-    
     // Exp2.1 mid to post and calc post
     void testMid2PostAndCalcPost(const std::string mid = "12*(1+3)") {
         cout << "mid expression: " << mid << "\n";
@@ -297,11 +284,9 @@ public:
         cout << "calc post result: " << res << "\n";
     }
     
-    
     // Exp2.2 test SeqQueue
     void testSeqQueue() {
         CircleSeqQueueWithFlag<int, 100> q;
-        
         int choice;
         while (true) {
             displaySeqQueueMenu();
@@ -336,7 +321,6 @@ public:
             }
         }
     }
-    
     
     // Exp2.2 test patient
     void testPatient() {
@@ -382,7 +366,6 @@ public:
         }
     }
     
-    
     // Exp2.3 shortest path
     void testShortestPath() {
         vector<vector<int>> g = {{0, 1, 1},
@@ -391,9 +374,7 @@ public:
                                  {0, 1, 0}};
         pair<int, int> st = {0, 0};
         pair<int, int> en = {3, 2};
-        
         pair<vector<pair<int, int>>, int> res = getShortestPath(g, st, en);
-        
         auto all_path = res.first;
         auto min_dist = res.second;
         cout << "shortest path:\n";

@@ -1,7 +1,3 @@
-//
-// Created by Wenjie Dong on 2023-10-10.
-//
-
 #include <vector>
 #include <iostream>
 #include <string>
@@ -60,7 +56,6 @@ public:
         get_train_seq(station, out, n);
     }
     
-    
     // T3.2 convert decimal to either base between 2 and 16
     void testConvert() {
         int num, base;
@@ -84,7 +79,6 @@ public:
             }
         }
     }
-    
     
     // T3.3 bracket match
     bool testMatch(std::string s = "{10+9*12+[10/(2+90)+1]*(1+2)}") {
@@ -119,7 +113,6 @@ public:
         return a.Empty();
     }
     
-    
     // T3.4 double stack
     void testDoubleStack() {
         SeqDoubleStack<int, 10> a;
@@ -131,14 +124,12 @@ public:
         a.Output();
     }
     
-    
     // T3.5 mid to post
     void testMid2Post(std::string mid = "12+3*4/6*(5+7)") {
         Experiment_3 t3;
         string post = t3.Mid2Post(mid);
         cout << "post: " << post << "\n";
     }
-    
     
     // T3.6 use cicle list as queue
     void testCircleList4Queue() {
@@ -149,7 +140,6 @@ public:
         cout << cl.CountNode() << "\n";
         cl.Clear();
     }
-    
     
     // T3.7 circle sequence queue with a flag variable
     void testCircleSeqQueueWithFlag() {
@@ -164,7 +154,6 @@ public:
         queue_flag.Pop();
     }
     
-    
     // T3.8 circle sequence queue with node number
     void testCircleSeqQueueWithNum() {
         CircleSeqQueueWithNum<int, 3> queue_num;
@@ -173,7 +162,6 @@ public:
         queue_num.Push(3);
         queue_num.Push(3);
     }
-    
     
     // T3.9 two stack for queue
     void testDoubleStack4Queue() {
