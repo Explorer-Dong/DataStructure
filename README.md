@@ -1,35 +1,33 @@
-## 23-24年秋学期 - 数据结构
+## 项目简介
 
-- 参考教材：数据结构（C++语言描述），主编 - 吉根林、陈波
-- 教材电子书（pdf）[下载地址](https://explorer-dong.lanzoum.com/inOvg1fm7b4b)
-- by *Wenjie Dong*
+本项目以本科课程「23-24年秋学期 - 数据结构」为基础，动手编写重要数据结构的源码级实现及其应用。参考教材[《数据结构（C++语言描述）》](https://explorer-dong.lanzoum.com/inOvg1fm7b4b)，主编 - 吉根林、陈波。内容主要有以下几个部分，*斜体表示未完成的内容*：
 
-## Notes
+- 链表：顺序表、单向链表、循环链表、*跳表*
+- 栈和队列：顺序栈、链栈、循环顺序队列
+- 字符串：KMP、*后缀数组*
+- 矩阵：稀疏矩阵
+- 广义表：广义表类
+- 树：二叉树、孩子兄弟树、哈夫曼树、*线索二叉树*、*线段树*、*树状数组*、*字典树*、*伸展树*
+- 图：邻接矩阵、邻接表、*十字链表*
+- 查找：顺序查找、二分查找、哈希查找、*分块查找*、*平衡二叉搜索树（AVL树）*、*红黑树*、*B树*、*B+树*、*散列表*、*Trie树*
+- 排序：冒泡排序、选择排序、插入排序、希尔排序、快速排序、堆排序、归并排序
 
-上课详细笔记请移步：
+## 项目结构
 
-- 高速体验：https://blog.dwj601.cn/GPA/3rd-term/DataStructure/
-- 永久链接：https://explorer-dong.github.io/GPA/3rd-term/DataStructure/
-
-## Project Introduction
-
-- `Code` - 源码文件夹
-- `CourseWare` - 课件文件夹
-- `HomeWork` - 作业文件夹
+- `Code/` - 源码文件夹
+- `CourseWare/` - 课件文件夹
+- `HomeWork/` - 作业文件夹
 - `.gitignore` - git忽略文件
-- `CMakeLists.txt` - 项目构建文件
+- `CMakeLists.txt` - CMake配置文件
 - `README.md` - 说明文件
 
-## Code Review
+## 代码逻辑
 
-代码逻辑遵循：
-
-- 方法优先封装在数据结构类内
+- 算法优先封装为数据结构类的成员函数
 - 测试单元封装在测试类内
 - 程序在唯一拥有可执行权限的文件 `Code/main.cpp` 中运行与调试
 
-代码规范遵循：
+## 课程笔记
 
-- 头文件仅引用当前模块需要使用的内容
-- 类的宏定义为文件名全大写
-- 类名遵循大驼峰命名法、函数名遵循小驼峰命名法、变量名遵循下划线命名法
+- 高速体验：<https://blog.dwj601.cn/GPA/3rd-term/DataStructure/>
+- 永久链接：<https://explorer-dong.github.io/GPA/3rd-term/DataStructure/>

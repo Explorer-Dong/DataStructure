@@ -359,7 +359,7 @@ int optimizedKMP(const string& s = "abccabaccaba", const string& t = "aba") {
 
 ```cpp
 void caesarCipher(string in = "Exp4_T4_in.txt", string out = "Exp4_T4_cipher.txt", int dx = 3) {
-    string cwd = std::filesystem::current_path().string() + "\\Code\\chapter4\\";
+    string cwd = std::filesystem::current_path().string() + "\\Code\\chapter4_String\\";
 
     ifstream fin(cwd + in);
     ofstream fout(cwd + out);

@@ -2,8 +2,8 @@
 // Created by Wenjie Dong on 2023-10-10.
 //
 
-#ifndef INC_3__DATASTRUCTURES_SEQQUEUENUM_H
-#define INC_3__DATASTRUCTURES_SEQQUEUENUM_H
+#ifndef CIRCLESEQQUEUEWITHNUM_H
+#define CIRCLESEQQUEUEWITHNUM_H
 
 template<class T, int MaxSize>
 class CircleSeqQueueWithNum {
@@ -50,4 +50,4 @@ T CircleSeqQueueWithNum<T, MaxSize>::Front() {
     return data[head];
 }
 
-#endif //INC_3__DATASTRUCTURES_SEQQUEUENUM_H
+#endif //CIRCLESEQQUEUEWITHNUM_H

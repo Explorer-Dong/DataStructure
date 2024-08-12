@@ -4,8 +4,8 @@
 
 #include "SeqStack.h"
 
-#ifndef INC_3__DATASTRUCTURES_DSTACK2QUEUE_H
-#define INC_3__DATASTRUCTURES_DSTACK2QUEUE_H
+#ifndef DOUBLESTACK4QUEUE_H
+#define DOUBLESTACK4QUEUE_H
 
 template<class T, int MaxSize>
 class DoubleStack4Queue {
@@ -62,4 +62,4 @@ bool DoubleStack4Queue<T, MaxSize>::Empty() {
     return A.Empty() && B.Empty();
 }
 
-#endif //INC_3__DATASTRUCTURES_DSTACK2QUEUE_H
+#endif //DOUBLESTACK4QUEUE_H

@@ -6,8 +6,8 @@
 
 using namespace std;
 
-#ifndef INC_3__DATASTRUCTURES_SEQQUEUEFLAG_H
-#define INC_3__DATASTRUCTURES_SEQQUEUEFLAG_H
+#ifndef CIRCLESEQQUEUEWITHFLAG_H
+#define CIRCLESEQQUEUEWITHFLAG_H
 
 template<class T, int MaxSize>
 class CircleSeqQueueWithFlag {
@@ -56,4 +56,4 @@ T CircleSeqQueueWithFlag<T, MaxSize>::Front() {
     return data[head];
 }
 
-#endif //INC_3__DATASTRUCTURES_SEQQUEUEFLAG_H
+#endif //CIRCLESEQQUEUEWITHFLAG_H
