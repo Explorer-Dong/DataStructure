@@ -23,9 +23,9 @@ int main() {
     Experiment_5 exp5;
     Experiment_6 exp6;
     Experiment_7 exp7;
-    Experiment_8 tr8;
-    Experiment_9 tr9;
-    Experiment_10 tr10;
+    Experiment_8 exp8;
+    Experiment_9 exp9;
+    Experiment_10 exp10;
     Homework_2 hw2;
     Homework_3 hw3;
     Homework_4 hw4;
@@ -35,7 +35,7 @@ int main() {
     Homework_8 hw8;
     Homework_10 hw10;
     
-    exp7.testDecode();
+    hw8.testFindUndigraphLoop();
     
     return 0;
 }
