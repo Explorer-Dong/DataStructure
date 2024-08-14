@@ -7,12 +7,12 @@ using namespace std;
 
 class Experiment_8 {
 public:
-    // 8.1 (1) 建立无向图 - 邻接矩阵
-    void Mbuild() {
-        vector<int> vexs = {1, 2, 3, 4, 5, 6, 7, 8};
+    // 8.1 (1) build undirected graph based on adjacency matrix
+    void testMbuild() {
+        vector<int> vexs = {0, 1, 2, 3, 4, 5, 6, 7, 8};
         vector<pair<int, int>> edges = {{1, 2},
                                         {1, 3},
-                                        {3, 4},
+                                        {0, 4},
                                         {3, 5},
                                         {3, 6},
                                         {3, 8},
@@ -21,10 +21,10 @@ public:
                                         {8, 7}};
         MGraph<int> G(undigraph, vexs, edges);
         
-        // 补充：无向网
-        vector<int> vexs2 = {1, 2, 3, 4, 5, 6, 7, 8};
+        // supplement: undirected network
+        vector<int> vexs2 = {0, 1, 2, 3, 4, 5, 6, 7, 8};
         vector<tuple<int, int, int>> edges2 = {{1, 2, 2},
-                                               {1, 3, 4},
+                                               {1, 0, 4},
                                                {3, 4, 1},
                                                {3, 5, 3},
                                                {3, 6, 6},
@@ -35,55 +35,55 @@ public:
         MGraph<int> G2(undinetwork, vexs2, edges2);
     }
     
-    // 8.1 (2) 建立无向图 - 邻接表
-    void ALbuild() {
-        vector<int> vexs = {1, 2, 3, 4};
+    // 8.1(2) build undirected graph based on adjacency list
+    void testALbuild() {
+        vector<int> vexs = {0, 1, 2, 3, 4};
         vector<pair<int, int>> edges = {{1, 2},
                                         {1, 3},
-                                        {1, 4},
+                                        {1, 0},
                                         {2, 3},
                                         {3, 4}};
         ALGraph<int> G(undigraph, vexs, edges);
         
-        // 补充：无向网
-        vector<int> vexs2 = {1, 2, 3, 4};
+        // supplement: undirected network
+        vector<int> vexs2 = {0, 1, 2, 3, 4};
         vector<tuple<int, int, double>> edges2 = {{1, 2, 2.5},
-                                                  {1, 3, 4.0},
+                                                  {1, 0, 4.0},
                                                   {1, 4, 1.6},
                                                   {2, 3, 3.9},
                                                   {3, 4, 6.2}};
         ALGraph<double> G2(undinetwork, vexs, edges);
     }
     
-    // 8.1 (3) 基于邻接矩阵的dfs
-    void Mdfs() {
-        vector<int> vexs = {1, 2, 3, 4};
+    // 8.1(3) dfs based on MGraph
+    void testMdfs() {
+        vector<int> vexs = {0, 1, 2, 3, 4};
         vector<pair<int, int>> edges = {{2, 3},
                                         {1, 2},
-                                        {3, 4},
+                                        {3, 0},
                                         {1, 4},
                                         {1, 3}};
         MGraph<int> G(undigraph, vexs, edges);
         G.dfs();
     }
     
-    // 8.1 (3) 基于邻接表的dfs
-    void ALdfs() {
-        vector<int> vexs = {1, 2, 3, 4};
+    // 8.1(3) dfs based on ALGraph
+    void testALdfs() {
+        vector<int> vexs = {0, 1, 2, 3, 4};
         vector<pair<int, int>> edges = {{2, 3},
                                         {1, 2},
-                                        {3, 4},
+                                        {3, 0},
                                         {1, 4},
                                         {1, 3}};
         ALGraph<int> G(undigraph, vexs, edges);
         G.dfs();
     }
     
-    // 8.1 (3) 基于邻接矩阵的bfs
-    void Mbfs() {
-        vector<int> vexs = {1, 2, 3, 4};
+    // 8.1(3) bfs based on MGraph
+    void testMbfs() {
+        vector<int> vexs = {0, 1, 2, 3, 4};
         vector<pair<int, int>> edges = {{2, 3},
-                                        {1, 2},
+                                        {1, 0},
                                         {3, 4},
                                         {1, 4},
                                         {1, 3}};
@@ -91,53 +91,44 @@ public:
         G.bfs();
     }
     
-    // 8.1 (3) 基于邻接表的bfs
-    void ALbfs() {
-        vector<int> vexs = {1, 2, 3, 4};
+    // 8.1(3) bfs based on ALGraph
+    void testALbfs() {
+        vector<int> vexs = {0, 1, 2, 3, 4};
         vector<pair<int, int>> edges = {{2, 3},
                                         {1, 2},
                                         {3, 4},
                                         {1, 4},
-                                        {1, 3}};
+                                        {1, 0}};
         ALGraph<int> G(undigraph, vexs, edges);
         G.bfs();
     }
     
-    // -------------------------------实验2-------------------------------
-    
-    // 8.2 (1) 基于邻接矩阵(无向网)的Prim求解
-    void Prim() {
-        vector<int> vexs = {1, 2, 3};
-        vector<tuple<int, int, double>> edges = {
-                {1, 2, 5.5},
-                {1, 3, 4.0},
-                {2, 3, 10.0}
-        };
+    // 8.2(1) prim based on MGraph
+    void testPrim() {
+        vector<int> vexs = {0, 1, 2, 3};
+        vector<tuple<int, int, double>> edges = {{1, 2, 5.5},
+                                                 {1, 3, 4.0},
+                                                 {2, 3, 10.0}};
         MGraph<double> G(undinetwork, vexs, edges);
-        double length = G.Prim(1);
-        cout << length << "\n";
+        cout << G.prim(1) << "\n";
     }
     
-    // 8.2 (2) 基于邻接矩阵(无向网)的Kruskal求解
-    void Kruskal() {
-        vector<int> vexs = {1, 2, 3};
-        vector<tuple<int, int, double>> edges = {
-                {1, 2, 5.5},
-                {1, 3, 4.0},
-                {2, 3, 10.0}
-        };
+    // 8.2(2) kruskal based on MGraph
+    void testKruskal() {
+        vector<int> vexs = {0, 1, 2, 3};
+        vector<tuple<int, int, double>> edges = {{1, 2, 5.5},
+                                                 {1, 3, 4.0},
+                                                 {2, 3, 10.0}};
         MGraph<double> G(undinetwork, vexs, edges);
-        vector<tuple<int, int, double>> MST_edges = G.Kruskal();
-        for (auto& x: MST_edges) {
-            cout << get<0>(x) << " --> " << get<1>(x) << " weight: " << get<2>(x) << "\n";
+        vector<tuple<int, int, double>> MST_edges = G.kruskal();
+        for (auto [u, v, w]: MST_edges) {
+            cout << u << " " << v << " " << w << "\n";
         }
     }
     
-    // -------------------------------实验3-------------------------------
-    
-    // 8.3 (1) Dijkstra 单源最短路 - 朴素版 O(n^2)
-    void Dijkstra() {
-        vector<int> vexs = {1, 2, 3, 4, 5};
+    // 8.3(1) dijkstra - O(n^2)
+    void testDijkstra() {
+        vector<int> vexs = {0, 1, 2, 3, 4, 5};
         vector<tuple<int, int, int>> edges = {
                 {1, 2, 10},
                 {1, 4, 30},
@@ -148,32 +139,30 @@ public:
                 {4, 5, 60}
         };
         MGraph<int> G(dinetwork, vexs, edges);
-        vector<int> path = G.Dijkstra(1, 3);
+        vector<int> path = G.dijkstra(1, 3);
         for (auto& road: path) {
             cout << road << " ";
         }
     }
     
-    // 8.3(2) Floyd多源最短路 - O(n^3)
-    void Floyd() {
-        vector<int> vexs = {1, 2, 3, 4, 5};
-        vector<tuple<int, int, int>> edges = {
-                {1, 2, 10},
-                {1, 4, 30},
-                {1, 5, 100},
-                {2, 3, 50},
-                {3, 5, 10},
-                {4, 3, 20},
-                {4, 5, 60}
-        };
+    // 8.3(2) floyd - O(n^3)
+    void testFloyd() {
+        vector<int> vexs = {0, 1, 2, 3, 4, 5};
+        vector<tuple<int, int, int>> edges = {{1, 2, 10},
+                                              {1, 4, 30},
+                                              {1, 5, 100},
+                                              {2, 3, 50},
+                                              {3, 5, 10},
+                                              {4, 3, 20},
+                                              {4, 5, 60}};
         MGraph<int> G(dinetwork, vexs, edges);
-//        vector<tuple<int, int, vector<int>>> paths = G.Floyd();
-//        for (auto& path: paths) {
-//            cout << get<0>(path) << "->" << get<1>(path) << ":\n";
-//            for (auto& road: get<2>(path)) {
-//                cout << road << " ";
-//            }
-//            cout << "\n\n";
-//        }
+        vector<tuple<int, int, vector<int>>> paths = G.floyd();
+        for (auto& [u, v, path]: paths) {
+            cout << u << " " << v << ": ";
+            for (auto& road: path) {
+                cout << road << " ";
+            }
+            cout << "\n";
+        }
     }
 };

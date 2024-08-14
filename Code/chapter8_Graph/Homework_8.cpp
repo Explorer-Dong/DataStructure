@@ -102,28 +102,26 @@ public:
     }
     
     // T6 prim & kruskal
-    void MST() {
-        vector<int> vexs = {1, 2, 3, 4, 5, 6, 7, 8};
-        vector<tuple<int, int, int>> edges = {
-                {1, 2, 2},
-                {1, 3, 3},
-                {2, 4, 2},
-                {3, 4, 1},
-                {4, 5, 2},
-                {4, 6, 4},
-                {5, 7, 5},
-                {5, 6, 1},
-                {6, 7, 2},
-                {6, 8, 1},
-                {7, 8, 1}
-        };
+    void testMST() {
+        vector<int> vexs = {0, 1, 2, 3, 4, 5, 6, 7};
+        vector<tuple<int, int, int>> edges = {{0, 1, 2},
+                                              {0, 2, 3},
+                                              {1, 3, 2},
+                                              {2, 3, 1},
+                                              {3, 4, 2},
+                                              {3, 5, 4},
+                                              {4, 5, 1},
+                                              {4, 6, 5},
+                                              {5, 6, 2},
+                                              {5, 7, 1},
+                                              {6, 7, 1}};
         MGraph<int> G(undinetwork, vexs, edges);
-        int length = G.Prim(1);
-        cout << length << "\n";
-        
-        auto res = G.Kruskal();
-        for (auto& x: res) {
-            cout << get<0>(x) << " --> " << get<1>(x) << " weight: " << get<2>(x) << "\n";
+        cout << "Prim for tree length:\n";
+        cout << G.prim(0) << "\n";
+        auto tree_edges = G.kruskal();
+        cout << "Kurskal for all edges:\n";
+        for (auto [u, v, w]: tree_edges) {
+            cout << char(u + 'A') << " -> " << char(v + 'A') << " : " << w << "\n";
         }
     }
 };

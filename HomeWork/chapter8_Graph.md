@@ -242,54 +242,59 @@ deque<int> MGraph<T>::findUndigraphLoop() {
 > ![连通网](https://dwj-oss.oss-cn-nanjing.aliyuncs.com/images/202408122131699.png)
 
 - 均使用邻接矩阵进行存储，初始化图时，所有边权均初始化为无穷大 `INF`
-- $prim$ 算法时间复杂度：$O(n^2)$
-- $kruskal$ 算法时间复杂度：$O(e \log e)$
+- $prim$ 算法时间复杂度 $O(n^2)$
+- $kruskal$ 算法时间复杂度 $O(e \log e)$
 
 $prim$ 算法
 
 ```cpp
 template<class T>
-T MGraph<T>::Prim(int v) {
-	T length = 0;
-
-	vector<T> d(n + 1, INF); // d[i]表示i号点到集合MST中的最短边长
-	vector<bool> MST(n + 1, false);
-
-	auto min = [&](T a, T b) {
-		return a < b ? a : b;
-	};
-
-	/* 1. 选择一个点到集合MST中 */
-	MST[v] = true;
-	for (int i = 1; i <= n; i++)
-		if (!MST[i])
-			d[i] = min(d[i], edges[i][v]);
-
-	/* 2. 迭代n-1次，选择其他的点到集合MST中 */
-	for (int i = 2; i <= n; i++) {
-		// 找到交叉边中的最短边min_e和其在U-MST集合中的顶点vex
-		T min_e = INF;
-		int vex;
-		for (int j = 1; j <= n; j++)
-			if (!MST[j] && d[j] < min_e)
-				min_e = d[j], vex = j;
-
-		// 加入MST集合
-		MST[vex] = true;
-		if (min_e == INF) {
-			cerr << "unable to generate MST!\n";
-			exit(1);
-		} else {
-			length += min_e;
-		}
-
-		// 迭代更新d数组
-		for (int j = 1; j <= n; j++)
-			if (!MST[j])
-				d[j] = min(d[j], edges[j][vex]);
-	}
-
-	return length;
+T MGraph<T>::prim(int v) {
+    T length = 0;
+    vector<T> d(vex_cnt, INF); // d[i] means min edge from i to MST
+    vector<bool> MST(vex_cnt, false);
+    auto min = [&](T a, T b) {
+        return a < b ? a : b;
+    };
+    
+    /* 1. choose v as the first point */
+    MST[v] = true;
+    for (int j = 0; j < vex_cnt; j++) {
+        if (!MST[j]) {
+            d[j] = min(d[j], edges[j][v]);
+        }
+    }
+    
+    /* 2. choose n-1 edges */
+    for (int i = 0; i < vex_cnt - 1; i++) {
+        // find the shortest edge min_e and its corresponding point vex
+        int vex = -1;
+        for (int j = 0; j < vex_cnt; j++) {
+            if (!MST[j] && (vex == -1 || d[j] < d[vex])) {
+                vex = j;
+            }
+        }
+        
+        // add vex to MST
+        MST[vex] = true;
+        
+        // add min_e to length
+        if (d[vex] == INF) {
+            cerr << "unable to generate MST!\n";
+            exit(1);
+        } else {
+            length += d[vex];
+        }
+        
+        // dp method to update d
+        for (int j = 0; j < vex_cnt; j++) {
+            if (!MST[j]) {
+                d[j] = min(d[j], edges[j][vex]);
+            }
+        }
+    }
+    
+    return length;
 }
 ```
 
@@ -297,58 +302,68 @@ $kruskal$ 算法
 
 ```cpp
 template<class T>
-vector<tuple<int, int, T>> MGraph<T>::Kruskal() {
-	vector<tuple<int, int, T>> res, edges_set;
-
-	// 获取边集
-	for (int i = 1; i <= n; i++)
-		for (int j = 1; j <= n; j++)
-			if (edges[i][j])
-				edges_set.push_back({i, j, edges[i][j]});
-
-	/* 1. 按边权升序排序 */
-	sort(edges_set.begin(), edges_set.end(), [&](tuple<int, int, T>& x, tuple<int, int, T>& y){
-		return get<2>(x) < get<2>(y);
-	});
-
-	/* 2. 选边构造MST */
-
-	// 并查集
-	vector<int> p(n + 1);
-	for (int i = 1; i <= n; i++) {
-		p[i] = i;
-	}
-	function<int(int)> Find = [&](int now) {
-		if (p[now] != now) {
-			p[now] = Find(p[now]);
-		}
-		return p[now];
-	};
-
-	// 选边
-	int cnt = 0; // 统计选择的边数
-	for (auto& edge: edges_set) {
-		int u = get<0>(edge), v = get<1>(edge);
-		T weight = get<2>(edge);
-
-		int pu = Find(u), pv = Find(v);
-		if (pu != pv) {
-			p[pu] = pv;
-			res.push_back({u, v, weight});
-			cnt++;
-		}
-
-		if (cnt == n - 1) {
-			break;
-		}
-	}
-
-	if (cnt < n - 1) {
-		cerr << "unable to generate MST!\n";
-		exit(1);
-	}
-
-	return res;
+vector<tuple<int, int, T>> MGraph<T>::kruskal() {
+    vector<tuple<int, int, T>> res;
+    vector<tuple<T, int, int>> edges_set;
+    
+    // store all edges
+    for (int i = 0; i < vex_cnt; i++) {
+        for (int j = 0; j < vex_cnt; j++) {
+            if (edges[i][j] != INF) {
+                edges_set.push_back({edges[i][j], i, j});
+            }
+        }
+    }
+    
+    /* 1. sort with edge weight */
+    sort(edges_set.begin(), edges_set.end());
+    
+    class DSU {
+    public:
+        vector<int> p;
+        
+        DSU(int n) {
+            p.resize(n);
+            for (int i = 0; i < n; i++) {
+                p[i] = i;
+            }
+        }
+        
+        int findParent(int now) {
+            if (p[now] != now) {
+                p[now] = findParent(p[now]);
+            }
+            return p[now];
+        }
+        
+        void unionSet(int u, int v) {
+            p[findParent(u)] = findParent(v);
+        }
+        
+        bool sameSet(int u, int v) {
+            return findParent(u) == findParent(v);
+        }
+    };
+    
+    /* 2. choose n-1 edges */
+    int cnt = 0; // count of edges
+    DSU dsu(vex_cnt);
+    for (auto [w, u, v]: edges_set) {
+        if (!dsu.sameSet(u, v)) {
+            res.push_back({u, v, w});
+            dsu.unionSet(u, v);
+            cnt++;
+        }
+        if (cnt == vex_cnt - 1) {
+            break;
+        }
+    }
+    if (cnt < vex_cnt - 1) {
+        cerr << "unable to generate MST!\n";
+        exit(1);
+    }
+    
+    return res;
 }
 ```
 
@@ -365,37 +380,133 @@ vector<tuple<int, int, T>> MGraph<T>::Kruskal() {
 - 修改 $prim$ 算法，每次选取交叉边从**最小权值交叉边**，改为每次选取**最大权值交叉边**
 - 修改 $kruskal$ 算法，将边权按照**升序排序**进行选择，改为将边权按照**降序排序**进行选择
 
-### T8
-
-> 试利用Dijkstra算法求下图中从顶点A到其他顶点间的最短路径，写出执行过程中各步的状态。
->
-> ![img](https://dwj-oss.oss-cn-nanjing.aliyuncs.com/images/202408122133428.png)
-
-
-
-```cpp
-
-```
-
 ## 实验八
+
+实验代码：https://github.com/Explorer-Dong/DataStructure/blob/main/Code/chapter8_Graph/Experiment_8.cpp
 
 ### T1
 
 ![1](https://dwj-oss.oss-cn-nanjing.aliyuncs.com/images/202408122134645.png)
 
-
-
 ### T2
 
 ![2](https://dwj-oss.oss-cn-nanjing.aliyuncs.com/images/202408122135828.png)
-
-
 
 ### T3
 
 ![3](https://dwj-oss.oss-cn-nanjing.aliyuncs.com/images/202408122135248.png)
 
+dijkstra
+
+```cpp
+template<class T>
+vector<int> MGraph<T>::dijkstra(int a, int b) {
+    vector<int> res;                      // a->b shortest path
+    vector<int> pre(vex_cnt, 0);          // pre[i] means i's previous point
+    vector<int> d(vex_cnt, INF);          // d[i] means a to i shortest path length
+    vector<bool> SPT(vex_cnt, false);     // SPT[i] means i is in SPT
+    
+    // join a to SPT
+    d[a] = 0;
+    SPT[a] = true;
+    pre[a] = -1;
+    for (int j = 0; j < vex_cnt; j++) {
+        if (!SPT[j] && d[j] > d[a] + edges[a][j]) {
+            pre[j] = a;
+            d[j] = d[a] + edges[a][j];
+        }
+    }
+    
+    // choose n-1 points
+    for (int i = 1; i <= vex_cnt - 1; i++) {
+        // 1. choose the shortest edge
+        int vex = -1;
+        for (int j = 0; j < vex_cnt; j++) {
+            if (!SPT[j] && (vex == -1 || d[j] < d[vex])) {
+                vex = j;
+            }
+        }
+        
+        // 2. join vex to SPT
+        SPT[vex] = true;
+        
+        // 3. update the shortest path from vex to other points
+        // record the previous point of the updated point as vex
+        for (int j = 0; j < vex_cnt; j++) {
+            if (!SPT[j] && d[j] > d[vex] + edges[vex][j]) {
+                pre[j] = vex;
+                d[j] = d[vex] + edges[vex][j];
+            }
+        }
+    }
+    
+    // get path
+    while (b != -1) {
+        res.push_back(b);
+        b = pre[b];
+    }
+    reverse(res.begin(), res.end());
+    
+    return res;
+}
+```
+
+floyd
+
+```cpp
+template<class T>
+vector<tuple<int, int, vector<int>>> MGraph<T>::floyd() {
+    vector<tuple<int, int, vector<int>>> res;
+    // d[i][j] means i to j shortest path length
+    vector<vector<int>> d(vex_cnt, vector<int>(vex_cnt, INF));
+    // aft[i][j] means i to j first pass vex
+    vector<vector<int>> aft(vex_cnt, vector<int>(vex_cnt, -1));
+    
+    // init
+    for (int i = 0; i < vex_cnt; i++) {
+        for (int j = 0; j < vex_cnt; j++) {
+            if (i == j) {
+                d[i][j] = 0;
+            } else if (edges[i][j] != INF) {
+                d[i][j] = edges[i][j];
+                aft[i][j] = j;
+            }
+        }
+    }
+    
+    // dp
+    for (int k = 0; k < vex_cnt; k++) {
+        for (int i = 0; i < vex_cnt; i++) {
+            for (int j = 0; j < vex_cnt; j++) {
+                if (d[i][k] != INF && d[k][j] != INF && d[i][k] + d[k][j] < d[i][j]) {
+                    d[i][j] = d[i][k] + d[k][j];
+                    aft[i][j] = k; // aft[i][j] = aft[i][k] = k
+                }
+            }
+        }
+    }
+    
+    // result
+    for (int i = 0; i < vex_cnt; i++) {
+        for (int j = 0; j < vex_cnt; j++) {
+            if (d[i][j] != INF && d[i][j]) {
+                vector<int> path;
+                path.push_back(i);
+                int next = aft[i][j];
+                while (next != j) {
+                    path.push_back(next);
+                    next = aft[next][j];
+                }
+                path.push_back(j);
+                res.push_back({i, j, path});
+            }
+        }
+    }
+    
+    return res;
+}
+```
+
 ### T4
 
 ![4](https://dwj-oss.oss-cn-nanjing.aliyuncs.com/images/202408122135431.png)
-

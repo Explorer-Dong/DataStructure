@@ -35,7 +35,7 @@ int main() {
     Homework_8 hw8;
     Homework_10 hw10;
     
-    hw8.testFindUndigraphLoop();
+    exp8.testFloyd();
     
     return 0;
 }
