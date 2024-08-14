@@ -35,7 +35,7 @@ int main() {
     Homework_8 hw8;
     Homework_10 hw10;
     
-    exp8.testFloyd();
+    exp10.compare();
     
     return 0;
 }
