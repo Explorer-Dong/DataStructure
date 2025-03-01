@@ -29,5 +29,5 @@
 
 ## 课程笔记
 
-- 高速体验：<https://blog.dwj601.cn/GPA/3rd-term/DS&Algo/>
-- 永久链接：<https://explorer-dong.github.io/GPA/3rd-term/DS&Algo/>
+- 高速体验：<https://wiki.dwj601.cn/base/ds-and-algo/>
+- 永久链接：<https://explorer-dong.github.io/base/ds-and-algo/>
