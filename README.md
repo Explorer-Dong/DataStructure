@@ -29,5 +29,5 @@
 
 ## 课程笔记
 
-- 高速体验：<https://wiki.dwj601.cn/base/ds-and-algo/>
-- 永久链接：<https://explorer-dong.github.io/base/ds-and-algo/>
+- 高速体验：<https://wiki.dwj601.cn/ds-and-algo/>
+- 永久链接：<https://explorer-dong.github.io/ds-and-algo/>
